@@ -20,7 +20,7 @@ public class BancoDeDados {
 			this.conection = DriverManager.getConnection(servidor, usuario, senha);
 			this.statement = this.conection.createStatement();
 		} catch (Exception e){
-			System.out.println("Erro: " + e.getMessage());
+			System.out.println("Conectar Erro: " + e.getMessage());
 		}
 	}
 	public boolean estaConectado(){
@@ -34,17 +34,53 @@ public class BancoDeDados {
 		try{
 			String query = "SELECT * FROM produto ORDER BY nome";
 			this.resultset = this.statement.executeQuery(query);
-			this.statement = this.conection.createStatement();
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 			}
 		} catch(Exception e){
-			System.out.println("L Erro: " + e.getMessage());
+			System.out.println("Listar Erro: " + e.getMessage());
 		}
 	}
-	
-	
-	
+	public void inserirProduto(String nome, String marca, double preco){
+		try{
+			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + nome + "', '" + marca +"', '" + preco + "');";
+			this.statement.executeUpdate(query);
+		} catch (Exception e){
+			System.out.println("Inserir ERRO: " + e.getMessage());
+		}
+	}
+	public void editarProduto(int id, String nome, String marca, double preco){
+		try{
+			String query = "UPDATE produto SET nome = '" + nome + "', marca = '" + marca + "', preco = '" + preco + "' WHERE id = " + id + ";";
+			this.statement.executeUpdate(query);
+		} catch (Exception e){
+			System.out.println("Editar ERRO: " + e.getMessage());
+		}
+	}
+	public void editarProduto(int id, String nome){
+		try{
+			String query = "UPDATE produto SET nome = '" + nome + "' WHERE id = " + id + ";";
+			this.statement.executeUpdate(query);
+		} catch (Exception e){
+			System.out.println("Editar ERRO: " + e.getMessage());
+		}
+	}
+	public void editarProduto(int id, double preco){
+		try{
+			String query = "UPDATE produto SET preco = '" + preco + "' WHERE id = " + id + ";";
+			this.statement.executeUpdate(query);
+		} catch (Exception e){
+			System.out.println("Editar ERRO: " + e.getMessage());
+		}
+	}
+	public void apagarProduto(int id){
+		try{
+			String query = "DELETE FROM produto WHERE id = " + id + ";";
+			this.statement.executeUpdate(query);
+		} catch (Exception e){
+			System.out.println("Apagar ERRO:" + e.getMessage());
+		}
+	}
 	
 	public void desconectar(){
 		try{
