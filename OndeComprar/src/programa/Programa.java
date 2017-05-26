@@ -1,10 +1,20 @@
 package programa;
 
+import DataBase.BancoDeDados;
+
 public class Programa {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("sempre dando dor de cabeça esse karai");
+
+		BancoDeDados bancoDeDados = new BancoDeDados();
+		
+		bancoDeDados.conectar();
+		if(bancoDeDados.estaConectado()){
+			bancoDeDados.listarProdutos();
+			bancoDeDados.desconectar();
+		} else {
+			System.out.println("Não foi posível conectar ao banco de dados!");
+		}
 	}
 
 }
