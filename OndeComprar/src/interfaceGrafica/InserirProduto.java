@@ -89,7 +89,7 @@ public class InserirProduto extends JFrame {
 				BancoDeDados bancoDeDados = new BancoDeDados();
 				bancoDeDados.conectar();
 				if(bancoDeDados.estaConectado()){
-					bancoDeDados.inserirProduto(produto.getNome(), produto.getMarca(), produto.getPreco());
+					bancoDeDados.inserirProduto(produto);
 					bancoDeDados.desconectar();
 					JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 				} else {

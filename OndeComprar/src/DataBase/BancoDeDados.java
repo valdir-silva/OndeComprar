@@ -5,7 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class BancoDeDados {
+import interfaces.IBancoDeDados;
+import programa.Produto;
+
+public class BancoDeDados implements IBancoDeDados{
 	private Connection conection = null;
 	private Statement statement = null;
 	private ResultSet resultset = null;
@@ -41,33 +44,22 @@ public class BancoDeDados {
 			System.out.println("Listar Erro: " + e.getMessage());
 		}
 	}
-	public void inserirProduto(String nome, String marca, double preco){ //Passar a receber o objeto Produto e não essas variáveis
+	public Produto buscarProduto(int id){
+		Produto produto = new Produto();
+		//baser codigo no método listarProdutos()
+		return produto;
+	}
+	public void inserirProduto(Produto produto){ //Passar a receber o objeto Produto e não essas variáveis
 		try{
-			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + nome + "', '" + marca +"', '" + preco + "');";
+			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + produto.getNome() + "', '" + produto.getMarca() +"', '" + produto.getPreco() + "');";
 			this.statement.executeUpdate(query);
 		} catch (Exception e){
 			System.out.println("Inserir ERRO: " + e.getMessage());
 		}
 	}
-	public void editarProduto(int id, String nome, String marca, double preco){
+	public void atualizarProduto(Produto produto){
 		try{
-			String query = "UPDATE produto SET nome = '" + nome + "', marca = '" + marca + "', preco = '" + preco + "' WHERE id = " + id + ";";
-			this.statement.executeUpdate(query);
-		} catch (Exception e){
-			System.out.println("Editar ERRO: " + e.getMessage());
-		}
-	}
-	public void editarProduto(int id, String nome){
-		try{
-			String query = "UPDATE produto SET nome = '" + nome + "' WHERE id = " + id + ";";
-			this.statement.executeUpdate(query);
-		} catch (Exception e){
-			System.out.println("Editar ERRO: " + e.getMessage());
-		}
-	}
-	public void editarProduto(int id, double preco){
-		try{
-			String query = "UPDATE produto SET preco = '" + preco + "' WHERE id = " + id + ";";
+			String query = "UPDATE produto SET nome = '" + produto.getNome() + "', marca = '" + produto.getMarca() + "', preco = '" + produto.getPreco() + "' WHERE id = " + produto.getId() + ";";
 			this.statement.executeUpdate(query);
 		} catch (Exception e){
 			System.out.println("Editar ERRO: " + e.getMessage());
