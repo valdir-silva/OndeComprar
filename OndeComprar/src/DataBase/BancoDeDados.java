@@ -41,7 +41,7 @@ public class BancoDeDados {
 			System.out.println("Listar Erro: " + e.getMessage());
 		}
 	}
-	public void inserirProduto(String nome, String marca, double preco){
+	public void inserirProduto(String nome, String marca, double preco){ //Passar a receber o objeto Produto e não essas variáveis
 		try{
 			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + nome + "', '" + marca +"', '" + preco + "');";
 			this.statement.executeUpdate(query);
