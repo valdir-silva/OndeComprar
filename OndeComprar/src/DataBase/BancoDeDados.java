@@ -44,12 +44,23 @@ public class BancoDeDados implements IBancoDeDados{
 			System.out.println("Listar Erro: " + e.getMessage());
 		}
 	}
-	public Produto buscarProduto(int id){
+	public Produto buscarProduto(int id){ //descobrir erro que só retorna objeto nulo
 		Produto produto = new Produto();
-		//baser codigo no método listarProdutos()
-		return produto;
+		try{
+			String query = "SELECT * from produto WHERE id = " + id + ";";
+			while(this.resultset.next()){
+				produto.setId(Integer.parseInt(this.resultset.getString("id")));
+				produto.setMarca(this.resultset.getString("marca"));
+				produto.setNome(this.resultset.getString("nome"));
+				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
+			}
+			return produto;
+		} catch(Exception e){
+			System.out.println("Buscar Erro: " + e.getMessage());
+		}
+		return produto; //perguntar ao professor como fica quando dá erro e retorna este objeto vazio
 	}
-	public void inserirProduto(Produto produto){ //Passar a receber o objeto Produto e não essas variáveis
+	public void inserirProduto(Produto produto){
 		try{
 			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + produto.getNome() + "', '" + produto.getMarca() +"', '" + produto.getPreco() + "');";
 			this.statement.executeUpdate(query);

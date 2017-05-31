@@ -2,10 +2,15 @@ package interfaceGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import interfaces.IBancoDeDados;
+import programa.Produto;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import DataBase.BancoDeDados;
+
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -90,6 +95,12 @@ public class EditarProduto extends JFrame {
 		JButton btnCarregar = new JButton("Carregar");
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				BancoDeDados banco = new BancoDeDados(); //Ver como fazer isso depois que criar a fachada (aaaaa, muita coisa)
+				Produto produto = new Produto();
+				produto = banco.buscarProduto(Integer.parseInt(txtId.getText()));
+				txtNome.setText(produto.getNome());
+				txtMarca.setText(produto.getMarca());
+				txtPreco.setText(String.valueOf(produto.getPreco()));
 			}
 		});
 		btnCarregar.setBounds(284, 20, 89, 23);
