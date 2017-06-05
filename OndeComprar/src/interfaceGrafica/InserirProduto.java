@@ -93,7 +93,7 @@ public class InserirProduto extends JFrame {
 					bancoDeDados.desconectar();
 					JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
 				} else {
-					System.out.println("Não foi posível conectar ao banco de dados!");
+					JOptionPane.showMessageDialog(null, "Não foi posível conectar ao banco de dados!");
 				}
 			}
 		});

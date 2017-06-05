@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import javax.swing.JOptionPane;
+
 import interfaces.IBancoDeDados;
 import programa.Produto;
 
@@ -44,10 +46,11 @@ public class BancoDeDados implements IBancoDeDados{
 			System.out.println("Listar Erro: " + e.getMessage());
 		}
 	}
-	public Produto buscarProduto(int id){ //descobrir erro que só retorna objeto nulo
+	public Produto buscarProduto(int id){
 		Produto produto = new Produto();
 		try{
 			String query = "SELECT * from produto WHERE id = " + id + ";";
+			this.resultset = this.statement.executeQuery(query);
 			while(this.resultset.next()){
 				produto.setId(Integer.parseInt(this.resultset.getString("id")));
 				produto.setMarca(this.resultset.getString("marca"));
@@ -58,7 +61,7 @@ public class BancoDeDados implements IBancoDeDados{
 		} catch(Exception e){
 			System.out.println("Buscar Erro: " + e.getMessage());
 		}
-		return produto; //perguntar ao professor como fica quando dá erro e retorna este objeto vazio
+		return produto; //perguntar ao professor como fica quando dá erro e retorna este objeto vazio (nao perguntei mas deve usar uma exceção pra isso)
 	}
 	public void inserirProduto(Produto produto){
 		try{
@@ -73,7 +76,7 @@ public class BancoDeDados implements IBancoDeDados{
 			String query = "UPDATE produto SET nome = '" + produto.getNome() + "', marca = '" + produto.getMarca() + "', preco = '" + produto.getPreco() + "' WHERE id = " + produto.getId() + ";";
 			this.statement.executeUpdate(query);
 		} catch (Exception e){
-			System.out.println("Editar ERRO: " + e.getMessage());
+			System.out.println("Editar ERRO: " + e.getMessage()); 
 		}
 	}
 	public void apagarProduto(int id){
