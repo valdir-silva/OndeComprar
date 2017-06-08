@@ -89,6 +89,10 @@ public class InserirProduto extends JFrame {
 				
 				RepositorioProduto repositorio = new RepositorioProduto();
 				repositorio.inserirProduto(produto);
+				JOptionPane.showMessageDialog(null, "Adicionado com sucesso!");
+				txtNome.setText(null);
+				txtMarca.setText(null);
+				txtPreco.setText(null);
 			}
 		});
 		btnAdicionar.setBounds(64, 89, 89, 23);

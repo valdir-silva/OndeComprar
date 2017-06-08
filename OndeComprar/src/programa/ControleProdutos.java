@@ -13,6 +13,9 @@ public class ControleProdutos implements IRepositorioProduto{ // se controleta i
 	public void listarProdutos(){ //que porra que isso vai fazer? NADA!? (LOOP INFINITO)
 		repositorioProduto.listarProdutos();
 	}
+	public void listarProdutos(String order){ // LOOP!!!!!!!!!
+		repositorioProduto.listarProdutos(order);
+	}
 	public Produto buscarProduto(int id){ // LOOP!!!!!!!!!
 		return repositorioProduto.buscarProduto(id);
 	}

@@ -5,10 +5,10 @@ import programa.Produto;
 
 public class RepositorioProduto extends BancoDeDados implements IRepositorioProduto{
 
-	public void listarProdutos(){
+	public void listarProdutos(){ // por padrão ordena por id
 		try{
 			super.conectar();
-			String query = "SELECT * FROM produto ORDER BY nome";
+			String query = "SELECT * FROM produto ORDER BY id";
 			this.resultset = this.statement.executeQuery(query);
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
@@ -16,6 +16,45 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			super.desconectar();
 		} catch(Exception e){
 			System.out.println("Listar Erro: " + e.getMessage());
+		}
+	}
+	public void listarProdutos(String order){ // overloading para ordenar por outros atributos
+		if(order.equals("nome")){
+			try{
+				super.conectar();
+				String query = "SELECT * FROM produto ORDER BY nome";
+				this.resultset = this.statement.executeQuery(query);
+				while(this.resultset.next()){
+					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+				}
+				super.desconectar();
+			} catch(Exception e){
+				System.out.println("Listar Erro: " + e.getMessage());
+			}
+		} else if (order.equals("marca")){
+			try{
+				super.conectar();
+				String query = "SELECT * FROM produto ORDER BY marca";
+				this.resultset = this.statement.executeQuery(query);
+				while(this.resultset.next()){
+					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+				}
+				super.desconectar();
+			} catch(Exception e){
+				System.out.println("Listar Erro: " + e.getMessage());
+			}
+		} else if (order.equals("preco")){
+			try{
+				super.conectar();
+				String query = "SELECT * FROM produto ORDER BY preco";
+				this.resultset = this.statement.executeQuery(query);
+				while(this.resultset.next()){
+					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+				}
+				super.desconectar();
+			} catch(Exception e){
+				System.out.println("Listar Erro: " + e.getMessage());
+			}
 		}
 	}
 	public Produto buscarProduto(int id){

@@ -69,7 +69,7 @@ public class EditarProduto extends JFrame {
 					produto.setNome(txtNome.getText());
 					produto.setPreco(Float.parseFloat(txtPreco.getText()));
 					repositorio.atualizarProduto(produto);
-					JOptionPane.showConfirmDialog(null, "Produto atualizado com sucesso!"); //como verificar se foi atualizado mesmo?
+					JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!"); //como verificar se foi atualizado mesmo?
 			}
 		});
 		btnAtualizar.setBounds(64, 146, 89, 23);
@@ -110,7 +110,7 @@ public class EditarProduto extends JFrame {
 		JButton btnCarregar = new JButton("Carregar");
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BancoDeDados banco = new RepositorioProduto(); //Ver como fazer isso depois que criar a fachada (aaaaa, muita coisa)
+				RepositorioProduto banco = new RepositorioProduto(); //Ver como fazer isso depois que criar a fachada (aaaaa, muita coisa)
 				Produto produto = new Produto();
 				banco.conectar();
 				//implementar: quando clicar em carregar o Jtext do id deixa de ser editavel e o btnCarregar muda o texto para "Editar outro" que ao clicar libera a edição e apaga os outros campos
