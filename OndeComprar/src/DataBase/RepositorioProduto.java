@@ -5,7 +5,7 @@ import programa.Produto;
 
 public class RepositorioProduto extends BancoDeDados implements IRepositorioProduto{
 
-	public void listarProdutos(){ // por padrão ordena por id
+	public void listarProdutos(){// por padrão ordena por id
 		try{
 			super.conectar();
 			String query = "SELECT * FROM produto ORDER BY id";
