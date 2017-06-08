@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DataBase.BancoDeDados;
+import DataBase.RepositorioProduto;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -60,21 +61,15 @@ public class EditarProduto extends JFrame {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BancoDeDados banco = new BancoDeDados();
+				RepositorioProduto repositorio = new RepositorioProduto();
 				Produto produto = new Produto();
 				
-				banco.conectar();
-				if(banco.estaConectado()){
 					produto.setId(Integer.parseInt(txtId.getText()));
 					produto.setMarca(txtMarca.getText());
 					produto.setNome(txtNome.getText());
 					produto.setPreco(Float.parseFloat(txtPreco.getText()));
-					banco.atualizarProduto(produto);
-					banco.desconectar();
-					JOptionPane.showConfirmDialog(null, "Produto atualizado com sucesso!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi posível conectar ao banco de dados!");
-				}
+					repositorio.atualizarProduto(produto);
+					JOptionPane.showConfirmDialog(null, "Produto atualizado com sucesso!"); //como verificar se foi atualizado mesmo?
 			}
 		});
 		btnAtualizar.setBounds(64, 146, 89, 23);
@@ -115,19 +110,15 @@ public class EditarProduto extends JFrame {
 		JButton btnCarregar = new JButton("Carregar");
 		btnCarregar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BancoDeDados banco = new BancoDeDados(); //Ver como fazer isso depois que criar a fachada (aaaaa, muita coisa)
+				BancoDeDados banco = new RepositorioProduto(); //Ver como fazer isso depois que criar a fachada (aaaaa, muita coisa)
 				Produto produto = new Produto();
 				banco.conectar();
 				//implementar: quando clicar em carregar o Jtext do id deixa de ser editavel e o btnCarregar muda o texto para "Editar outro" que ao clicar libera a edição e apaga os outros campos
-				if(banco.estaConectado()){
-					produto = banco.buscarProduto(Integer.parseInt(txtId.getText()));
-					txtNome.setText(produto.getNome());
-					txtMarca.setText(produto.getMarca());
-					txtPreco.setText(String.valueOf(produto.getPreco()));
-					banco.desconectar();
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi posível conectar ao banco de dados!");
-				}
+				
+				produto = banco.buscarProduto(Integer.parseInt(txtId.getText()));
+				txtNome.setText(produto.getNome());
+				txtMarca.setText(produto.getMarca());
+				txtPreco.setText(String.valueOf(produto.getPreco()));
 			}
 		});
 		btnCarregar.setBounds(284, 20, 89, 23);

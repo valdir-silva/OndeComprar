@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DataBase.BancoDeDados;
+import DataBase.RepositorioProduto;
 import programa.Produto;
 
 import javax.swing.JLabel;
@@ -86,15 +87,8 @@ public class InserirProduto extends JFrame {
 				produto.setMarca(txtMarca.getText());
 				produto.setPreco(Float.parseFloat(txtPreco.getText()));
 				
-				BancoDeDados bancoDeDados = new BancoDeDados();
-				bancoDeDados.conectar();
-				if(bancoDeDados.estaConectado()){
-					bancoDeDados.inserirProduto(produto);
-					bancoDeDados.desconectar();
-					JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
-				} else {
-					JOptionPane.showMessageDialog(null, "Não foi posível conectar ao banco de dados!");
-				}
+				RepositorioProduto repositorio = new RepositorioProduto();
+				repositorio.inserirProduto(produto);
 			}
 		});
 		btnAdicionar.setBounds(64, 89, 89, 23);

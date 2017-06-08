@@ -1,12 +1,13 @@
 package programa;
 
 import DataBase.BancoDeDados;
+import DataBase.RepositorioProduto;
 
 public class Programa {
 
 	public static void main(String[] args) {
 
-		BancoDeDados bancoDeDados = new BancoDeDados();
+		RepositorioProduto bancoDeDados = new RepositorioProduto();
 		String nome = "Mouse Gamer";
 		String marca = "ADATA";
 		double preco = 99.10;
