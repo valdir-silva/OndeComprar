@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.JInternalFrame;
@@ -20,19 +22,24 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class Login extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtLogin;
 	private JTextField txtSenha;
-
+	static Login dialog = new Login(); //analizar o modificador estático e no que ele influencia aqui
 	/**
 	 * Launch the application.
 	 */
+	
 	public static void main(String[] args) {
 		try {
-			Login dialog = new Login();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -52,30 +59,18 @@ public class Login extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
+		this.setLocationRelativeTo(null); //coloca a janela no centro da tela
+		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(43, 11, 1, 1);
 		contentPanel.add(layeredPane);
-		
-		JLabel bg = new JLabel("");
-		bg.setFont(new Font("SansSerif", Font.PLAIN, 15));
-		bg.setForeground(new Color(102, 102, 102));
-		bg.setBounds(0, 0, 297, 267);
-		
-		ImageIcon background = new ImageIcon(Login.class.getResource("/img/Login.jpg"));
-		Image imagem = background.getImage().getScaledInstance(bg.getWidth(), bg.getHeight(), Image.SCALE_DEFAULT);
+	
 		
 		JLabel lblLogin = new JLabel("Login");
 		lblLogin.setFont(new Font("SansSerif", Font.BOLD, 27));
 		lblLogin.setForeground(new Color(102, 102, 102));
 		lblLogin.setBounds(110, 0, 76, 37);
 		contentPanel.add(lblLogin);
-		
-		JLabel lblNewLabel = new JLabel("login");
-		lblNewLabel.setBackground(new Color(240, 240, 240));
-		lblNewLabel.setForeground(new Color(255, 255, 255));
-		lblNewLabel.setFont(new Font("SansSerif", Font.PLAIN, 17));
-		lblNewLabel.setBounds(133, 187, 36, 26);
-		contentPanel.add(lblNewLabel);
 		
 		txtLogin = new JTextField();
 		txtLogin.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,13 +93,60 @@ public class Login extends JDialog {
 		txtSenha.setBackground(new Color(102, 51, 0));
 		txtSenha.setBounds(35, 118, 228, 32);
 		contentPanel.add(txtSenha);
-		bg.setIcon(new ImageIcon(imagem));
 		
+		ImageIcon myImage = new ImageIcon(Login.class.getResource("/img/Login_bt.png"));
+		ImageIcon myImage2 = new ImageIcon(Login.class.getResource("/img/Login_bt2.png"));
+		JLabel btnEntrar = new JLabel("");
+
+		btnEntrar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent arg0) {
+				System.out.println("clicado!");
+			}
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+				Image imagemBotao3 = myImage2.getImage().getScaledInstance(btnEntrar.getWidth(), btnEntrar.getHeight(), Image.SCALE_DEFAULT);
+				btnEntrar.setIcon(new ImageIcon(imagemBotao3));
+
+			}
+		});
+		btnEntrar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				dialog.setVisible(false);
+				EmpresaProduto frame2 = new EmpresaProduto(); frame2.setVisible(true);
+			}
+		});
+		btnEntrar.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		btnEntrar.setForeground(new Color(102, 102, 102));
+		btnEntrar.setBounds(63, 181, 173, 40);
+		Image imagemBotao = myImage.getImage().getScaledInstance(btnEntrar.getWidth(), btnEntrar.getHeight(), Image.SCALE_DEFAULT);
+		btnEntrar.setIcon(new ImageIcon(imagemBotao));
+		contentPanel.add(btnEntrar);
+		
+		//BACKGROUND
+		ImageIcon background = new ImageIcon(Login.class.getResource("/img/Login.jpg"));
+		JLabel bg = new JLabel("");
+		bg.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+				Image imagemBotao = myImage.getImage().getScaledInstance(btnEntrar.getWidth(), btnEntrar.getHeight(), Image.SCALE_DEFAULT);
+				btnEntrar.setIcon(new ImageIcon(imagemBotao));
+			}
+		});
+		bg.setFont(new Font("SansSerif", Font.PLAIN, 15));
+		bg.setForeground(new Color(102, 102, 102));
+		bg.setBounds(0, 0, 297, 267);
+		Image imagem = background.getImage().getScaledInstance(bg.getWidth(), bg.getHeight(), Image.SCALE_DEFAULT);
+		bg.setIcon(new ImageIcon(imagem));
 		contentPanel.add(bg);
 		
 		//VALORES PADRAO
 		txtLogin.setText("Valdir");
 		txtSenha.setText("1234");
 		// FIM VALORES PADRAO
+		
 	}
 }
