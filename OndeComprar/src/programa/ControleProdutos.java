@@ -1,5 +1,9 @@
 package programa;
 
+import java.sql.ResultSet;
+
+import javax.swing.table.TableModel;
+
 import interfaces.IRepositorioProduto;
 
 public class ControleProdutos implements IRepositorioProduto{ // se controleta implementando IRepositorio, como karai que o java sabe o código?
@@ -27,6 +31,10 @@ public class ControleProdutos implements IRepositorioProduto{ // se controleta i
 	}
 	public void apagarProduto(int id){ // LOOP!!!!!!!!!
 		repositorioProduto.apagarProduto(id);
+	}
+
+	public TableModel listarProdutosTabela(String order) {
+		return repositorioProduto.listarProdutosTabela(order);
 	}
 	
 }

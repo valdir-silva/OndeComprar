@@ -1,11 +1,22 @@
 package DataBase;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.table.TableModel;
+
+import com.mysql.jdbc.PreparedStatement;
+import com.mysql.jdbc.Statement;
+
 import interfaces.IRepositorioProduto;
+import net.proteanit.sql.DbUtils;
 import programa.Produto;
 
 public class RepositorioProduto extends BancoDeDados implements IRepositorioProduto{
 
-	public void listarProdutos(){// por padrão ordena por id
+	public void listarProdutos(){// POR PADRÃO ORDENA POR ID
 		try{
 			super.conectar();
 			String query = "SELECT * FROM produto ORDER BY id";
@@ -106,4 +117,22 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			System.out.println("Apagar ERRO:" + e.getMessage());
 		}
 	}
+    
+    public TableModel listarProdutosTabela(String order){
+    	TableModel t = null;
+    	try{
+			super.conectar();
+			String query = "SELECT * FROM produto ORDER BY " + order + ";";
+			this.resultset = this.statement.executeQuery(query);
+			TableModel table = DbUtils.resultSetToTableModel(resultset);
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return table;
+		} catch(Exception e){
+			System.out.println("Listar Erro: " + e.getMessage());
+		}
+    	return t;
+    }
 }
