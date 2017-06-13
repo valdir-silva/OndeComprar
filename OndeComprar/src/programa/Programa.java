@@ -16,6 +16,6 @@ public class Programa {
 			//banco.editarProduto(id, nome);
 			//banco.inserirProduto(produto);
 		String order = "marca";
-			repositorio.listarProdutos(order);
+			//repositorio.listarProdutos(order);
 	}
 }
