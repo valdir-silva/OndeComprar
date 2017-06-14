@@ -33,8 +33,13 @@ public class ControleProdutos implements IRepositorioProduto{ // se controleta i
 		repositorioProduto.apagarProduto(id);
 	}
 
-	public TableModel listarProdutosTabela(String order) {
-		return repositorioProduto.listarProdutosTabela(order);
+	public TableModel listarProdutosTabela(String texto, String order) {
+		return repositorioProduto.listarProdutosTabela(texto, order);
+	}
+
+	@Override
+	public Produto tabelaParaTela(int id) {
+		return repositorioProduto.tabelaParaTela(id);
 	}
 	
 }

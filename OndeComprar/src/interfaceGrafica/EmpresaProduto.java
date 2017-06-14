@@ -59,8 +59,8 @@ public class EmpresaProduto extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTextField txtMarca;
-	private JLabel lblId_UI;
 	String order="id";
+	private JTextField txtId;
 	/**
 	 * Launch the application.
 	 */
@@ -124,7 +124,15 @@ public class EmpresaProduto extends JFrame {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				// QUANDO APERDER O ENTER IR� BUSCAR NO BANCO
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){  
+					RepositorioProduto repositorio = new RepositorioProduto();
+					table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
+					
+					table.getColumnModel().getColumn(0).setPreferredWidth(50);
+					table.getColumnModel().getColumn(1).setPreferredWidth(300); 
+					table.getColumnModel().getColumn(2).setPreferredWidth(150); 
+					table.getColumnModel().getColumn(3).setPreferredWidth(80);
+				}
 			}
 		});
 		txtBuscar.setOpaque(false);
@@ -156,7 +164,12 @@ public class EmpresaProduto extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) { // DIMINUIR BARRA DE BUSCA E ADICIONAR OP플O DE BUSCAR POR NOME OU MARCA
 				RepositorioProduto repositorio = new RepositorioProduto();
-				table.setModel(repositorio.listarProdutosTabela(order));
+				table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
+				
+				table.getColumnModel().getColumn(0).setPreferredWidth(50);
+				table.getColumnModel().getColumn(1).setPreferredWidth(300); 
+				table.getColumnModel().getColumn(2).setPreferredWidth(150); 
+				table.getColumnModel().getColumn(3).setPreferredWidth(80);
 			}
 		});
 		lblBuscar.setBounds(437, 76, 27, 26);
@@ -185,6 +198,9 @@ public class EmpresaProduto extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//ADICIONAR OUTRA IMAGEM PARA GERAR SENSA플O DE ANIMA플O AO DELETAR
+				RepositorioProduto repositorio = new RepositorioProduto();
+				repositorio.apagarProduto(Integer.parseInt(txtId.getText()));
+				JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 			}
 		});
 		lblApagar2.setBounds(28, 301, 79, 66);
@@ -227,7 +243,7 @@ public class EmpresaProduto extends JFrame {
 				txtPreco.setText(null);
 			}
 		});
-		lblSalvar2.setBounds(117, 301, 76, 66);
+		lblSalvar2.setBounds(117, 301, 78, 66);
 		Image imgSalvar2 = salvar2.getImage().getScaledInstance(lblSalvar2.getWidth(), lblSalvar2.getHeight(), Image.SCALE_SMOOTH);
 		lblSalvar2.setIcon(new ImageIcon(imgSalvar2));
 		contentPane.add(lblSalvar2);
@@ -244,7 +260,7 @@ public class EmpresaProduto extends JFrame {
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		lblSalvar.setBounds(117, 301, 76, 66);
+		lblSalvar.setBounds(117, 301, 78, 66);
 		Image imgSalvar = salvar.getImage().getScaledInstance(lblSalvar.getWidth(), lblSalvar.getHeight(), Image.SCALE_SMOOTH);
 		lblSalvar.setIcon(new ImageIcon(imgSalvar));
 		contentPane.add(lblSalvar);
@@ -253,6 +269,12 @@ public class EmpresaProduto extends JFrame {
 		//ID 3
 		ImageIcon id3 = new ImageIcon(EmpresaProduto.class.getResource("/img/id3.png"));
 		lblId3 = new JLabel("");
+		lblId3.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
 		lblId3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -263,7 +285,7 @@ public class EmpresaProduto extends JFrame {
 		Image imgId3 = id3.getImage().getScaledInstance(lblId3.getWidth(), lblId3.getHeight(), Image.SCALE_SMOOTH);
 		lblId3.setIcon(new ImageIcon(imgId3));
 		contentPane.add(lblId3);
-		lblId3.setVisible(false);
+		lblId3.setVisible(true);
 		// FIM ID 3
 		
 		//ID 2
@@ -275,7 +297,6 @@ public class EmpresaProduto extends JFrame {
 				lblNome2.setVisible(false);
 				lblMarca2.setVisible(false);
 				lblPreco2.setVisible(false);
-				order = "id";
 			}
 		});
 		lblId2.addMouseListener(new MouseAdapter() {
@@ -314,6 +335,12 @@ public class EmpresaProduto extends JFrame {
 		//NOME 3
 		ImageIcon nome3 = new ImageIcon(EmpresaProduto.class.getResource("/img/nome3.png"));
 		lblNome3 = new JLabel("");
+		lblNome3.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
 		lblNome3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -374,6 +401,12 @@ public class EmpresaProduto extends JFrame {
 		//MARCA 3
 		ImageIcon marca3 = new ImageIcon(EmpresaProduto.class.getResource("/img/marca3.png"));
 		lblMarca3 = new JLabel("");
+		lblMarca3.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
 		lblMarca3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -434,6 +467,12 @@ public class EmpresaProduto extends JFrame {
 		//PRECO
 		ImageIcon preco3 = new ImageIcon(EmpresaProduto.class.getResource("/img/preco3.png"));
 		lblPreco3 = new JLabel("");
+		lblPreco3.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
 		lblPreco3.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -494,9 +533,23 @@ public class EmpresaProduto extends JFrame {
 		scrollPane = new JScrollPane();
 		scrollPane.setBounds(261, 111, 455, 260);
 		contentPane.add(scrollPane);
+		
 		//FIM PRECO
 		
 		table = new JTable();
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				RepositorioProduto repositorio = new RepositorioProduto();
+				int row = table.getSelectedRow();
+				int id = (int) table.getModel().getValueAt(row, 0);
+				Produto produto = repositorio.tabelaParaTela(id);
+				txtId.setText(Integer.toString(produto.getId()));
+				txtNome.setText(produto.getNome());
+				txtMarca.setText(produto.getMarca());
+				txtPreco.setText(Float.toString(produto.getPreco()));
+			}
+		});
 		scrollPane.setViewportView(table);
 		
 		txtMarca = new JTextField();
@@ -506,14 +559,17 @@ public class EmpresaProduto extends JFrame {
 		txtMarca.setOpaque(false);
 		txtMarca.setBorder(null);
 		
-		lblId_UI = new JLabel("");
-		lblId_UI.setBounds(33, 92, 51, 20);
-		contentPane.add(lblId_UI);
+		txtId = new JTextField();
+		txtId.setEditable(false);
+		txtId.setBounds(33, 92, 57, 20);
+		contentPane.add(txtId);
+		txtId.setColumns(10);
+		txtId.setOpaque(false);
+		txtId.setBorder(null);
 		
 		//BACKGROUND
 		lblBg.setIcon(new ImageIcon(imagem));
 		contentPane.add(lblBg);
-		
 		//...
 		
 	}

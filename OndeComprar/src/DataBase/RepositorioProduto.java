@@ -118,11 +118,11 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 		}
 	}
     
-    public TableModel listarProdutosTabela(String order){
+    public TableModel listarProdutosTabela(String texto, String order){
     	TableModel t = null;
     	try{
 			super.conectar();
-			String query = "SELECT * FROM produto ORDER BY " + order + ";";
+			String query = "SELECT * FROM produto WHERE nome LIKE '%" + texto + "%' ORDER BY " + order + ";";
 			this.resultset = this.statement.executeQuery(query);
 			TableModel table = DbUtils.resultSetToTableModel(resultset);
 			while(this.resultset.next()){
@@ -135,4 +135,23 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 		}
     	return t;
     }
+	public Produto tabelaParaTela(int id){
+		Produto produto = new Produto();
+		try{
+			super.conectar();
+			String query = "SELECT * from produto WHERE id = " + id + ";";
+			this.resultset = this.statement.executeQuery(query);
+			while(this.resultset.next()){
+				produto.setId(Integer.parseInt(this.resultset.getString("id")));
+				produto.setMarca(this.resultset.getString("marca"));
+				produto.setNome(this.resultset.getString("nome"));
+				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
+			}
+			super.desconectar();
+			return produto;
+		} catch(Exception e){
+			System.out.println("Buscar Erro: " + e.getMessage());
+		}
+		return produto; 
+	}
 }
