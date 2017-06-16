@@ -33,15 +33,15 @@ public class Login extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private JTextField txtLogin;
 	private JTextField txtSenha;
-	static Login dialog = new Login(); //analizar o modificador estático e no que ele influencia aqui
 	/**
 	 * Launch the application.
 	 */
 	
 	public static void main(String[] args) {
 		try {
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			Login frameLogin = new Login();
+			frameLogin.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			frameLogin.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,8 +94,8 @@ public class Login extends JDialog {
 		txtSenha.setBounds(35, 118, 228, 32);
 		contentPanel.add(txtSenha);
 		
-		ImageIcon myImage = new ImageIcon(Login.class.getResource("/img/Login_bt.png"));
-		ImageIcon myImage2 = new ImageIcon(Login.class.getResource("/img/Login_bt2.png"));
+		ImageIcon myImage = new ImageIcon(Login.class.getResource("/img/login/Login_bt.png"));
+		ImageIcon myImage2 = new ImageIcon(Login.class.getResource("/img/login/Login_bt2.png"));
 		JLabel btnEntrar = new JLabel("");
 
 		btnEntrar.addMouseMotionListener(new MouseMotionAdapter() {
@@ -114,8 +114,8 @@ public class Login extends JDialog {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				dialog.setVisible(false);
-				EmpresaProduto frame2 = new EmpresaProduto(); frame2.setVisible(true);
+				UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
+				dispose();
 			}
 		});
 		btnEntrar.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -126,7 +126,7 @@ public class Login extends JDialog {
 		contentPanel.add(btnEntrar);
 		
 		//BACKGROUND
-		ImageIcon background = new ImageIcon(Login.class.getResource("/img/Login.jpg"));
+		ImageIcon background = new ImageIcon(Login.class.getResource("/img/login/Login.jpg"));
 		JLabel bg = new JLabel("");
 		bg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override

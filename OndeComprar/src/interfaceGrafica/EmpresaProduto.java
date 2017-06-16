@@ -86,7 +86,7 @@ public class EmpresaProduto extends JFrame {
 	public EmpresaProduto() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
-		setBounds(100, 100, 753, 460);
+		setBounds(100, 100, 759, 465);
 		contentPane = new JPanel();
 		contentPane.setBackground(Color.WHITE);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -96,7 +96,7 @@ public class EmpresaProduto extends JFrame {
 		this.setLocationRelativeTo(null); //coloca a janela no centro da tela
 		
 		//BACKGROUND
-		ImageIcon background = new ImageIcon(EmpresaProduto.class.getResource("/img/Empresa_Produto.png"));
+		ImageIcon background = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Empresa_Produto.png"));
 		JLabel lblBg = new JLabel("");
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -158,7 +158,7 @@ public class EmpresaProduto extends JFrame {
 		txtNome.setBounds(33, 145, 160, 20);
 		contentPane.add(txtNome);
 		
-		ImageIcon buscar = new ImageIcon(EmpresaProduto.class.getResource("/img/Buscar_bt.png"));
+		ImageIcon buscar = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Buscar_bt.png"));
 		lblBuscar = new JLabel("");
 		lblBuscar.addMouseListener(new MouseAdapter() {
 			@Override
@@ -178,7 +178,7 @@ public class EmpresaProduto extends JFrame {
 		contentPane.add(lblBuscar);
 		lblBuscar.setVisible(false);
 		
-		ImageIcon buscar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/Buscar_bt2.png"));
+		ImageIcon buscar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Buscar_bt2.png"));
 		lblBuscar2 = new JLabel("");
 		lblBuscar2.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -192,7 +192,7 @@ public class EmpresaProduto extends JFrame {
 		lblBuscar2.setIcon(new ImageIcon(imgBuscar2));
 		contentPane.add(lblBuscar2);
 		
-		ImageIcon apagar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/Apagar_bt2.png"));
+		ImageIcon apagar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Apagar_bt2.png"));
 		lblApagar2 = new JLabel("");
 		lblApagar2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -209,7 +209,7 @@ public class EmpresaProduto extends JFrame {
 		contentPane.add(lblApagar2);
 		lblApagar2.setVisible(false);
 		
-		ImageIcon apagar = new ImageIcon(EmpresaProduto.class.getResource("/img/Apagar_bt.png"));
+		ImageIcon apagar = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Apagar_bt.png"));
 		lblApagar = new JLabel("");
 		lblApagar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -224,7 +224,7 @@ public class EmpresaProduto extends JFrame {
 		contentPane.add(lblApagar);
 		
 		//SALVAR 2
-		ImageIcon salvar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/Salvar_bt2.png"));
+		ImageIcon salvar2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Salvar_bt2.png"));
 		lblSalvar2 = new JLabel("");
 		lblSalvar2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -251,7 +251,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM SALVAR 2
 		
 		//SALVAR
-		ImageIcon salvar = new ImageIcon(EmpresaProduto.class.getResource("/img/Salvar_bt.png"));
+		ImageIcon salvar = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Salvar_bt.png"));
 		JLabel lblSalvar = new JLabel("");
 		lblSalvar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -267,7 +267,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM SALVAR
 		
 		//ID 3
-		ImageIcon id3 = new ImageIcon(EmpresaProduto.class.getResource("/img/id3.png"));
+		ImageIcon id3 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/id3.png"));
 		lblId3 = new JLabel("");
 		lblId3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -289,7 +289,7 @@ public class EmpresaProduto extends JFrame {
 		// FIM ID 3
 		
 		//ID 2
-		ImageIcon id2 = new ImageIcon(EmpresaProduto.class.getResource("/img/id2.png"));
+		ImageIcon id2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/id2.png"));
 		lblId2 = new JLabel("");
 		lblId2.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -317,7 +317,7 @@ public class EmpresaProduto extends JFrame {
 		// FIM ID 2
 		
 		//ID
-		ImageIcon id = new ImageIcon(EmpresaProduto.class.getResource("/img/id.png"));
+		ImageIcon id = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/id.png"));
 		lblId = new JLabel("");
 		lblId.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -333,7 +333,7 @@ public class EmpresaProduto extends JFrame {
 		// FIM ID
 		
 		//NOME 3
-		ImageIcon nome3 = new ImageIcon(EmpresaProduto.class.getResource("/img/nome3.png"));
+		ImageIcon nome3 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/nome3.png"));
 		lblNome3 = new JLabel("");
 		lblNome3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -355,7 +355,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM NOME 3
 		
 		//NOME 2
-		ImageIcon nome2 = new ImageIcon(EmpresaProduto.class.getResource("/img/nome2.png"));
+		ImageIcon nome2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/nome2.png"));
 		lblNome2 = new JLabel("");
 		lblNome2.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -383,7 +383,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM NOME 2
 		
 		//NOME
-		ImageIcon nome = new ImageIcon(EmpresaProduto.class.getResource("/img/nome.png"));
+		ImageIcon nome = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/nome.png"));
 		lblNome = new JLabel("");
 		lblNome.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -399,7 +399,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM NOME
 		
 		//MARCA 3
-		ImageIcon marca3 = new ImageIcon(EmpresaProduto.class.getResource("/img/marca3.png"));
+		ImageIcon marca3 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/marca3.png"));
 		lblMarca3 = new JLabel("");
 		lblMarca3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -421,7 +421,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM MARCA 3
 		
 		//MARCA 2
-		ImageIcon marca2 = new ImageIcon(EmpresaProduto.class.getResource("/img/marca2.png"));
+		ImageIcon marca2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/marca2.png"));
 		lblMarca2 = new JLabel("");
 		lblMarca2.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -449,7 +449,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM MARCA 2
 
 		//MARCA
-		ImageIcon marca = new ImageIcon(EmpresaProduto.class.getResource("/img/marca.png"));
+		ImageIcon marca = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/marca.png"));
 		lblMarca = new JLabel("");
 		lblMarca.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -465,7 +465,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM MARCA
 		
 		//PRECO
-		ImageIcon preco3 = new ImageIcon(EmpresaProduto.class.getResource("/img/preco3.png"));
+		ImageIcon preco3 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/preco3.png"));
 		lblPreco3 = new JLabel("");
 		lblPreco3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -488,7 +488,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM PRECO
 		
 		//PRECO
-		ImageIcon preco2 = new ImageIcon(EmpresaProduto.class.getResource("/img/preco2.png"));
+		ImageIcon preco2 = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/preco2.png"));
 		lblPreco2 = new JLabel("");
 		lblPreco2.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -516,7 +516,7 @@ public class EmpresaProduto extends JFrame {
 		//FIM PRECO
 		
 		//PRECO
-		ImageIcon preco = new ImageIcon(EmpresaProduto.class.getResource("/img/preco.png"));
+		ImageIcon preco = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/preco.png"));
 		lblPreco = new JLabel("");
 		lblPreco.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
