@@ -12,12 +12,17 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import DataBase.RepositorioCliente;
+import programa.Usuario;
+
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 
 import javax.swing.JInternalFrame;
 import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
@@ -114,8 +119,15 @@ public class Login extends JDialog {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
-				dispose();
+				RepositorioCliente cliente = new RepositorioCliente();
+				boolean entrar = cliente.logar(txtLogin.getText(), txtSenha.getText());
+				if(entrar){
+					UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
+					usuarioHome.receber(cliente.buscarCliente(txtLogin.getText()));
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "login ou senha inválidos");
+				}
 			}
 		});
 		btnEntrar.setFont(new Font("SansSerif", Font.PLAIN, 15));
@@ -144,9 +156,10 @@ public class Login extends JDialog {
 		contentPanel.add(bg);
 		
 		//VALORES PADRAO
-		txtLogin.setText("Valdir");
+		txtLogin.setText("valdirsilva");
 		txtSenha.setText("1234");
 		// FIM VALORES PADRAO
 		
 	}
+
 }

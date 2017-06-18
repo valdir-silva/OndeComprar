@@ -32,6 +32,7 @@ import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Toolkit;
 
 public class EmpresaProduto extends JFrame {
 
@@ -59,8 +60,10 @@ public class EmpresaProduto extends JFrame {
 	private JTable table;
 	private JScrollPane scrollPane;
 	private JTextField txtMarca;
-	String order="id";
 	private JTextField txtId;
+	JComboBox comboBox = new JComboBox();
+	String order="id";
+	
 	/**
 	 * Launch the application.
 	 */
@@ -84,6 +87,7 @@ public class EmpresaProduto extends JFrame {
 	 * 
 	 */
 	public EmpresaProduto() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(EmpresaProduto.class.getResource("/img/favicon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 759, 465);
@@ -129,9 +133,10 @@ public class EmpresaProduto extends JFrame {
 					table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
 					
 					table.getColumnModel().getColumn(0).setPreferredWidth(50);
-					table.getColumnModel().getColumn(1).setPreferredWidth(300); 
-					table.getColumnModel().getColumn(2).setPreferredWidth(150); 
-					table.getColumnModel().getColumn(3).setPreferredWidth(80);
+					table.getColumnModel().getColumn(1).setPreferredWidth(180); 
+					table.getColumnModel().getColumn(2).setPreferredWidth(120); 
+					table.getColumnModel().getColumn(3).setPreferredWidth(100);
+					table.getColumnModel().getColumn(4).setPreferredWidth(60);
 				}
 			}
 		});
@@ -147,7 +152,7 @@ public class EmpresaProduto extends JFrame {
 		txtPreco.setForeground(SystemColor.controlDkShadow);
 		txtPreco.setColumns(10);
 		txtPreco.setBorder(null);
-		txtPreco.setBounds(52, 250, 143, 20);
+		txtPreco.setBounds(52, 261, 143, 20);
 		contentPane.add(txtPreco);
 		
 		txtNome = new JTextField();
@@ -155,7 +160,7 @@ public class EmpresaProduto extends JFrame {
 		txtNome.setForeground(SystemColor.controlDkShadow);
 		txtNome.setColumns(10);
 		txtNome.setBorder(null);
-		txtNome.setBounds(33, 145, 160, 20);
+		txtNome.setBounds(33, 118, 160, 20);
 		contentPane.add(txtNome);
 		
 		ImageIcon buscar = new ImageIcon(EmpresaProduto.class.getResource("/img/empresaProduto/Buscar_bt.png"));
@@ -167,9 +172,10 @@ public class EmpresaProduto extends JFrame {
 				table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
 				
 				table.getColumnModel().getColumn(0).setPreferredWidth(50);
-				table.getColumnModel().getColumn(1).setPreferredWidth(300); 
-				table.getColumnModel().getColumn(2).setPreferredWidth(150); 
-				table.getColumnModel().getColumn(3).setPreferredWidth(80);
+				table.getColumnModel().getColumn(1).setPreferredWidth(180); 
+				table.getColumnModel().getColumn(2).setPreferredWidth(120); 
+				table.getColumnModel().getColumn(3).setPreferredWidth(100);
+				table.getColumnModel().getColumn(4).setPreferredWidth(60);
 			}
 		});
 		lblBuscar.setBounds(437, 76, 27, 26);
@@ -233,6 +239,7 @@ public class EmpresaProduto extends JFrame {
 				Produto produto = new Produto();
 				produto.setNome(txtNome.getText());
 				produto.setMarca(txtMarca.getText());
+				produto.setCategoria((String) comboBox.getSelectedItem());
 				produto.setPreco(Float.parseFloat(txtPreco.getText()));
 				
 				RepositorioProduto repositorio = new RepositorioProduto();
@@ -547,13 +554,21 @@ public class EmpresaProduto extends JFrame {
 				txtId.setText(Integer.toString(produto.getId()));
 				txtNome.setText(produto.getNome());
 				txtMarca.setText(produto.getMarca());
+		        for (int i = 0; i < comboBox.getItemCount(); i++)
+		        {
+		            if (produto.getCategoria().equalsIgnoreCase((String) comboBox.getItemAt(i)))
+		            {
+		                comboBox.setSelectedIndex(i);
+		                break;
+		            }
+		        }
 				txtPreco.setText(Float.toString(produto.getPreco()));
 			}
 		});
 		scrollPane.setViewportView(table);
 		
 		txtMarca = new JTextField();
-		txtMarca.setBounds(33, 198, 162, 20);
+		txtMarca.setBounds(33, 166, 162, 20);
 		contentPane.add(txtMarca);
 		txtMarca.setColumns(10);
 		txtMarca.setOpaque(false);
@@ -561,11 +576,18 @@ public class EmpresaProduto extends JFrame {
 		
 		txtId = new JTextField();
 		txtId.setEditable(false);
-		txtId.setBounds(33, 92, 57, 20);
+		txtId.setBounds(56, 71, 57, 20);
 		contentPane.add(txtId);
 		txtId.setColumns(10);
 		txtId.setOpaque(false);
 		txtId.setBorder(null);
+		
+		// COMBOBOX
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Smartphone", "Notebook", "Placa de Video", "Outro"}));
+		comboBox.setBounds(29, 213, 166, 22);
+		contentPane.add(comboBox);
+		comboBox.getColorModel();
+		// FIM COMBOBOX
 		
 		//BACKGROUND
 		lblBg.setIcon(new ImageIcon(imagem));

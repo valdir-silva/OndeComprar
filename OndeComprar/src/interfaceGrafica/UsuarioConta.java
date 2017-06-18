@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.MouseAdapter;
+import java.awt.Toolkit;
 
 public class UsuarioConta extends JFrame {
 
@@ -38,6 +39,7 @@ public class UsuarioConta extends JFrame {
 	 * Create the frame.
 	 */
 	public UsuarioConta() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(UsuarioConta.class.getResource("/img/favicon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 752, 460);
 		contentPane = new JPanel();

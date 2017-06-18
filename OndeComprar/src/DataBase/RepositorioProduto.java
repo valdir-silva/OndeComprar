@@ -90,7 +90,7 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 	public void inserirProduto(Produto produto){
 		try{
 			super.conectar();
-			String query = "INSERT INTO produto (nome, marca, preco) VALUES('" + produto.getNome() + "', '" + produto.getMarca() +"', '" + produto.getPreco() + "');";
+			String query = "INSERT INTO produto (nome, marca, categoria, preco) VALUES('" + produto.getNome() + "', '" + produto.getMarca() +"', '" + produto.getCategoria() + "', '" + produto.getPreco() + "');";
 			this.statement.executeUpdate(query);
 			super.desconectar();
 		} catch (Exception e){
@@ -145,6 +145,7 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				produto.setId(Integer.parseInt(this.resultset.getString("id")));
 				produto.setMarca(this.resultset.getString("marca"));
 				produto.setNome(this.resultset.getString("nome"));
+				produto.setCategoria(this.resultset.getString("categoria"));
 				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
 			}
 			super.desconectar();

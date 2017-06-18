@@ -5,6 +5,7 @@ public class Produto {
 	private int id;
 	private String nome;
 	private String marca;
+	private String categoria;
 	private float preco;
 	
 	public int getId() {
@@ -24,6 +25,12 @@ public class Produto {
 	}
 	public void setMarca(String marca) {
 		this.marca = marca;
+	}
+	public String getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
 	}
 	public float getPreco() {
 		return preco;
