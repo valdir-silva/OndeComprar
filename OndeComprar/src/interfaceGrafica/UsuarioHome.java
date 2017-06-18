@@ -22,6 +22,8 @@ public class UsuarioHome extends JFrame {
 	JLabel lblOpcao3 = new JLabel("");
 	JLabel lblEditarPerfil = new JLabel("");
 	JLabel lblSair = new JLabel("");
+	JLabel lblPesquisarprodutos = new JLabel("");
+	JLabel lblPesquisarprodutos2 = new JLabel("");
 	
 	/**
 	 * Launch the application.
@@ -45,8 +47,7 @@ public class UsuarioHome extends JFrame {
 	public UsuarioHome() {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 752
-				, 460);
+		setBounds(100, 100, 752, 460);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -55,7 +56,7 @@ public class UsuarioHome extends JFrame {
 		this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		
 		//CONTA 2
-		ImageIcon conta3 = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_bt3.png"));
+		ImageIcon conta3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt3.png"));
 		JLabel lblConta3 = new JLabel("");
 		lblConta3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -80,7 +81,7 @@ public class UsuarioHome extends JFrame {
 		//FIM CONTA
 		
 		//CONTA 2
-		ImageIcon conta2 = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_bt2.png"));
+		ImageIcon conta2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt2.png"));
 		JLabel lblConta2 = new JLabel("");
 		lblConta2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -99,7 +100,7 @@ public class UsuarioHome extends JFrame {
 		//FIM CONTA
 		
 		//CONTA
-		ImageIcon conta = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_bt1.png"));
+		ImageIcon conta = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt1.png"));
 		JLabel lblConta = new JLabel("");
 		lblConta.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -157,7 +158,7 @@ public class UsuarioHome extends JFrame {
 		//FIM SAIR
 		
 		//OPCAO 2
-		ImageIcon opcao3 = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_sair.png"));
+		ImageIcon opcao3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_sair.png"));
 		lblOpcao3.setBounds(591, 47, 147, 75);
 		Image imgOpcao3 = opcao3.getImage().getScaledInstance(lblOpcao3.getWidth(), lblOpcao3.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao3.setIcon(new ImageIcon(imgOpcao3));
@@ -166,7 +167,7 @@ public class UsuarioHome extends JFrame {
 		//FIM OPCAO 2
 		
 		//OPCAO 2
-		ImageIcon opcao2 = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_edit.png"));
+		ImageIcon opcao2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_edit.png"));
 		lblOpcao2.setBounds(591, 47, 147, 75);
 		Image imgOpcao2 = opcao2.getImage().getScaledInstance(lblOpcao2.getWidth(), lblOpcao2.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao2.setIcon(new ImageIcon(imgOpcao2));
@@ -175,17 +176,47 @@ public class UsuarioHome extends JFrame {
 		//FIM OPCAO 2
 		
 		//OPCAO
-		ImageIcon opcao = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/conta_op.png"));
+		ImageIcon opcao = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_op.png"));
 		lblOpcao.setBounds(591, 47, 147, 75);
 		Image imgOpcao = opcao.getImage().getScaledInstance(lblOpcao.getWidth(), lblOpcao.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao.setIcon(new ImageIcon(imgOpcao));
 		contentPane.add(lblOpcao);
 		lblOpcao.setVisible(false);
-		
 		//FIM OPCAO
 		
+		//PESQUISAR PRODUTOS
+		ImageIcon pesquisar2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt2.png"));
+		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
+				dispose();
+			}
+		});
+		lblPesquisarprodutos2.setBounds(119, 53, 203, 46);
+		Image imgPesquisar2 = pesquisar2.getImage().getScaledInstance(lblPesquisarprodutos2.getWidth(), lblPesquisarprodutos2.getHeight(), Image.SCALE_SMOOTH);
+		lblPesquisarprodutos2.setIcon(new ImageIcon(imgPesquisar2));
+		contentPane.add(lblPesquisarprodutos2);
+		lblPesquisarprodutos2.setVisible(false);
+		//FIM PESQUISAR PRODUTOS
+		
+		//PESQUISAR PRODUTOS
+		ImageIcon pesquisar = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt1.png"));
+		lblPesquisarprodutos.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblPesquisarprodutos2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblPesquisarprodutos.setBounds(119, 53, 203, 46);
+		Image imgPesquisar = pesquisar.getImage().getScaledInstance(lblPesquisarprodutos.getWidth(), lblPesquisarprodutos.getHeight(), Image.SCALE_SMOOTH);
+		lblPesquisarprodutos.setIcon(new ImageIcon(imgPesquisar));
+		contentPane.add(lblPesquisarprodutos);
+		//FIM PESQUISAR PRODUTOS
+		
 		//BG
-		ImageIcon background = new ImageIcon(EmpresaProduto.class.getResource("/img/usuarioHome/Usuario_Home.png"));
+		ImageIcon background = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/Usuario_Home.png"));
 		JLabel lblBg = new JLabel("");
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -193,6 +224,7 @@ public class UsuarioHome extends JFrame {
 				lblConta2.setVisible(false);
 				lblOpcao2.setVisible(false);
 				lblOpcao3.setVisible(false);
+				lblPesquisarprodutos2.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});

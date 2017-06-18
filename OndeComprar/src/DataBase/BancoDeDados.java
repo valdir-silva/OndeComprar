@@ -17,7 +17,8 @@ public abstract class BancoDeDados implements IBancoDeDados{ //não tenho certeza
 	
 	
 	public void conectar(){
-		String servidor = "jdbc:mysql://localhost:3306/ondecomprar";
+		//String servidor = "jdbc:mysql://localhost:3306/ondecomprar";
+		String servidor = "jdbc:mysql://localhost:3306/ondecomp";
 		String usuario = "root";
 		String senha = "";
 		String driver = "com.mysql.jdbc.Driver";
