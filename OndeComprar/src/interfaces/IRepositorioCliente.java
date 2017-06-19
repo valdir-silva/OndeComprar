@@ -8,7 +8,9 @@ import programa.Usuario;
 public interface IRepositorioCliente {
 	//NOVO CLIENTE
 	public boolean logar(String login, String senha);
-	public Usuario buscarCliente(String login); //nao é legal buscar por login já que não é a primary key
+	public Usuario buscarCliente(String login);
+	public Usuario buscarCliente(int id);
+	public int reservasPendentes(int id); // RETORNA A QUANTIDADE DE RESERVAS PENDENTES DAQUELE USUARIO 
 	//APAGAR CLIENTE
 	//ALTERAR CLIENTE
 	//ALTERAR SENHA //CONSIDERAR FAZER UMA "SUPER INTERFACE" CHAMADA CONTA COM OVERLOADING PARA CLIENTE E EMPRESA

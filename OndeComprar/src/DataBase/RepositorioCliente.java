@@ -26,7 +26,7 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 		TableModel t = null;
     	try{
 			super.conectar();
-			String query = "SELECT * FROM reserva WHERE cliente_id = '" + id + "' ORDER BY id;"; //FAZER JOIN PARA MOSTRAR NOME DO PRODUTO
+			String query = "SELECT reserva.id, reserva.data, produto.nome, reserva.solicitacao FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND cliente.id ='" + id + "';"; //SELECT MAIS COMPLICADO QUE EU JA FIZ
 			this.resultset = this.statement.executeQuery(query);
 			TableModel table = DbUtils.resultSetToTableModel(resultset);
 			while(this.resultset.next()){
@@ -99,5 +99,25 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 			System.out.println("Buscar Erro: " + e.getMessage());
 		}
 		return usuario; 
+	}
+
+	@Override
+	public int reservasPendentes(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='pendente' AND reserva.cliente_id = '" + id + "';"; // OUTRO SELECT FODA
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Pendentes Erro: " + e.getMessage());
+		}
+    	return n;
 	}
 }

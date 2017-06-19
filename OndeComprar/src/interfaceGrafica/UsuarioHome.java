@@ -26,6 +26,9 @@ import java.awt.event.KeyEvent;
 import java.awt.Toolkit;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import java.awt.Font;
+import java.awt.SystemColor;
+import javax.swing.UIManager;
 
 public class UsuarioHome extends JFrame {
 
@@ -42,7 +45,7 @@ public class UsuarioHome extends JFrame {
 	private final JLabel lblMais2 = new JLabel("");
 	JTable table;
 	JLabel lblProvisorio2 = new JLabel("");
-	Usuario userLocal;
+	JLabel lblPendentes = new JLabel("0");
 	
 	/**
 	 * Launch the application.
@@ -336,6 +339,13 @@ public class UsuarioHome extends JFrame {
 		lblProvisorio2.setBounds(297, 110, 66, 14);
 		contentPane.add(lblProvisorio2);
 		
+		// PENDENTES
+		lblPendentes.setForeground(UIManager.getColor("Button.shadow"));
+		lblPendentes.setFont(new Font("SansSerif", Font.BOLD, 35));
+		lblPendentes.setBounds(445, 370, 73, 33);
+		contentPane.add(lblPendentes);
+		// FIM PENDENTES
+		
 		//BG
 		ImageIcon background = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/Usuario_Home.png"));
 		JLabel lblBg = new JLabel("");
@@ -363,5 +373,13 @@ public class UsuarioHome extends JFrame {
 		lblProvisorio2.setText(Integer.toString(user.getId()));
 		RepositorioCliente repositorio = new RepositorioCliente();
 		table.setModel(repositorio.listarReservas(user.getId()));
+		
+		table.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table.getColumnModel().getColumn(1).setPreferredWidth(80); 
+		table.getColumnModel().getColumn(2).setPreferredWidth(120); 
+		table.getColumnModel().getColumn(3).setPreferredWidth(80);
+		
+		lblPendentes.setText(String.valueOf(repositorio.reservasPendentes(user.getId())));
+		lblPendentes.setForeground(new Color(149, 152, 154));
 	}
 }
