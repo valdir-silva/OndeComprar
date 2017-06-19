@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioCliente;
+import DataBase.RepositorioUsuario;
 import DataBase.RepositorioProduto;
 import programa.Produto;
 import programa.Reserva;
@@ -186,7 +186,7 @@ public class UsuarioCatalogo extends JFrame {
 		lblSolicitar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioCliente repositorio = new RepositorioCliente();
+				RepositorioUsuario repositorio = new RepositorioUsuario();
 				Reserva reserva = new Reserva();
 				Calendar date = Calendar.getInstance();;
 				reserva.setData(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));

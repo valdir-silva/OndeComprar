@@ -1,11 +1,18 @@
 package programa;
 
 public class Endereco {
+	private int id;
 	private String cidade;
 	private String estado;
 	private String rua;
 	private String cep;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getCidade() {
 		return cidade;
 	}

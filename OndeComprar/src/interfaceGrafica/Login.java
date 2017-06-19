@@ -13,7 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioCliente;
+import DataBase.RepositorioEmpresa;
+import DataBase.RepositorioUsuario;
 import programa.Usuario;
 
 import java.awt.Color;
@@ -64,7 +65,7 @@ public class Login extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		this.setLocationRelativeTo(null); //coloca a janela no centro da tela
+		this.setLocationRelativeTo(null); // COLOCA A JANELA NO CENTRO DA TELA
 		
 		JLayeredPane layeredPane = new JLayeredPane();
 		layeredPane.setBounds(43, 11, 1, 1);
@@ -106,7 +107,6 @@ public class Login extends JDialog {
 		btnEntrar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseDragged(MouseEvent arg0) {
-				System.out.println("clicado!");
 			}
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -119,14 +119,19 @@ public class Login extends JDialog {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioCliente cliente = new RepositorioCliente();
-				boolean entrar = cliente.logar(txtLogin.getText(), txtSenha.getText());
-				if(entrar){
+				RepositorioUsuario cliente = new RepositorioUsuario();
+				RepositorioEmpresa empresa = new RepositorioEmpresa();
+				
+				if(cliente.logar(txtLogin.getText(), txtSenha.getText())){
 					UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
-					usuarioHome.receber(cliente.buscarCliente(txtLogin.getText()));
+					usuarioHome.receber(cliente.buscarUsuario(txtLogin.getText()));
+					dispose();
+				} else if (empresa.logar(txtLogin.getText(), txtSenha.getText())){
+					EmpresaHome empresaHome = new EmpresaHome(); empresaHome.setVisible(true);
+					empresaHome.receber(empresa.buscarEmpresa(txtLogin.getText()));
 					dispose();
 				} else {
-					JOptionPane.showMessageDialog(null, "login ou senha inválidos");
+					JOptionPane.showMessageDialog(null, "Login ou Senha inválidos");
 				}
 			}
 		});
@@ -136,6 +141,19 @@ public class Login extends JDialog {
 		Image imagemBotao = myImage.getImage().getScaledInstance(btnEntrar.getWidth(), btnEntrar.getHeight(), Image.SCALE_DEFAULT);
 		btnEntrar.setIcon(new ImageIcon(imagemBotao));
 		contentPanel.add(btnEntrar);
+		
+		//
+		JLabel lblAlunando = new JLabel("alunando");
+		lblAlunando.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtLogin.setText("alunando");
+				txtSenha.setText("12345");
+			}
+		});
+		lblAlunando.setBounds(10, 11, 61, 26);
+		contentPanel.add(lblAlunando);
+		//
 		
 		//BACKGROUND
 		ImageIcon background = new ImageIcon(Login.class.getResource("/img/login/Login.jpg"));

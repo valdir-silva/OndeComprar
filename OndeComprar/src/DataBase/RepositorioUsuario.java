@@ -3,13 +3,14 @@ package DataBase;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
-import interfaces.IRepositorioCliente;
+import interfaces.IRepositorioUsuario;
 import net.proteanit.sql.DbUtils;
+import programa.Endereco;
 import programa.Produto;
 import programa.Reserva;
 import programa.Usuario;
 
-public class RepositorioCliente extends BancoDeDados implements IRepositorioCliente {
+public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsuario {
 
 	public void solicitarReserva(Reserva reserva) {
 		try {
@@ -48,7 +49,6 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 				super.desconectar();
 				return true;
 			} else {
-				JOptionPane.showMessageDialog(null, "Login ou Senha inválidos");
 				super.desconectar();
 				return false;
 			}
@@ -57,7 +57,7 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 		}
 		return false;
 	}
-	public Usuario buscarCliente(int id) {
+	public Usuario buscarUsuario(int id) {
 		Usuario usuario = new Usuario();
 		try{
 			super.conectar();
@@ -79,7 +79,7 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 		return usuario; 
 	}
 
-	public Usuario buscarCliente(String login) {
+	public Usuario buscarUsuario(String login) {
 		Usuario usuario = new Usuario();
 		try{
 			super.conectar();
@@ -119,5 +119,84 @@ public class RepositorioCliente extends BancoDeDados implements IRepositorioClie
 			System.out.println("Pendentes Erro: " + e.getMessage());
 		}
     	return n;
+	}
+	public int reservasAceitas(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='aceita' AND reserva.cliente_id = '" + id + "';"; // OUTRO SELECT FODA
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Aceitas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+	public int reservasRecusadas(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='recusada' AND reserva.cliente_id = '" + id + "';"; // OUTRO SELECT FODA
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+	public void atualizarUsuario(Usuario usuario){
+			try{
+				super.conectar();
+				String query = "UPDATE cliente SET nome = '" + usuario.getNome() + "', email = '" + usuario.getEmail() + "', telefone = '" + usuario.getTelefone() + "' WHERE id = '" + usuario.getId() + "';";
+				this.statement.executeUpdate(query);
+				super.desconectar();
+				JOptionPane.showMessageDialog(null, "Atualizado!");
+			} catch (Exception e){
+				System.out.println("Editar Usuario ERRO: " + e.getMessage()); 
+			}
+			Endereco endereco = usuario;
+			this.atualizarEndereco(endereco);
+	}
+	private void atualizarEndereco(Endereco endereco){
+		try{
+			super.conectar();
+			String query = "UPDATE endereco SET cidade = '" + endereco.getCidade() + "', estado = '" + endereco.getEstado() + "', rua = '" + endereco.getRua() +"', cep ='"+ endereco.getCep() + "' WHERE id ='" + endereco.getId() + "';";
+			this.statement.executeUpdate(query);
+			super.desconectar();
+		} catch (Exception e){
+			System.out.println("Editar Endereco ERRO: " + e.getMessage()); 
+		}
+	}
+	public Endereco buscarEndereco(int id){
+		Endereco endereco = new Endereco();
+		try{
+			super.conectar();
+			String query = "SELECT * from endereco WHERE id = '" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			while(this.resultset.next()){
+				endereco.setId(Integer.parseInt(this.resultset.getString("id")));
+				endereco.setCidade(this.resultset.getString("cidade"));
+				endereco.setEstado(this.resultset.getString("estado"));
+				endereco.setRua(this.resultset.getString("rua"));
+				endereco.setCep(this.resultset.getString("cep"));
+			}
+			super.desconectar();
+			return endereco;
+		} catch(Exception e){
+			System.out.println("Buscar endereco Erro: " + e.getMessage());
+		}
+		return endereco;
 	}
 }

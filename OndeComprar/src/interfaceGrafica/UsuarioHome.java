@@ -11,7 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioCliente;
+import DataBase.RepositorioUsuario;
+import DataBase.RepositorioUsuario;
 import DataBase.RepositorioProduto;
 import programa.Produto;
 import programa.Usuario;
@@ -46,7 +47,8 @@ public class UsuarioHome extends JFrame {
 	JTable table;
 	JLabel lblProvisorio2 = new JLabel("");
 	JLabel lblPendentes = new JLabel("0");
-	
+	JLabel lblAceitas = new JLabel("0");
+	JLabel lblRecusadas = new JLabel("0");
 	/**
 	 * Launch the application.
 	 */
@@ -150,7 +152,9 @@ public class UsuarioHome extends JFrame {
 		lblEditarPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				RepositorioUsuario usuario = new RepositorioUsuario();
 				UsuarioConta frame3 = new UsuarioConta(); frame3.setVisible(true);
+				frame3.receber(usuario.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
 				dispose();
 			}
 		});
@@ -212,9 +216,9 @@ public class UsuarioHome extends JFrame {
 		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				RepositorioCliente cliente = new RepositorioCliente();
+				RepositorioUsuario cliente = new RepositorioUsuario();
 				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
-				frame4.receber(cliente.buscarCliente(Integer.parseInt(lblProvisorio2.getText())));
+				frame4.receber(cliente.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
 				dispose();
 			}
 		});
@@ -242,6 +246,7 @@ public class UsuarioHome extends JFrame {
 		
 		// CAMPO PESQUISA
 		txtCampoPesquisa = new JTextField();
+		txtCampoPesquisa.setForeground(SystemColor.controlDkShadow);
 		txtCampoPesquisa.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent arg0) {
@@ -302,6 +307,15 @@ public class UsuarioHome extends JFrame {
 		
 		// MAIS 2
 		ImageIcon mais2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/mais_bt2.png"));
+		lblMais2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				RepositorioUsuario cliente = new RepositorioUsuario();
+				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
+				frame4.receber(cliente.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
+				dispose();
+			}
+		});
 		lblMais2.setBounds(1, 390, 98, 29);
 		Image imgMais2 = mais2.getImage().getScaledInstance(lblMais2.getWidth(), lblMais2.getHeight(), Image.SCALE_SMOOTH);
 		lblMais2.setIcon(new ImageIcon(imgMais2));
@@ -339,6 +353,20 @@ public class UsuarioHome extends JFrame {
 		lblProvisorio2.setBounds(297, 110, 66, 14);
 		contentPane.add(lblProvisorio2);
 		
+		// RECUSADAS
+		lblRecusadas.setForeground(UIManager.getColor("Button.shadow"));
+		lblRecusadas.setFont(new Font("SansSerif", Font.BOLD, 35));
+		lblRecusadas.setBounds(640, 370, 73, 33);
+		contentPane.add(lblRecusadas);
+		// FIM RECUSADAS
+		
+		// ACEITAS
+		lblAceitas.setForeground(UIManager.getColor("Button.shadow"));
+		lblAceitas.setFont(new Font("SansSerif", Font.BOLD, 35));
+		lblAceitas.setBounds(553, 370, 73, 33);
+		contentPane.add(lblAceitas);
+		// FIM ACEITAS
+		
 		// PENDENTES
 		lblPendentes.setForeground(UIManager.getColor("Button.shadow"));
 		lblPendentes.setFont(new Font("SansSerif", Font.BOLD, 35));
@@ -371,7 +399,7 @@ public class UsuarioHome extends JFrame {
 	
 	public void receber (Usuario user){
 		lblProvisorio2.setText(Integer.toString(user.getId()));
-		RepositorioCliente repositorio = new RepositorioCliente();
+		RepositorioUsuario repositorio = new RepositorioUsuario();
 		table.setModel(repositorio.listarReservas(user.getId()));
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
@@ -380,6 +408,10 @@ public class UsuarioHome extends JFrame {
 		table.getColumnModel().getColumn(3).setPreferredWidth(80);
 		
 		lblPendentes.setText(String.valueOf(repositorio.reservasPendentes(user.getId())));
+		lblAceitas.setText(String.valueOf(repositorio.reservasAceitas(user.getId())));
+		lblRecusadas.setText(String.valueOf(repositorio.reservasRecusadas(user.getId())));
 		lblPendentes.setForeground(new Color(149, 152, 154));
+		lblAceitas.setForeground(new Color(149, 152, 154));
+		lblRecusadas.setForeground(new Color(149, 152, 154));
 	}
 }
