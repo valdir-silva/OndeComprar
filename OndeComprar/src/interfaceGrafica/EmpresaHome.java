@@ -49,7 +49,7 @@ public class EmpresaHome extends JFrame {
 	JLabel lblEstoque = new JLabel("");
 	
 	/**
-	 * Launch the application.
+	 * Launch the application
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
