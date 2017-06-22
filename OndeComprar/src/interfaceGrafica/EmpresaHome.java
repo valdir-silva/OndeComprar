@@ -46,6 +46,7 @@ public class EmpresaHome extends JFrame {
 	JLabel lblCategoria = new JLabel("");
 	JLabel lblPreco = new JLabel("");
 	JLabel lblProduto = new JLabel("");
+	JLabel lblEstoque = new JLabel("");
 	
 	/**
 	 * Launch the application.
@@ -122,6 +123,12 @@ public class EmpresaHome extends JFrame {
 				lblPreco.setText(String.valueOf(produto.getPreco()));
 				lblDadosreserva.setVisible(true);
 				lblFechar.setVisible(true);
+				lblNome.setVisible(true);
+				lblData.setVisible(true);
+				lblProduto.setVisible(true);
+				lblCategoria.setVisible(true);
+				lblPreco.setVisible(true);
+				lblEstoque.setVisible(true);
 				
 			}
 		});
@@ -144,7 +151,6 @@ public class EmpresaHome extends JFrame {
 		lblPreco.setBounds(276, 283, 95, 18);
 		contentPane.add(lblPreco);
 		
-		JLabel lblEstoque = new JLabel("");
 		lblEstoque.setBounds(286, 321, 46, 14);
 		contentPane.add(lblEstoque);
 		// FIM DADOS DA RESERVA
@@ -154,6 +160,12 @@ public class EmpresaHome extends JFrame {
 			public void mouseClicked(MouseEvent arg0) {
 				lblDadosreserva.setVisible(false);
 				lblFechar.setVisible(false);
+				lblNome.setVisible(false);
+				lblData.setVisible(false);
+				lblProduto.setVisible(false);
+				lblCategoria.setVisible(false);
+				lblPreco.setVisible(false);
+				lblEstoque.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});

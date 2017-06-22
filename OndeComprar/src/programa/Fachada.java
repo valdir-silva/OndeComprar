@@ -12,15 +12,13 @@ import interfaces.IRepositorioUsuario;
 public class Fachada {
 		private static Fachada instance;
 		private ControleProdutos produtos;
-		//private IRepositorioProduto produtos;
 		private IRepositorioUsuario usuarios;
-		private IRepositorioEmpresa empresas;
+		private ControleEmpresas empresas;
 		
 		public Fachada(){
 			IRepositorioProduto produto = new RepositorioProduto(); produtos = new ControleProdutos(produto);
-			//produtos = new RepositorioProduto();
 			usuarios = new RepositorioUsuario();
-			empresas = new RepositorioEmpresa();
+			IRepositorioEmpresa empresa = new RepositorioEmpresa(); empresas = new ControleEmpresas(empresa);
 		}
 		
 		public static Fachada getInstance(){

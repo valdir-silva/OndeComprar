@@ -6,30 +6,30 @@ import javax.swing.table.TableModel;
 
 import interfaces.IRepositorioProduto;
 
-public class ControleProdutos implements IRepositorioProduto{ // se controleta implementando IRepositorio, como karai que o java sabe o código?
+public class ControleProdutos implements IRepositorioProduto{ 
 	IRepositorioProduto repositorioProduto;
 	Produto produto;
 	
-	public ControleProdutos (IRepositorioProduto repositorioProduto) { //tinha no programa de matheus, não sei pra que serve
+	public ControleProdutos (IRepositorioProduto repositorioProduto) {
 		this.repositorioProduto = repositorioProduto;
 	}
 	
-	public void listarProdutos(){ //que porra que isso vai fazer? NADA!? (LOOP INFINITO)
+	public void listarProdutos(){
 		repositorioProduto.listarProdutos();
 	}
-	public void listarProdutos(String order){ // LOOP!!!!!!!!!
+	public void listarProdutos(String order){ 
 		repositorioProduto.listarProdutos(order);
 	}
-	public Produto buscarProduto(int id){ // LOOP!!!!!!!!!
+	public Produto buscarProduto(int id){ 
 		return repositorioProduto.buscarProduto(id);
 	}
-	public void inserirProduto(Produto produto){ // LOOP!!!!!!!!!
+	public void inserirProduto(Produto produto){
 		repositorioProduto.inserirProduto(produto);
 	}
-	public void atualizarProduto(Produto produto){ // LOOP!!!!!!!!!
+	public void atualizarProduto(Produto produto){
 		repositorioProduto.atualizarProduto(produto);
 	}
-	public void apagarProduto(int id){ // LOOP!!!!!!!!!
+	public void apagarProduto(int id){ 
 		repositorioProduto.apagarProduto(id);
 	}
 
@@ -41,5 +41,4 @@ public class ControleProdutos implements IRepositorioProduto{ // se controleta i
 	public Produto produtoParaTela(int id) {
 		return repositorioProduto.produtoParaTela(id);
 	}
-	
 }
