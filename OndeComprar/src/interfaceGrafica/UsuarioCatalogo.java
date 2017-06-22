@@ -19,7 +19,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import DataBase.RepositorioUsuario;
+import interfaces.IRepositorioProduto;
 import DataBase.RepositorioProduto;
+import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
 import programa.Usuario;
@@ -93,10 +95,10 @@ public class UsuarioCatalogo extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioProduto repositorio = new RepositorioProduto();
 				int row = table.getSelectedRow();
 				int id = (int) table.getModel().getValueAt(row, 0);
-				Produto produto = repositorio.tabelaParaTela(id);
+				Produto produto = Fachada.getInstance().produtoParaTela(id);
+				
 				txtId.setText(Integer.toString(produto.getId()));
 				txtNome.setText(produto.getNome());
 				txtMarca.setText(produto.getMarca());
@@ -120,7 +122,7 @@ public class UsuarioCatalogo extends JFrame {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
 				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){  
-					RepositorioProduto repositorio = new RepositorioProduto();
+					IRepositorioProduto repositorio = new RepositorioProduto();
 					table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
 					
 					table.getColumnModel().getColumn(0).setPreferredWidth(50);

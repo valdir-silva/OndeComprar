@@ -3,12 +3,20 @@ package programa;
 public class Reserva {
 	private int id;
 	private String data;
+	private String solicitacao;
 	private int produto_id;
 	private int cliente_id;
-	private int cliente_endereco_int;
+	private int cliente_endereco_id;
 	
+	public String getSolicitacao() {
+		return solicitacao;
+	}
+
+	public void setSolicitacao(String solicitacao) {
+		this.solicitacao = solicitacao;
+	}
 	public Reserva(){
-		cliente_endereco_int = 1;
+		cliente_endereco_id = 1;
 	}
 	
 	public int getCliente_id() {
@@ -17,11 +25,11 @@ public class Reserva {
 	public void setCliente_id(int cliente_id) {
 		this.cliente_id = cliente_id;
 	}
-	public int getCliente_endereco_int() {
-		return cliente_endereco_int;
+	public int getCliente_endereco_id() {
+		return cliente_endereco_id;
 	}
-	public void setCliente_endereco_int(int cliente_endereco_int) {
-		this.cliente_endereco_int = cliente_endereco_int;
+	public void setCliente_endereco_id(int cliente_endereco_int) {
+		this.cliente_endereco_id = cliente_endereco_int;
 	}
 	public int getId() {
 		return id;

@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import DataBase.RepositorioEmpresa;
 import DataBase.RepositorioUsuario;
+import programa.Fachada;
 import programa.Usuario;
 
 import java.awt.Color;
@@ -119,16 +120,14 @@ public class Login extends JDialog {
 		btnEntrar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario cliente = new RepositorioUsuario();
-				RepositorioEmpresa empresa = new RepositorioEmpresa();
 				
-				if(cliente.logar(txtLogin.getText(), txtSenha.getText())){
+				if(Fachada.getInstance().logarUsuario(txtLogin.getText(), txtSenha.getText())){
 					UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
-					usuarioHome.receber(cliente.buscarUsuario(txtLogin.getText()));
+					usuarioHome.receber(Fachada.getInstance().buscarUsuario(txtLogin.getText()));
 					dispose();
-				} else if (empresa.logar(txtLogin.getText(), txtSenha.getText())){
+				} else if (Fachada.getInstance().logarEmpresa(txtLogin.getText(), txtSenha.getText())){
 					EmpresaHome empresaHome = new EmpresaHome(); empresaHome.setVisible(true);
-					empresaHome.receber(empresa.buscarEmpresa(txtLogin.getText()));
+					empresaHome.receber(Fachada.getInstance().buscarEmpresa(txtLogin.getText()));
 					dispose();
 				} else {
 					JOptionPane.showMessageDialog(null, "Login ou Senha inválidos");

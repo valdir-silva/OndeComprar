@@ -135,7 +135,7 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 		}
     	return t;
     }
-	public Produto tabelaParaTela(int id){
+	public Produto produtoParaTela(int id){
 		Produto produto = new Produto();
 		try{
 			super.conectar();

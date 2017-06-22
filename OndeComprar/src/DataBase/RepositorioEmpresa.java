@@ -1,14 +1,18 @@
 package DataBase;
 
 import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
 
 import interfaces.IRepositorioEmpresa;
+import net.proteanit.sql.DbUtils;
 import programa.Empresa;
+import programa.Produto;
+import programa.Reserva;
 import programa.Usuario;
 
 public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpresa{
 	
-	public boolean logar(String login, String senha) {
+	public boolean logarEmpresa(String login, String senha) {
 		try{
 			super.conectar();
 			String query = "SELECT * from empresa WHERE nome = '" + login + "' and senha='" + senha + "';";
@@ -50,4 +54,100 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 		return empresa; 
 	}
 
+	@Override
+	public TableModel listarReservasEmpresa(int id) {
+		TableModel t = null;
+    	try{
+			super.conectar();
+			String query = "SELECT reserva.id, reserva.data, produto.nome, reserva.solicitacao FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND produto.empresa_id ='" + id + "';"; //SELECT MAIS COMPLICADO QUE EU JA FIZ
+			this.resultset = this.statement.executeQuery(query);
+			TableModel table = DbUtils.resultSetToTableModel(resultset);
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return table;
+		} catch(Exception e){
+			System.out.println("Listar Erro: " + e.getMessage());
+		}
+    	return t;
+	}
+	@Override
+	public int reservasPendentesEmpresa(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='pendente' AND produto.empresa_id = '" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Pendentes Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+	public int reservasAceitasEmpresa(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='aceita' AND produto.empresa_id = '" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Aceitas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+	public int reservasRecusadasEmpresa(int id) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM reserva JOIN cliente ON reserva.cliente_id = cliente.id JOIN produto ON reserva.produto_id = produto.id AND reserva.solicitacao ='recusada' AND produto.empresa_id = '" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+
+	@Override
+	public Reserva tabelaParaTelaEmpresa(int id) {
+		Reserva reserva = new Reserva();
+		try{
+			super.conectar();
+			String query = "SELECT * from reserva WHERE id = " + id + ";";
+			this.resultset = this.statement.executeQuery(query);
+			while(this.resultset.next()){
+				reserva.setId(Integer.parseInt(this.resultset.getString("id")));
+				reserva.setData(this.resultset.getString("data"));
+				reserva.setSolicitacao(this.resultset.getString("solicitacao"));
+				reserva.setProduto_id(Integer.parseInt(this.resultset.getString("produto_id")));
+				reserva.setCliente_id(Integer.parseInt(this.resultset.getString("cliente_id")));
+				reserva.setCliente_endereco_id(Integer.parseInt(this.resultset.getString("cliente_endereco_id")));
+			}
+			super.desconectar();
+			return reserva;
+		} catch(Exception e){
+			System.out.println("Buscar Erro: " + e.getMessage());
+		}
+		return reserva; 
+	}
 }

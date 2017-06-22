@@ -15,7 +15,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 	public void solicitarReserva(Reserva reserva) {
 		try {
 			super.conectar();
-			String query = "INSERT INTO reserva (data, produto_id, cliente_id, cliente_endereco_id) VALUES('" + reserva.getData() + "', '" + reserva.getProduto_id() + "', '" + reserva.getCliente_id() + "', '" + reserva.getCliente_endereco_int() + "');";
+			String query = "INSERT INTO reserva (data, produto_id, cliente_id, cliente_endereco_id) VALUES('" + reserva.getData() + "', '" + reserva.getProduto_id() + "', '" + reserva.getCliente_id() + "', '" + reserva.getCliente_endereco_id() + "');";
 			this.statement.executeUpdate(query);
 			super.desconectar();
 		} catch(Exception e) {
@@ -23,7 +23,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
 	}
 
-	public TableModel listarReservas(int id) {
+	public TableModel listarReservasUser(int id) {
 		TableModel t = null;
     	try{
 			super.conectar();
@@ -40,7 +40,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return t;
 	}
-	public boolean logar(String login, String senha) {
+	public boolean logarUsuario(String login, String senha) {
 		try{
 			super.conectar();
 			String query = "SELECT * from cliente WHERE nome = '" + login + "' and senha='" + senha + "';";
@@ -102,7 +102,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 	}
 
 	@Override
-	public int reservasPendentes(int id) {
+	public int reservasPendentesUser(int id) {
 		int n = 0;
     	try{
 			super.conectar();
@@ -120,7 +120,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return n;
 	}
-	public int reservasAceitas(int id) {
+	public int reservasAceitasUser(int id) {
 		int n = 0;
     	try{
 			super.conectar();
@@ -138,7 +138,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return n;
 	}
-	public int reservasRecusadas(int id) {
+	public int reservasRecusadasUser(int id) {
 		int n = 0;
     	try{
 			super.conectar();

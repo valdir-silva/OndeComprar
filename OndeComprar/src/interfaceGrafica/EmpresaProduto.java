@@ -12,6 +12,7 @@ import javax.swing.table.TableModel;
 
 import DataBase.RepositorioProduto;
 import net.proteanit.sql.DbUtils;
+import programa.Fachada;
 import programa.Produto;
 
 import java.awt.Color;
@@ -242,6 +243,7 @@ public class EmpresaProduto extends JFrame {
 				produto.setCategoria((String) comboBox.getSelectedItem());
 				produto.setPreco(Float.parseFloat(txtPreco.getText()));
 				
+				//Fachada.getInstance().inserirProduto(produto);
 				RepositorioProduto repositorio = new RepositorioProduto();
 				repositorio.inserirProduto(produto);
 				JOptionPane.showMessageDialog(null, "Adicionado com sucesso!");
@@ -547,10 +549,9 @@ public class EmpresaProduto extends JFrame {
 		table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioProduto repositorio = new RepositorioProduto();
 				int row = table.getSelectedRow();
 				int id = (int) table.getModel().getValueAt(row, 0);
-				Produto produto = repositorio.tabelaParaTela(id);
+				Produto produto = Fachada.getInstance().produtoParaTela(id);
 				txtId.setText(Integer.toString(produto.getId()));
 				txtNome.setText(produto.getNome());
 				txtMarca.setText(produto.getMarca());

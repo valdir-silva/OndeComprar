@@ -38,8 +38,8 @@ public class ControleProdutos implements IRepositorioProduto{ // se controleta i
 	}
 
 	@Override
-	public Produto tabelaParaTela(int id) {
-		return repositorioProduto.tabelaParaTela(id);
+	public Produto produtoParaTela(int id) {
+		return repositorioProduto.produtoParaTela(id);
 	}
 	
 }

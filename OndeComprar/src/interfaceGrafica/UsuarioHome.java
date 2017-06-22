@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import DataBase.RepositorioUsuario;
 import DataBase.RepositorioUsuario;
 import DataBase.RepositorioProduto;
+import programa.Fachada;
 import programa.Produto;
 import programa.Usuario;
 
@@ -399,17 +400,16 @@ public class UsuarioHome extends JFrame {
 	
 	public void receber (Usuario user){
 		lblProvisorio2.setText(Integer.toString(user.getId()));
-		RepositorioUsuario repositorio = new RepositorioUsuario();
-		table.setModel(repositorio.listarReservas(user.getId()));
+		table.setModel(Fachada.getInstance().listarReservasUser(user.getId()));
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
 		table.getColumnModel().getColumn(1).setPreferredWidth(80); 
 		table.getColumnModel().getColumn(2).setPreferredWidth(120); 
 		table.getColumnModel().getColumn(3).setPreferredWidth(80);
 		
-		lblPendentes.setText(String.valueOf(repositorio.reservasPendentes(user.getId())));
-		lblAceitas.setText(String.valueOf(repositorio.reservasAceitas(user.getId())));
-		lblRecusadas.setText(String.valueOf(repositorio.reservasRecusadas(user.getId())));
+		lblPendentes.setText(String.valueOf(Fachada.getInstance().reservasPendentesUser(user.getId())));
+		lblAceitas.setText(String.valueOf(Fachada.getInstance().reservasAceitasUser(user.getId())));
+		lblRecusadas.setText(String.valueOf(Fachada.getInstance().reservasRecusadasUser(user.getId())));
 		lblPendentes.setForeground(new Color(149, 152, 154));
 		lblAceitas.setForeground(new Color(149, 152, 154));
 		lblRecusadas.setForeground(new Color(149, 152, 154));
