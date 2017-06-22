@@ -47,6 +47,7 @@ public class EmpresaHome extends JFrame {
 	JLabel lblPreco = new JLabel("");
 	JLabel lblProduto = new JLabel("");
 	JLabel lblEstoque = new JLabel("");
+	JLabel lblAceitar = new JLabel("");
 	
 	/**
 	 * Launch the application
@@ -186,6 +187,11 @@ public class EmpresaHome extends JFrame {
 		contentPane.add(lblDadosreserva);
 		lblDadosreserva.setVisible(false);
 		// FIM DADOS RESERVA
+		
+		// ACAITAR
+		lblAceitar.setBounds(259, 346, 46, 14);
+		contentPane.add(lblAceitar);
+		// FIM ACEITAR
 		
 		//BG
 		ImageIcon background = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/Empresa_Home.png"));
