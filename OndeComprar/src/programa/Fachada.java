@@ -98,16 +98,28 @@ public class Fachada {
 		public int reservasAceitasEmpresa(int id){
 			return empresas.reservasAceitasEmpresa(id);
 		}
+		public int promocoesAtivas(int id, String data) {
+			return empresas.promocoesAtivas(id, data);
+		}
+		public int promocoesAcabando(int id, String data) {
+			return empresas.promocoesAcabando(id, data);
+		}
 		public int reservasRecusadasEmpresa(int id){
 			return empresas.reservasRecusadasEmpresa(id);
 		}
 		public Reserva tabelaParaTelaEmpresa(int id){
 			return empresas.tabelaParaTelaEmpresa(id);
 		}
-		//ACEITAR RESERVA
-		//RECUSAR RESERVA
-		//ALTERAR SENHA
+		public void aceitarReserva(int id){
+			empresas.aceitarReserva(id);
+		}
+		public void recusarReserva(int id){
+			empresas.recusarReserva(id);
+		}
 		public TableModel listarReservasEmpresa(int id){
 			return empresas.listarReservasEmpresa(id);
+		}
+		public TableModel listarPromocoesEmpresa(int id) {
+			return empresas.listarPromocoesEmpresa(id);
 		}
 }

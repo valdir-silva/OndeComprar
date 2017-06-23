@@ -15,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import DataBase.RepositorioUsuario;
 import programa.Endereco;
+import programa.Fachada;
 import programa.Usuario;
 
 import java.awt.event.MouseAdapter;
@@ -75,9 +76,8 @@ public class UsuarioConta extends JFrame {
 		lblVoltar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario usuario = new RepositorioUsuario();
 				UsuarioHome frame4 = new UsuarioHome(); frame4.setVisible(true);
-				frame4.receber(usuario.buscarUsuario(txtNome.getText()));
+				frame4.receber(Fachada.getInstance().buscarUsuario(txtNome.getText()));
 				dispose();
 			}
 		});
@@ -228,20 +228,19 @@ public class UsuarioConta extends JFrame {
 		lblAlterar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario repositorio = new RepositorioUsuario();
 				Usuario usuario = new Usuario();
 			
 				usuario.setNome(txtNome.getText());
-				usuario.setId(repositorio.buscarUsuario(usuario.getNome()).getId());
+				usuario.setId(Fachada.getInstance().buscarUsuario(usuario.getNome()).getId());
 				usuario.setEmail(txtEmail.getText());
 				usuario.setTelefone(txtTelefone.getText());
 				usuario.setCep(txtCep.getText());
 				usuario.setCidade(txtCidade.getText());
 				usuario.setEstado(txtEstado.getText());
 				usuario.setRua(txtEndereco.getText());
-				usuario.setEndereco_id(repositorio.buscarUsuario(usuario.getNome()).getEndereco_id());
+				usuario.setEndereco_id(Fachada.getInstance().buscarUsuario(usuario.getNome()).getEndereco_id());
 				
-				repositorio.atualizarUsuario(usuario);
+				Fachada.getInstance().atualizarUsuario(usuario);
 				
 			}
 		});
@@ -290,14 +289,13 @@ public class UsuarioConta extends JFrame {
 	
 	public void receber(Usuario user){
 		Endereco endereco = new Endereco();
-		RepositorioUsuario repositorio = new RepositorioUsuario();
 		
 		txtNome.setText(user.getNome());
 		txtEmail.setText(user.getEmail());
 		txtTelefone.setText(user.getTelefone());
 		txtSenhaAtual.setText(user.getSenha());
 		
-		endereco = repositorio.buscarEndereco(user.getEndereco_id());
+		endereco = Fachada.getInstance().buscarEndereco(user.getEndereco_id());
 		txtCep.setText(endereco.getCep());
 		txtCidade.setText(endereco.getCidade());
 		txtEstado.setText(endereco.getEstado());

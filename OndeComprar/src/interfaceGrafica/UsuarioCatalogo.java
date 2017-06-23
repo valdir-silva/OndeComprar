@@ -18,9 +18,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioUsuario;
-import interfaces.IRepositorioProduto;
-import DataBase.RepositorioProduto;
 import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
@@ -121,9 +118,8 @@ public class UsuarioCatalogo extends JFrame {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){  
-					IRepositorioProduto repositorio = new RepositorioProduto();
-					table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+					table.setModel(Fachada.getInstance().listarProdutosTabela(txtBuscar.getText(), order));
 					
 					table.getColumnModel().getColumn(0).setPreferredWidth(50);
 					table.getColumnModel().getColumn(1).setPreferredWidth(180); 
@@ -188,13 +184,12 @@ public class UsuarioCatalogo extends JFrame {
 		lblSolicitar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario repositorio = new RepositorioUsuario();
 				Reserva reserva = new Reserva();
 				Calendar date = Calendar.getInstance();;
 				reserva.setData(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));
 				reserva.setProduto_id(Integer.parseInt(txtId.getText()));
 				reserva.setCliente_id(Integer.parseInt(lblProvisorio2.getText()));
-				repositorio.solicitarReserva(reserva);
+				Fachada.getInstance().solicitarReserva(reserva);
 				JOptionPane.showMessageDialog(null, "Solicitação enviada!");
 			}
 		});

@@ -13,8 +13,6 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioEmpresa;
-import DataBase.RepositorioUsuario;
 import programa.Fachada;
 import programa.Usuario;
 

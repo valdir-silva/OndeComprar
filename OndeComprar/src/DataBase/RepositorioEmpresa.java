@@ -72,6 +72,26 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 		}
     	return t;
 	}
+	
+	@Override
+	public TableModel listarPromocoesEmpresa(int id) {
+		TableModel t = null;
+    	try{
+			super.conectar();
+			String query = "SELECT promocao.id, promocao.valida_ate, produto.nome, produto.preco, promocao.preco_promo FROM promocao JOIN produto ON promocao.produto_id = produto.id AND produto.empresa_id ='" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			TableModel table = DbUtils.resultSetToTableModel(resultset);
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return table;
+		} catch(Exception e){
+			System.out.println("Listar Erro: " + e.getMessage());
+		}
+    	return t;
+	}
+	
 	@Override
 	public int reservasPendentesEmpresa(int id) {
 		int n = 0;
@@ -81,9 +101,6 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			while(this.resultset.next()){
-				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
-			}
 			super.desconectar();
 			return n;
 		} catch(Exception e){
@@ -99,9 +116,6 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			while(this.resultset.next()){
-				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
-			}
 			super.desconectar();
 			return n;
 		} catch(Exception e){
@@ -117,9 +131,6 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			while(this.resultset.next()){
-				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
-			}
 			super.desconectar();
 			return n;
 		} catch(Exception e){
@@ -149,5 +160,63 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			System.out.println("Buscar Erro: " + e.getMessage());
 		}
 		return reserva; 
+	}
+	
+	@Override
+	public void aceitarReserva(int id) {
+			try{
+				super.conectar();
+				String query = "UPDATE reserva SET solicitacao = 'aceita' WHERE id = " + id + ";";
+				this.statement.executeUpdate(query);
+				super.desconectar();
+			} catch (Exception e){
+				System.out.println("Aceitar Reserva ERRO:" + e.getMessage());
+			}
+	}
+
+	@Override
+	public void recusarReserva(int id) {
+		try{
+			super.conectar();
+			String query = "UPDATE reserva SET solicitacao = 'recusada' WHERE id = " + id + ";";
+			this.statement.executeUpdate(query);
+			super.desconectar();
+		} catch (Exception e){
+			System.out.println("Aceitar Reserva ERRO:" + e.getMessage());
+		}
+	}
+
+	@Override
+	public int promocoesAtivas(int id, String data) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM promocao JOIN produto ON promocao.produto_id = produto.id AND produto.empresa_id ='" + id + "' AND promocao.valida_ate !='" + data + "' ;";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+
+	@Override
+	public int promocoesAcabando(int id, String data) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "select count(*) FROM promocao JOIN produto ON promocao.produto_id = produto.id AND produto.empresa_id ='" + id + "' AND promocao.valida_ate ='" + data + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
 	}
 }

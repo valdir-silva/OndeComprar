@@ -78,6 +78,7 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				produto.setId(Integer.parseInt(this.resultset.getString("id")));
 				produto.setMarca(this.resultset.getString("marca"));
 				produto.setNome(this.resultset.getString("nome"));
+				produto.setCategoria(this.resultset.getString("categoria"));
 				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
 			}
 			super.desconectar();
