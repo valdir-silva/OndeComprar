@@ -10,6 +10,7 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -25,9 +26,13 @@ import programa.Usuario;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.awt.event.MouseAdapter;
 import java.awt.SystemColor;
+import javax.swing.JTextField;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class EmpresaHome extends JFrame {
 
@@ -44,6 +49,7 @@ public class EmpresaHome extends JFrame {
 	JLabel lblDadosreserva = new JLabel("");
 	JLabel lblBg = new JLabel("");
 	JLabel lblFechar = new JLabel("");
+	JLabel lblFechar2 = new JLabel("");
 	JLabel lblCategoria = new JLabel("");
 	JLabel lblPreco = new JLabel("");
 	JLabel lblProduto = new JLabel("");
@@ -58,6 +64,19 @@ public class EmpresaHome extends JFrame {
 	Reserva reserva;
 	Calendar date = Calendar.getInstance();;
 	String dataAtual = date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR);
+	private JTextField txtCodigoProduto;
+	private JTextField txtValidade;
+	private JTextField txtNomeProduto;
+	private JTextField txtPrecoProduto;
+	private JTextField txtNovoPreco;
+	private JTextField txtDesconto;
+	private JLabel lblBuscarproduto = new JLabel("");
+	private JLabel lblBuscarproduto2 = new JLabel("");
+	JLabel lblApagar2 = new JLabel("");
+	JLabel lblNovapromocao = new JLabel("");
+	JLabel lblApagar = new JLabel("");
+	JLabel lblSalvar = new JLabel("");
+	private final JLabel lblCriarpromocao = new JLabel("");
 	
 	/**
 	 * Launch the application
@@ -95,6 +114,202 @@ public class EmpresaHome extends JFrame {
 		
 		lblProvisorio2.setBounds(209, 23, 66, 14);
 		contentPane.add(lblProvisorio2);
+		lblCriarpromocao.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblCriarpromocao.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				novaPromocao(true);
+				txtValidade.setText(dataAtual);
+			}
+		});
+				
+		lblCriarpromocao.setBounds(255, 105, 111, 23);	
+		contentPane.add(lblCriarpromocao);
+		
+		// DATOS PROMOCAO
+		txtCodigoProduto = new JTextField();
+		txtCodigoProduto.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblBuscarproduto2.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		txtCodigoProduto.setBounds(450, 172, 95, 20);
+		contentPane.add(txtCodigoProduto);
+		txtCodigoProduto.setColumns(10);
+		txtCodigoProduto.setOpaque(false);
+		txtCodigoProduto.setBorder(null);
+		
+		txtValidade = new JTextField();
+		txtValidade.setBounds(586, 172, 100, 20);
+		contentPane.add(txtValidade);
+		txtValidade.setColumns(10);
+		txtValidade.setOpaque(false);
+		txtValidade.setBorder(null);
+		
+		txtNomeProduto = new JTextField();
+		txtNomeProduto.setEditable(false);
+		txtNomeProduto.setBounds(450, 250, 230, 20);
+		contentPane.add(txtNomeProduto);
+		txtNomeProduto.setColumns(10);
+		txtNomeProduto.setOpaque(false);
+		txtNomeProduto.setBorder(null);
+		
+		txtPrecoProduto = new JTextField();
+		txtPrecoProduto.setEditable(false);
+		txtPrecoProduto.setBounds(450, 290, 95, 20);
+		contentPane.add(txtPrecoProduto);
+		txtPrecoProduto.setColumns(10);
+		txtPrecoProduto.setOpaque(false);
+		txtPrecoProduto.setBorder(null);
+		
+		txtNovoPreco = new JTextField();
+		txtNovoPreco.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){
+					
+						DecimalFormat df = new DecimalFormat("#.00");
+						float precoNormal = Float.parseFloat(txtPrecoProduto.getText());
+						float precoDesconto = Float.parseFloat(txtNovoPreco.getText());
+						float desconto = 100 - ((precoDesconto*100)/precoNormal);
+						txtDesconto.setText(df.format(desconto) + " %");
+				}
+			}
+		});
+		txtNovoPreco.setBounds(593, 290, 95, 20);
+		contentPane.add(txtNovoPreco);
+		txtNovoPreco.setColumns(10);
+		txtNovoPreco.setOpaque(false);
+		txtNovoPreco.setBorder(null);
+		
+		txtDesconto = new JTextField();
+		txtDesconto.setEditable(false);
+		txtDesconto.setBounds(529, 329, 80, 20);
+		contentPane.add(txtDesconto);
+		txtDesconto.setColumns(10);
+		txtDesconto.setOpaque(false);
+		txtDesconto.setBorder(null);
+		
+		ImageIcon buscarProduto2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/buscarProduto_bt2.png"));
+		lblBuscarproduto2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Produto produto = Fachada.getInstance().buscarProduto(Integer.parseInt(txtCodigoProduto.getText()));
+				txtNomeProduto.setText(produto.getNome());
+				txtPrecoProduto.setText(String.valueOf(produto.getPreco()));
+			}
+		});
+		lblBuscarproduto2.setBounds(545, 172, 28, 21);
+		Image imgBuscarProduto2 = buscarProduto2.getImage().getScaledInstance(lblBuscarproduto2.getWidth(), lblBuscarproduto2.getHeight(), Image.SCALE_SMOOTH);
+		lblBuscarproduto2.setIcon(new ImageIcon(imgBuscarProduto2));
+		contentPane.add(lblBuscarproduto2);
+		lblBuscarproduto2.setVisible(false);
+		
+		ImageIcon buscarProduto = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/buscarProduto_bt1.png"));
+		lblBuscarproduto.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				lblBuscarproduto2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblBuscarproduto.setBounds(545, 172, 28, 21);
+		Image imgBuscarProduto = buscarProduto.getImage().getScaledInstance(lblBuscarproduto.getWidth(), lblBuscarproduto.getHeight(), Image.SCALE_SMOOTH);
+		lblBuscarproduto.setIcon(new ImageIcon(imgBuscarProduto));
+		contentPane.add(lblBuscarproduto);
+		
+		ImageIcon salvar2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/salvarPromo_bt2.png"));
+		JLabel lblSalvar2 = new JLabel("");
+		lblSalvar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Fachada.getInstance().salvarPromocao(txtNovoPreco.getText(), txtValidade.getText(), txtCodigoProduto.getText());
+				atualizarTabela();
+				JOptionPane.showMessageDialog(null, "Promoção Salva");
+			}
+		});
+		lblSalvar2.setBounds(575, 355, 137, 57);
+		Image imgSalvar2 = salvar2.getImage().getScaledInstance(lblSalvar2.getWidth(), lblSalvar2.getHeight(), Image.SCALE_SMOOTH);
+		lblSalvar2.setIcon(new ImageIcon(imgSalvar2));
+		contentPane.add(lblSalvar2);
+		lblSalvar2.setVisible(false);
+		
+		ImageIcon salvar = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/salvarPromo_bt1.png"));
+		lblSalvar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblSalvar2.setVisible(true);
+				lblApagar2.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblSalvar.setBounds(575, 355, 137, 57);
+		Image imgSalvar = salvar.getImage().getScaledInstance(lblSalvar.getWidth(), lblSalvar.getHeight(), Image.SCALE_SMOOTH);
+		lblSalvar.setIcon(new ImageIcon(imgSalvar));
+		contentPane.add(lblSalvar);
+		
+		ImageIcon apagar2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/apagarPromo_bt2.png"));
+		lblApagar2.setBounds(428, 355, 148, 57);
+		Image imgApagar2 = apagar2.getImage().getScaledInstance(lblApagar2.getWidth(), lblApagar2.getHeight(), Image.SCALE_SMOOTH);
+		lblApagar2.setIcon(new ImageIcon(imgApagar2));
+		contentPane.add(lblApagar2);
+		lblApagar2.setVisible(false);
+		
+		ImageIcon apagar = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/apagarPromo_bt1.png"));
+		lblApagar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblApagar2.setVisible(true);
+				lblSalvar2.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblApagar.setBounds(428, 355, 148, 57);
+		Image imgCancelar = apagar.getImage().getScaledInstance(lblApagar.getWidth(), lblApagar.getHeight(), Image.SCALE_SMOOTH);
+		lblApagar.setIcon(new ImageIcon(imgCancelar));
+		contentPane.add(lblApagar);
+		
+		lblFechar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				novaPromocao(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		lblFechar2.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblFechar2.setBounds(685, 105, 22, 23);
+		contentPane.add(lblFechar2);
+		// FIM DADOS PROMOCAO
+		
+		//	NOVA PROMOCAO
+		ImageIcon novaPromocao = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/novaPromocao.png"));
+		lblNovapromocao.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblBuscarproduto2.setVisible(false);
+				lblApagar2.setVisible(false);
+				lblSalvar2.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+		});
+		lblNovapromocao.setBounds(428, 102, 284, 310);
+		Image imgNovaPromocao = novaPromocao.getImage().getScaledInstance(lblNovapromocao.getWidth(), lblNovapromocao.getHeight(), Image.SCALE_SMOOTH);
+		lblNovapromocao.setIcon(new ImageIcon(imgNovaPromocao));
+		contentPane.add(lblNovapromocao);
+		// FIM NOVA PROMOCAO
 		
 		// RECUSADAS
 		lblRecusadas.setForeground(UIManager.getColor("Button.shadow"));
@@ -304,6 +519,7 @@ public class EmpresaHome extends JFrame {
 		table2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
+				txtValidade.setText(dataAtual);
 			}
 		});
 		scrollPane2.setViewportView(table2);
@@ -316,6 +532,9 @@ public class EmpresaHome extends JFrame {
 			public void mouseMoved(MouseEvent e) {
 				lblRecusar2.setVisible(false);
 				lblAceitar2.setVisible(false);
+				lblApagar2.setVisible(false);
+				lblBuscarproduto2.setVisible(false);
+				
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
@@ -347,6 +566,7 @@ public class EmpresaHome extends JFrame {
 		lblRecusadas.setText(String.valueOf(Fachada.getInstance().reservasRecusadasEmpresa(emp.getId())));
 		lblPromoAtivas.setText(String.valueOf(Fachada.getInstance().promocoesAtivas(emp.getId(), dataAtual)));
 		lblPromoAcabando.setText(String.valueOf(Fachada.getInstance().promocoesAcabando(emp.getId(), dataAtual)));
+		novaPromocao(false);
 	}
 	
 	public void atualizarTabela(){
@@ -370,5 +590,21 @@ public class EmpresaHome extends JFrame {
 		lblRecusadas.setText(String.valueOf(Fachada.getInstance().reservasRecusadasEmpresa(id)));
 		lblPromoAtivas.setText(String.valueOf(Fachada.getInstance().promocoesAtivas(id, dataAtual)));
 		lblPromoAcabando.setText(String.valueOf(Fachada.getInstance().promocoesAcabando(id, dataAtual)));
+	}
+	
+	public void novaPromocao(Boolean op){
+		lblNovapromocao.setVisible(op);
+		lblFechar2.setVisible(op);
+		txtCodigoProduto.setVisible(op);
+		lblBuscarproduto.setVisible(op);
+		lblBuscarproduto2.setVisible(op);
+		txtValidade.setVisible(op);
+		txtNomeProduto.setVisible(op);
+		txtPrecoProduto.setVisible(op);
+		txtNovoPreco.setVisible(op);
+		txtDesconto.setVisible(op);
+		lblApagar.setVisible(op);
+		lblSalvar.setVisible(op);
+		table.setVisible(!op);
 	}
 }

@@ -72,4 +72,9 @@ public class ControleEmpresas implements IRepositorioEmpresa{
 		return repositorioEmpresa.promocoesAcabando(id, data);
 	}
 
+	@Override
+	public void salvarPromocao(String preco, String validade, String produto_id) {
+		repositorioEmpresa.salvarPromocao(preco, validade, produto_id);
+	}
+
 }

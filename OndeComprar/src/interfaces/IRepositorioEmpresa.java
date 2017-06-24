@@ -18,6 +18,7 @@ public interface IRepositorioEmpresa {
 	public int reservasRecusadasEmpresa(int id);
 	public int promocoesAtivas(int id, String data);
 	public int promocoesAcabando(int id, String data);
+	public void salvarPromocao(String preco, String validade, String produto_id);
 	public Reserva tabelaParaTelaEmpresa(int id);
 	public void aceitarReserva(int id);
 	public void recusarReserva(int id);

@@ -11,9 +11,6 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioUsuario;
-import DataBase.RepositorioUsuario;
-import DataBase.RepositorioProduto;
 import programa.Fachada;
 import programa.Produto;
 import programa.Usuario;
@@ -46,10 +43,10 @@ public class UsuarioHome extends JFrame {
 	private final JLabel lblMais = new JLabel("");
 	private final JLabel lblMais2 = new JLabel("");
 	JTable table;
-	JLabel lblProvisorio2 = new JLabel("");
 	JLabel lblPendentes = new JLabel("0");
 	JLabel lblAceitas = new JLabel("0");
 	JLabel lblRecusadas = new JLabel("0");
+	private final JLabel lblNickname = new JLabel("");
 	/**
 	 * Launch the application.
 	 */
@@ -80,6 +77,12 @@ public class UsuarioHome extends JFrame {
 		contentPane.setLayout(null);
 		
 		this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
+		lblNickname.setForeground(SystemColor.control);
+		
+		// NICKNAME
+		lblNickname.setBounds(630, 9, 92, 25);
+		contentPane.add(lblNickname);
+		// FIM NICKNAME
 		
 		//CONTA 2
 		ImageIcon conta3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt3.png"));
@@ -153,9 +156,8 @@ public class UsuarioHome extends JFrame {
 		lblEditarPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario usuario = new RepositorioUsuario();
 				UsuarioConta frame3 = new UsuarioConta(); frame3.setVisible(true);
-				frame3.receber(usuario.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
+				frame3.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
 		});
@@ -217,9 +219,8 @@ public class UsuarioHome extends JFrame {
 		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				RepositorioUsuario cliente = new RepositorioUsuario();
 				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
-				frame4.receber(cliente.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
+				frame4.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
 		});
@@ -311,9 +312,8 @@ public class UsuarioHome extends JFrame {
 		lblMais2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				RepositorioUsuario cliente = new RepositorioUsuario();
 				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
-				frame4.receber(cliente.buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
+				frame4.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
 		});
@@ -347,13 +347,6 @@ public class UsuarioHome extends JFrame {
 		scrollPane.setViewportView(table);
 		// FIM TABELA
 		
-		JLabel lblProvisorio = new JLabel("provisorio:");
-		lblProvisorio.setBounds(231, 110, 65, 14);
-		contentPane.add(lblProvisorio);
-		
-		lblProvisorio2.setBounds(297, 110, 66, 14);
-		contentPane.add(lblProvisorio2);
-		
 		// RECUSADAS
 		lblRecusadas.setForeground(UIManager.getColor("Button.shadow"));
 		lblRecusadas.setFont(new Font("SansSerif", Font.BOLD, 35));
@@ -373,6 +366,7 @@ public class UsuarioHome extends JFrame {
 		lblPendentes.setFont(new Font("SansSerif", Font.BOLD, 35));
 		lblPendentes.setBounds(445, 370, 73, 33);
 		contentPane.add(lblPendentes);
+		lblNickname.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		// FIM PENDENTES
 		
 		//BG
@@ -399,8 +393,8 @@ public class UsuarioHome extends JFrame {
 	}
 	
 	public void receber (Usuario user){
-		lblProvisorio2.setText(Integer.toString(user.getId()));
 		table.setModel(Fachada.getInstance().listarReservasUser(user.getId()));
+		lblNickname.setText(user.getNome());
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
 		table.getColumnModel().getColumn(1).setPreferredWidth(80); 

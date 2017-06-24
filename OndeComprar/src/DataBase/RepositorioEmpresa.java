@@ -219,4 +219,16 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 		}
     	return n;
 	}
+
+	@Override
+	public void salvarPromocao(String preco, String validade, String produto_id) {
+		try{
+			super.conectar();
+			String query = "INSERT INTO promocao (preco_promo, valida_ate, produto_id) VALUES('" + preco + "', '" + validade +"', '" + produto_id + "');";
+			this.statement.executeUpdate(query);
+			super.desconectar();
+		} catch (Exception e){
+			System.out.println("Inserir Promocao ERRO: " + e.getMessage());
+		}
+	}
 }

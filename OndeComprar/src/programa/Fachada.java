@@ -104,6 +104,9 @@ public class Fachada {
 		public int promocoesAcabando(int id, String data) {
 			return empresas.promocoesAcabando(id, data);
 		}
+		public void salvarPromocao(String preco, String validade, String produto_id) {
+			empresas.salvarPromocao(preco, validade, produto_id);
+		}
 		public int reservasRecusadasEmpresa(int id){
 			return empresas.reservasRecusadasEmpresa(id);
 		}
