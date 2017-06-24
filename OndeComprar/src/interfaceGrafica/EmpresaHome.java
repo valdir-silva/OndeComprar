@@ -77,6 +77,7 @@ public class EmpresaHome extends JFrame {
 	JLabel lblApagar = new JLabel("");
 	JLabel lblSalvar = new JLabel("");
 	private final JLabel lblCriarpromocao = new JLabel("");
+	private JTextField txtCampoPesquisa;
 	
 	/**
 	 * Launch the application
@@ -524,6 +525,36 @@ public class EmpresaHome extends JFrame {
 		});
 		scrollPane2.setViewportView(table2);
 		// FIM TABELA PROMOÇÃO
+		
+		// PESQUISAR
+		txtCampoPesquisa = new JTextField();
+		txtCampoPesquisa.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				txtCampoPesquisa.setOpaque(true);
+				e.getComponent().setBackground(new Color(246, 246, 246));
+				
+				char keyChar = e.getKeyChar();
+				if (Character.isLowerCase(keyChar)) {
+				      e.setKeyChar(Character.toUpperCase(keyChar));
+				    }
+			}
+		});
+		txtCampoPesquisa.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtCampoPesquisa.setOpaque(true);
+				e.getComponent().setBackground(new Color(246, 246, 246));
+			}
+		});
+		
+		txtCampoPesquisa.setOpaque(false);
+		txtCampoPesquisa.setForeground(SystemColor.controlDkShadow);
+		txtCampoPesquisa.setColumns(10);
+		txtCampoPesquisa.setBorder(null);
+		txtCampoPesquisa.setBounds(435, 58, 239, 33);
+		contentPane.add(txtCampoPesquisa);
+		// FIM PESQUISAR
 		
 		//BG
 		ImageIcon background = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/Empresa_Home.png"));

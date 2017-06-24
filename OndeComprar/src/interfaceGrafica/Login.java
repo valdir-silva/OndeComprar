@@ -148,7 +148,7 @@ public class Login extends JDialog {
 				txtSenha.setText("12345");
 			}
 		});
-		lblAlunando.setBounds(10, 11, 61, 26);
+		lblAlunando.setBounds(10, 8, 61, 26);
 		contentPanel.add(lblAlunando);
 		//
 		

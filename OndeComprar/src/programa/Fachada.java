@@ -84,6 +84,15 @@ public class Fachada {
 		public TableModel listarReservasUser(int id){
 			return usuarios.listarReservasUser(id);
 		}
+		public TableModel listarPromocoesUser(int id) {
+			return usuarios.listarPromocoesUser(id);
+		}
+		public int promocoesAtivas(String data) {
+			return usuarios.promocoesAtivas(data);
+		}
+		public int promocoesAcabando(String data) {
+			return usuarios.promocoesAcabando(data);
+		}
 		
 		// MÉTODOS DE EMPRESA
 		public boolean logarEmpresa(String login, String senha){

@@ -61,5 +61,19 @@ public class ControleUsuarios implements IRepositorioUsuario{
 	public TableModel listarReservasUser(int id) {
 		return repositorioUsuario.listarReservasUser(id);
 	}
-	
+
+	@Override
+	public TableModel listarPromocoesUser(int id) {
+		return repositorioUsuario.listarPromocoesUser(id);
+	}
+
+	@Override
+	public int promocoesAtivas(String data) {
+		return repositorioUsuario.promocoesAtivas(data);
+	}
+
+	@Override
+	public int promocoesAcabando(String data) {
+		return repositorioUsuario.promocoesAcabando(data);
+	}
 }

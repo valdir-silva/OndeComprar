@@ -40,6 +40,23 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return t;
 	}
+	public TableModel listarPromocoesUser(int id) {
+		TableModel t = null;
+    	try{
+			super.conectar();
+			String query = "SELECT promocao.id, promocao.valida_ate, produto.nome, produto.preco, promocao.preco_promo FROM promocao JOIN produto ON promocao.produto_id = produto.id;";
+			this.resultset = this.statement.executeQuery(query);
+			TableModel table = DbUtils.resultSetToTableModel(resultset);
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return table;
+		} catch(Exception e){
+			System.out.println("Listar Erro: " + e.getMessage());
+		}
+    	return t;
+	}
 	public boolean logarUsuario(String login, String senha) {
 		try{
 			super.conectar();
@@ -198,5 +215,45 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 			System.out.println("Buscar endereco Erro: " + e.getMessage());
 		}
 		return endereco;
+	}
+
+	@Override
+	public int promocoesAtivas(String data) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "SELECT count(*) FROM promocao JOIN produto ON promocao.produto_id = produto.id AND promocao.valida_ate !='"+ data + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
+	}
+
+	@Override
+	public int promocoesAcabando(String data) {
+		int n = 0;
+    	try{
+			super.conectar();
+			String query = "SELECT count(*) FROM promocao JOIN produto ON promocao.produto_id = produto.id AND promocao.valida_ate ='"+ data + "';";
+			this.resultset = this.statement.executeQuery(query);
+			this.resultset.next();
+			n = this.resultset.getInt("count(*)");
+			while(this.resultset.next()){
+				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
+			}
+			super.desconectar();
+			return n;
+		} catch(Exception e){
+			System.out.println("Recusadas Erro: " + e.getMessage());
+		}
+    	return n;
 	}
 }

@@ -17,6 +17,7 @@ import programa.Usuario;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Calendar;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseAdapter;
 import javax.swing.JTextField;
@@ -43,10 +44,15 @@ public class UsuarioHome extends JFrame {
 	private final JLabel lblMais = new JLabel("");
 	private final JLabel lblMais2 = new JLabel("");
 	JTable table;
+	JTable table2;
 	JLabel lblPendentes = new JLabel("0");
 	JLabel lblAceitas = new JLabel("0");
 	JLabel lblRecusadas = new JLabel("0");
 	private final JLabel lblNickname = new JLabel("");
+	private final JLabel lblPromoAtivas = new JLabel("0");
+	private JLabel lblPromoAcabando = new JLabel("0");
+	Calendar date = Calendar.getInstance();;
+	String dataAtual = date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR);
 	/**
 	 * Launch the application.
 	 */
@@ -339,6 +345,14 @@ public class UsuarioHome extends JFrame {
 		contentPane.add(lblMais);
 		// FIM MAIS
 		
+		// TABELA PROMOCAO
+		JScrollPane scrollPane2 = new JScrollPane();
+		scrollPane2.setBounds(127, 135, 273, 217);
+		contentPane.add(scrollPane2);
+		table2 = new JTable();
+		scrollPane2.setViewportView(table2);
+		// FIM TABELA PROMOCAO
+		
 		// TABELA
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(442, 135, 273, 217);
@@ -369,6 +383,22 @@ public class UsuarioHome extends JFrame {
 		lblNickname.setFont(new Font("SansSerif", Font.PLAIN, 17));
 		// FIM PENDENTES
 		
+		// PROMO ACABANDO
+		lblPromoAcabando.setForeground(SystemColor.controlShadow);
+		lblPromoAcabando.setFont(new Font("SansSerif", Font.BOLD, 35));
+		lblPromoAcabando.setBounds(287, 370, 73, 33);
+		lblPromoAcabando.setForeground(new Color(149, 152, 154));
+		contentPane.add(lblPromoAcabando);
+		// FIM PROMO ACABANDO
+		
+		// PROMO ATIVAS
+		lblPromoAtivas.setForeground(SystemColor.controlShadow);
+		lblPromoAtivas.setFont(new Font("SansSerif", Font.BOLD, 35));
+		lblPromoAtivas.setBounds(129, 370, 73, 33);
+		lblPromoAtivas.setForeground(new Color(149, 152, 154));
+		contentPane.add(lblPromoAtivas);
+		// FIM PROMO ATIVAS
+		
 		//BG
 		ImageIcon background = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/Usuario_Home.png"));
 		JLabel lblBg = new JLabel("");
@@ -394,7 +424,14 @@ public class UsuarioHome extends JFrame {
 	
 	public void receber (Usuario user){
 		table.setModel(Fachada.getInstance().listarReservasUser(user.getId()));
+		table2.setModel(Fachada.getInstance().listarPromocoesUser(user.getId()));
 		lblNickname.setText(user.getNome());
+		
+		table2.getColumnModel().getColumn(0).setPreferredWidth(30);
+		table2.getColumnModel().getColumn(1).setPreferredWidth(140); 
+		table2.getColumnModel().getColumn(2).setPreferredWidth(180); 
+		table2.getColumnModel().getColumn(3).setPreferredWidth(100);
+		table2.getColumnModel().getColumn(4).setPreferredWidth(80);
 		
 		table.getColumnModel().getColumn(0).setPreferredWidth(30);
 		table.getColumnModel().getColumn(1).setPreferredWidth(80); 
@@ -407,5 +444,7 @@ public class UsuarioHome extends JFrame {
 		lblPendentes.setForeground(new Color(149, 152, 154));
 		lblAceitas.setForeground(new Color(149, 152, 154));
 		lblRecusadas.setForeground(new Color(149, 152, 154));
+		lblPromoAtivas.setText(String.valueOf(Fachada.getInstance().promocoesAtivas(dataAtual)));
+		lblPromoAcabando.setText(String.valueOf(Fachada.getInstance().promocoesAcabando(dataAtual)));
 	}
 }
