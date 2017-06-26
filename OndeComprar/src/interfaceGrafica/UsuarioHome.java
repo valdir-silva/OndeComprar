@@ -51,6 +51,7 @@ public class UsuarioHome extends JFrame {
 	private final JLabel lblNickname = new JLabel("");
 	private final JLabel lblPromoAtivas = new JLabel("0");
 	private JLabel lblPromoAcabando = new JLabel("0");
+	JLabel lblPesq2 = new JLabel("");
 	Calendar date = Calendar.getInstance();;
 	String dataAtual = date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR);
 	/**
@@ -83,14 +84,14 @@ public class UsuarioHome extends JFrame {
 		contentPane.setLayout(null);
 		
 		this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
-		lblNickname.setForeground(SystemColor.control);
 		
 		// NICKNAME
 		lblNickname.setBounds(630, 9, 92, 25);
+		lblNickname.setForeground(SystemColor.control);
 		contentPane.add(lblNickname);
 		// FIM NICKNAME
 		
-		//CONTA 2
+		//CONTA 3
 		ImageIcon conta3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt3.png"));
 		JLabel lblConta3 = new JLabel("");
 		lblConta3.addMouseMotionListener(new MouseMotionAdapter() {
@@ -113,7 +114,7 @@ public class UsuarioHome extends JFrame {
 		lblConta3.setIcon(new ImageIcon(imgConta3));
 		contentPane.add(lblConta3);
 		lblConta3.setVisible(false);
-		//FIM CONTA
+		//FIM CONTA 3
 		
 		//CONTA 2
 		ImageIcon conta2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt2.png"));
@@ -132,7 +133,7 @@ public class UsuarioHome extends JFrame {
 		lblConta2.setIcon(new ImageIcon(imgConta2));
 		contentPane.add(lblConta2);
 		lblConta2.setVisible(false);
-		//FIM CONTA
+		//FIM CONTA 2
 		
 		//CONTA
 		ImageIcon conta = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt1.png"));
@@ -193,14 +194,14 @@ public class UsuarioHome extends JFrame {
 		lblSair.setVisible(false);
 		//FIM SAIR
 		
-		//OPCAO 2
+		//OPCAO 3
 		ImageIcon opcao3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_sair.png"));
 		lblOpcao3.setBounds(591, 47, 147, 75);
 		Image imgOpcao3 = opcao3.getImage().getScaledInstance(lblOpcao3.getWidth(), lblOpcao3.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao3.setIcon(new ImageIcon(imgOpcao3));
 		contentPane.add(lblOpcao3);
 		lblOpcao3.setVisible(false);
-		//FIM OPCAO 2
+		//FIM OPCAO 3
 		
 		//OPCAO 2
 		ImageIcon opcao2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_edit.png"));
@@ -277,6 +278,7 @@ public class UsuarioHome extends JFrame {
 		txtCampoPesquisa.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent arg0) {
+				lblPesq2.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
 			}
 		});
@@ -287,15 +289,14 @@ public class UsuarioHome extends JFrame {
 		txtCampoPesquisa.setBorder(null);
 		// FIM CAMPO PESQUISA
 		
-		//PESQ
+		//PESQ 2
 		ImageIcon pesq2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesq_bt2.png"));
-		JLabel lblPesq2 = new JLabel("");
 		lblPesq2.setBounds(683, 56, 35, 39);
 		Image imgPesq2 = pesq2.getImage().getScaledInstance(lblPesq2.getWidth(), lblPesq2.getHeight(), Image.SCALE_SMOOTH);
 		lblPesq2.setIcon(new ImageIcon(imgPesq2));
 		contentPane.add(lblPesq2);
 		lblPesq2.setVisible(false);
-		//FIM PESQ
+		//FIM PESQ 2
 		
 		//PESQ
 		ImageIcon pesq = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesq_bt1.png"));

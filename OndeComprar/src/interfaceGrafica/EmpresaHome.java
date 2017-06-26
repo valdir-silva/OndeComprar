@@ -40,7 +40,11 @@ public class EmpresaHome extends JFrame {
 	JTable table;
 	JScrollPane scrollPane2 = new JScrollPane();
 	JTable table2;
-	JLabel lblProvisorio2 = new JLabel("");
+	JLabel lblOpcao = new JLabel("");
+	JLabel lblOpcao2 = new JLabel("");
+	JLabel lblOpcao3 = new JLabel("");
+	JLabel lblEditarPerfil = new JLabel("");
+	JLabel lblSair = new JLabel("");
 	JLabel lblPendentes = new JLabel("0");
 	JLabel lblAceitas = new JLabel("0");
 	JLabel lblRecusadas = new JLabel("0");
@@ -72,6 +76,7 @@ public class EmpresaHome extends JFrame {
 	private JTextField txtDesconto;
 	private JLabel lblBuscarproduto = new JLabel("");
 	private JLabel lblBuscarproduto2 = new JLabel("");
+	private JLabel lblNickname = new JLabel("");
 	JLabel lblApagar2 = new JLabel("");
 	JLabel lblNovapromocao = new JLabel("");
 	JLabel lblApagar = new JLabel("");
@@ -99,9 +104,10 @@ public class EmpresaHome extends JFrame {
 	 * Create the frame.
 	 */
 	public EmpresaHome() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(EmpresaHome.class.getResource("/img/favicon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 752, 460);
+		setBounds(100, 100, 743, 448);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -109,12 +115,7 @@ public class EmpresaHome extends JFrame {
 		
 		this.setLocationRelativeTo(null); // COLOCA A JANELA NO CENTRO DA TELA
 		
-		JLabel lblProvisorio = new JLabel("provisorio:");
-		lblProvisorio.setBounds(143, 23, 65, 14);
-		contentPane.add(lblProvisorio);
-		
-		lblProvisorio2.setBounds(209, 23, 66, 14);
-		contentPane.add(lblProvisorio2);
+		// CRIAR PROMOCAO
 		lblCriarpromocao.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -131,6 +132,144 @@ public class EmpresaHome extends JFrame {
 				
 		lblCriarpromocao.setBounds(255, 105, 111, 23);	
 		contentPane.add(lblCriarpromocao);
+		lblNickname.setFont(new Font("SansSerif", Font.PLAIN, 17));
+		// FIM CRIAR PROMOCAO
+		
+		// NICKNAME
+		lblNickname.setBounds(619, 9, 92, 25);
+		lblNickname.setForeground(SystemColor.control);
+		contentPane.add(lblNickname);
+		// FIM NICKNAME
+		
+		//CONTA 3
+		ImageIcon conta3 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_bt3.png"));
+		JLabel lblConta3 = new JLabel("");
+		lblConta3.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblConta3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				lblConta3.setVisible(false);
+				lblOpcao.setVisible(false);
+				lblEditarPerfil.setVisible(false);
+				lblSair.setVisible(false);
+			}
+		});
+		lblConta3.setBounds(571, 0, 165, 44);
+		Image imgConta3 = conta3.getImage().getScaledInstance(lblConta3.getWidth(), lblConta3.getHeight(), Image.SCALE_SMOOTH);
+		lblConta3.setIcon(new ImageIcon(imgConta3));
+		contentPane.add(lblConta3);
+		lblConta3.setVisible(false);
+		//FIM CONTA 3
+		
+		//CONTA 2
+		ImageIcon conta2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_bt2.png"));
+		JLabel lblConta2 = new JLabel("");
+		lblConta2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				lblConta3.setVisible(true);
+				lblOpcao.setVisible(true);
+				lblEditarPerfil.setVisible(true);
+				lblSair.setVisible(true);
+			}
+		});
+		lblConta2.setBounds(571, 0, 165, 44);
+		Image imgConta2 = conta2.getImage().getScaledInstance(lblConta2.getWidth(), lblConta2.getHeight(), Image.SCALE_SMOOTH);
+		lblConta2.setIcon(new ImageIcon(imgConta2));
+		contentPane.add(lblConta2);
+		lblConta2.setVisible(false);
+		//FIM CONTA 2
+		
+		//CONTA
+		ImageIcon conta = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_bt1.png"));
+		JLabel lblConta = new JLabel("");
+		lblConta.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				lblConta2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblConta.setBounds(571, 0, 165, 44);
+		Image imgConta = conta.getImage().getScaledInstance(lblConta.getWidth(), lblConta.getHeight(), Image.SCALE_SMOOTH);
+		lblConta.setIcon(new ImageIcon(imgConta));
+		contentPane.add(lblConta);
+		//FIM CONTA
+		
+		//EDITAR PERFIL
+		lblEditarPerfil.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblOpcao2.setVisible(true);
+				lblOpcao3.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblEditarPerfil.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				EmpresaConta frame4 = new EmpresaConta(); frame4.setVisible(true);
+				//frame4.receber(Fachada.getInstance().buscarEmpresa(lblNickname.getText()));
+				dispose();
+			}
+		});
+		lblEditarPerfil.setBounds(581, 55, 146, 33);
+		contentPane.add(lblEditarPerfil);
+		lblEditarPerfil.setVisible(false);
+		//FIM EDITAR PERFIL
+		
+		//SAIR
+		lblSair.setBounds(581, 89, 145, 33);
+		lblSair.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblOpcao3.setVisible(true);
+				lblOpcao2.setVisible(false);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblSair.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Login frame3 = new Login(); frame3.setVisible(true);
+				dispose();
+			}
+		});
+		contentPane.add(lblSair);
+		lblSair.setVisible(false);
+		//FIM SAIR
+		
+		//OPCAO 3
+		ImageIcon opcao3 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_sair.png"));
+		lblOpcao3.setBounds(580, 47, 147, 75);
+		Image imgOpcao3 = opcao3.getImage().getScaledInstance(lblOpcao3.getWidth(), lblOpcao3.getHeight(), Image.SCALE_SMOOTH);
+		lblOpcao3.setIcon(new ImageIcon(imgOpcao3));
+		contentPane.add(lblOpcao3);
+		lblOpcao3.setVisible(false);
+		//FIM OPCAO 3
+		
+		//OPCAO 2
+		ImageIcon opcao2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_edit.png"));
+		lblOpcao2.setBounds(580, 47, 147, 75);
+		Image imgOpcao2 = opcao2.getImage().getScaledInstance(lblOpcao2.getWidth(), lblOpcao2.getHeight(), Image.SCALE_SMOOTH);
+		lblOpcao2.setIcon(new ImageIcon(imgOpcao2));
+		contentPane.add(lblOpcao2);
+		lblOpcao2.setVisible(false);
+		//FIM OPCAO 2
+		
+		//OPCAO
+		ImageIcon opcao = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/conta_op.png"));
+		lblOpcao.setBounds(580, 47, 147, 75);
+		Image imgOpcao = opcao.getImage().getScaledInstance(lblOpcao.getWidth(), lblOpcao.getHeight(), Image.SCALE_SMOOTH);
+		lblOpcao.setIcon(new ImageIcon(imgOpcao));
+		contentPane.add(lblOpcao);
+		lblOpcao.setVisible(false);
+		//FIM OPCAO
 		
 		// DATOS PROMOCAO
 		txtCodigoProduto = new JTextField();
@@ -233,7 +372,6 @@ public class EmpresaHome extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Fachada.getInstance().salvarPromocao(txtNovoPreco.getText(), txtValidade.getText(), txtCodigoProduto.getText());
-				atualizarTabela();
 				JOptionPane.showMessageDialog(null, "Promoção Salva");
 			}
 		});
@@ -282,6 +420,7 @@ public class EmpresaHome extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				novaPromocao(false);
+				atualizarTabela();
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
@@ -303,6 +442,7 @@ public class EmpresaHome extends JFrame {
 				lblBuscarproduto2.setVisible(false);
 				lblApagar2.setVisible(false);
 				lblSalvar2.setVisible(false);
+				lblOpcao3.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
@@ -526,8 +666,41 @@ public class EmpresaHome extends JFrame {
 		scrollPane2.setViewportView(table2);
 		// FIM TABELA PROMOÇÃO
 		
+		//PESQ 2
+		ImageIcon pesq2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/pesq_bt2.png"));
+		JLabel lblPesq2 = new JLabel("");
+		lblPesq2.setBounds(675, 54, 35, 39);
+		Image imgPesq2 = pesq2.getImage().getScaledInstance(lblPesq2.getWidth(), lblPesq2.getHeight(), Image.SCALE_SMOOTH);
+		lblPesq2.setIcon(new ImageIcon(imgPesq2));
+		contentPane.add(lblPesq2);
+		lblPesq2.setVisible(false);
+		//FIM PESQ 2
+		
+		//PESQ
+		ImageIcon pesq = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/pesq_bt1.png"));
+		JLabel lblPesq = new JLabel("");
+		lblPesq.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				lblPesq2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblPesq.setBounds(675, 54, 35, 39);
+		Image imgPesq = pesq.getImage().getScaledInstance(lblPesq.getWidth(), lblPesq.getHeight(), Image.SCALE_SMOOTH);
+		lblPesq.setIcon(new ImageIcon(imgPesq));
+		contentPane.add(lblPesq);
+		//FIM PESQ
+		
 		// PESQUISAR
 		txtCampoPesquisa = new JTextField();
+		txtCampoPesquisa.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent arg0) {
+				lblPesq2.setVisible(false);
+				lblOpcao2.setVisible(false);
+			}
+		});
 		txtCampoPesquisa.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -564,8 +737,11 @@ public class EmpresaHome extends JFrame {
 				lblRecusar2.setVisible(false);
 				lblAceitar2.setVisible(false);
 				lblApagar2.setVisible(false);
+				lblPesq2.setVisible(false);
+				lblConta2.setVisible(false);
 				lblBuscarproduto2.setVisible(false);
-				
+				lblOpcao2.setVisible(false);
+				lblOpcao3.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
@@ -577,9 +753,9 @@ public class EmpresaHome extends JFrame {
 }
 	
 	public void receber (Empresa emp){
-		lblProvisorio2.setText(Integer.toString(emp.getId()));
 		table.setModel(Fachada.getInstance().listarReservasEmpresa(emp.getId()));
 		table2.setModel(Fachada.getInstance().listarPromocoesEmpresa(emp.getId()));
+		lblNickname.setText(emp.getNome());
 		
 		table2.getColumnModel().getColumn(0).setPreferredWidth(30);
 		table2.getColumnModel().getColumn(1).setPreferredWidth(140); 
@@ -601,7 +777,7 @@ public class EmpresaHome extends JFrame {
 	}
 	
 	public void atualizarTabela(){
-		int id = Integer.parseInt(lblProvisorio2.getText());
+		int id = Fachada.getInstance().buscarEmpresa(lblNickname.getText()).getId();
 		table.setModel(Fachada.getInstance().listarReservasEmpresa(id));
 		table2.setModel(Fachada.getInstance().listarPromocoesEmpresa(id));
 		

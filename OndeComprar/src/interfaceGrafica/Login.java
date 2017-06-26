@@ -32,6 +32,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.SystemColor;
 
 public class Login extends JDialog {
 
@@ -141,6 +142,7 @@ public class Login extends JDialog {
 		
 		//
 		JLabel lblAlunando = new JLabel("alunando");
+		lblAlunando.setForeground(SystemColor.controlHighlight);
 		lblAlunando.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
