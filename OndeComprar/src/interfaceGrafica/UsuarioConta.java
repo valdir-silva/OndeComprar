@@ -60,11 +60,13 @@ public class UsuarioConta extends JFrame {
 	 * Create the frame.
 	 */
 	public UsuarioConta() {
+		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(UsuarioConta.class.getResource("/img/favicon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 752, 460);
+		setBounds(100, 100, 742, 453);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
