@@ -221,7 +221,7 @@ public class UsuarioHome extends JFrame {
 		lblOpcao.setVisible(false);
 		//FIM OPCAO
 		
-		//PESQUISAR PRODUTOS
+		//PESQUISAR PRODUTOS 2
 		ImageIcon pesquisar2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt2.png"));
 		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -236,7 +236,7 @@ public class UsuarioHome extends JFrame {
 		lblPesquisarprodutos2.setIcon(new ImageIcon(imgPesquisar2));
 		contentPane.add(lblPesquisarprodutos2);
 		lblPesquisarprodutos2.setVisible(false);
-		//FIM PESQUISAR PRODUTOS
+		//FIM PESQUISAR PRODUTOS 2
 		
 		//PESQUISAR PRODUTOS
 		ImageIcon pesquisar = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt1.png"));

@@ -45,6 +45,8 @@ public class EmpresaHome extends JFrame {
 	JLabel lblOpcao3 = new JLabel("");
 	JLabel lblEditarPerfil = new JLabel("");
 	JLabel lblSair = new JLabel("");
+	JLabel lblPesquisarprodutos = new JLabel("");
+	JLabel lblPesquisarprodutos2 = new JLabel("");
 	JLabel lblPendentes = new JLabel("0");
 	JLabel lblAceitas = new JLabel("0");
 	JLabel lblRecusadas = new JLabel("0");
@@ -83,6 +85,8 @@ public class EmpresaHome extends JFrame {
 	JLabel lblSalvar = new JLabel("");
 	private final JLabel lblCriarpromocao = new JLabel("");
 	private JTextField txtCampoPesquisa;
+	private final JLabel lblFiltrar = new JLabel("");
+	private final JLabel lblFiltrar2 = new JLabel("");
 	
 	/**
 	 * Launch the application
@@ -270,6 +274,38 @@ public class EmpresaHome extends JFrame {
 		contentPane.add(lblOpcao);
 		lblOpcao.setVisible(false);
 		//FIM OPCAO
+		
+		//PESQUISAR PRODUTOS 2
+		ImageIcon pesquisar2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/pesquisar_bt2.png"));
+		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				EmpresaProduto frame4 = new EmpresaProduto(); frame4.setVisible(true);
+				//frame4.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
+				dispose();
+			}
+		});
+		lblPesquisarprodutos2.setBounds(118, 51, 203, 46);
+		Image imgPesquisar2 = pesquisar2.getImage().getScaledInstance(lblPesquisarprodutos2.getWidth(), lblPesquisarprodutos2.getHeight(), Image.SCALE_SMOOTH);
+		lblPesquisarprodutos2.setIcon(new ImageIcon(imgPesquisar2));
+		contentPane.add(lblPesquisarprodutos2);
+		lblPesquisarprodutos2.setVisible(false);
+		//FIM PESQUISAR PRODUTOS 2
+		
+		//PESQUISAR PRODUTOS
+		ImageIcon pesquisar = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/pesquisar_bt1.png"));
+		lblPesquisarprodutos.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblPesquisarprodutos2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblPesquisarprodutos.setBounds(118, 51, 203, 46);
+		Image imgPesquisar = pesquisar.getImage().getScaledInstance(lblPesquisarprodutos.getWidth(), lblPesquisarprodutos.getHeight(), Image.SCALE_SMOOTH);
+		lblPesquisarprodutos.setIcon(new ImageIcon(imgPesquisar));
+		contentPane.add(lblPesquisarprodutos);
+		//FIM PESQUISAR PRODUTOS
 		
 		// DATOS PROMOCAO
 		txtCodigoProduto = new JTextField();
@@ -729,6 +765,38 @@ public class EmpresaHome extends JFrame {
 		contentPane.add(txtCampoPesquisa);
 		// FIM PESQUISAR
 		
+		// MAIS 2
+		ImageIcon filtrar2 = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/filtrar_bt2.png"));
+		lblFiltrar2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				EmpresaProduto frame5 = new EmpresaProduto(); frame5.setVisible(true);
+				//frame5.receber(Fachada.getInstance().buscarEmpresa(lblNickname.getText()));
+				dispose();
+			}
+		});
+		lblFiltrar2.setBounds(1, 381, 98, 29);
+		Image imgFiltrar2 = filtrar2.getImage().getScaledInstance(lblFiltrar2.getWidth(), lblFiltrar2.getHeight(), Image.SCALE_SMOOTH);
+		lblFiltrar2.setIcon(new ImageIcon(imgFiltrar2));
+		contentPane.add(lblFiltrar2);
+		lblFiltrar2.setVisible(false);
+		// FIM MAIS 2
+		
+		// MAIS
+		ImageIcon filtrar = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/filtrar_bt1.png"));
+		lblFiltrar.addMouseMotionListener(new MouseMotionAdapter() {
+			@Override
+			public void mouseMoved(MouseEvent e) {
+				lblFiltrar2.setVisible(true);
+				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		});
+		lblFiltrar.setBounds(1, 381, 98, 29);
+		Image imgFiltrar = filtrar.getImage().getScaledInstance(lblFiltrar.getWidth(), lblFiltrar.getHeight(), Image.SCALE_SMOOTH);
+		lblFiltrar.setIcon(new ImageIcon(imgFiltrar));
+		contentPane.add(lblFiltrar);
+		// FIM MAIS
+		
 		//BG
 		ImageIcon background = new ImageIcon(EmpresaHome.class.getResource("/img/empresaHome/Empresa_Home.png"));
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
@@ -742,6 +810,8 @@ public class EmpresaHome extends JFrame {
 				lblBuscarproduto2.setVisible(false);
 				lblOpcao2.setVisible(false);
 				lblOpcao3.setVisible(false);
+				lblFiltrar2.setVisible(false);
+				lblPesquisarprodutos2.setVisible(false);
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			}
 		});
