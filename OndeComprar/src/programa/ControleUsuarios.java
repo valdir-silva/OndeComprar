@@ -2,29 +2,29 @@ package programa;
 
 import javax.swing.table.TableModel;
 
-import interfaces.IRepositorioUsuario;
+import interfaces.IRepositorioCliente;
 
-public class ControleUsuarios implements IRepositorioUsuario{
-	IRepositorioUsuario repositorioUsuario;
+public class ControleUsuarios implements IRepositorioCliente{
+	IRepositorioCliente repositorioUsuario;
 	Empresa empresa;
 	
-	public ControleUsuarios (IRepositorioUsuario repositorioUsuario) {
+	public ControleUsuarios (IRepositorioCliente repositorioUsuario) {
 		this.repositorioUsuario = repositorioUsuario;
 	}
 
 	@Override
-	public boolean logarUsuario(String login, String senha) {
-		return repositorioUsuario.logarUsuario(login, senha);
+	public boolean logarCliente(String login, String senha) {
+		return repositorioUsuario.logarCliente(login, senha);
 	}
 
 	@Override
-	public Usuario buscarUsuario(String login) {
-		return repositorioUsuario.buscarUsuario(login);
+	public Cliente buscarCliente(String login) {
+		return repositorioUsuario.buscarCliente(login);
 	}
 
 	@Override
-	public Usuario buscarUsuario(int id) {
-		return repositorioUsuario.buscarUsuario(id);
+	public Cliente buscarCliente(int id) {
+		return repositorioUsuario.buscarCliente(id);
 	}
 
 	@Override
@@ -33,23 +33,23 @@ public class ControleUsuarios implements IRepositorioUsuario{
 	}
 
 	@Override
-	public int reservasPendentesUser(int id) {
-		return repositorioUsuario.reservasPendentesUser(id);
+	public int reservasPendentesCliente(int id) {
+		return repositorioUsuario.reservasPendentesCliente(id);
 	}
 
 	@Override
-	public int reservasAceitasUser(int id) {
-		return repositorioUsuario.reservasAceitasUser(id);
+	public int reservasAceitasCliente(int id) {
+		return repositorioUsuario.reservasAceitasCliente(id);
 	}
 
 	@Override
-	public int reservasRecusadasUser(int id) {
-		return repositorioUsuario.reservasRecusadasUser(id);
+	public int reservasRecusadasCliente(int id) {
+		return repositorioUsuario.reservasRecusadasCliente(id);
 	}
 
 	@Override
-	public void atualizarUsuario(Usuario usuario) {
-		repositorioUsuario.atualizarUsuario(usuario);
+	public void atualizarCliente(Cliente usuario) {
+		repositorioUsuario.atualizarCliente(usuario);
 	}
 
 	@Override
@@ -58,13 +58,13 @@ public class ControleUsuarios implements IRepositorioUsuario{
 	}
 
 	@Override
-	public TableModel listarReservasUser(int id) {
-		return repositorioUsuario.listarReservasUser(id);
+	public TableModel listarReservasCliente(int id) {
+		return repositorioUsuario.listarReservasCliente(id);
 	}
 
 	@Override
-	public TableModel listarPromocoesUser(int id) {
-		return repositorioUsuario.listarPromocoesUser(id);
+	public TableModel listarPromocoesCliente(int id) {
+		return repositorioUsuario.listarPromocoesCliente(id);
 	}
 
 	@Override

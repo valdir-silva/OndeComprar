@@ -242,6 +242,7 @@ public class EmpresaProduto extends JFrame {
 				produto.setMarca(txtMarca.getText());
 				produto.setCategoria((String) comboBox.getSelectedItem());
 				produto.setPreco(Float.parseFloat(txtPreco.getText()));
+				//produto.setEmpresa(Fachada.getInstance().buscarEmpresa(login));
 				
 				//Fachada.getInstance().inserirProduto(produto);
 				RepositorioProduto repositorio = new RepositorioProduto();

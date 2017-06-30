@@ -13,7 +13,7 @@ import javax.swing.border.EmptyBorder;
 
 import programa.Fachada;
 import programa.Produto;
-import programa.Usuario;
+import programa.Cliente;
 
 import javax.swing.JLabel;
 import java.awt.event.MouseMotionAdapter;
@@ -30,7 +30,7 @@ import java.awt.Font;
 import java.awt.SystemColor;
 import javax.swing.UIManager;
 
-public class UsuarioHome extends JFrame {
+public class ClienteHome extends JFrame {
 
 	private JPanel contentPane;
 	JLabel lblOpcao = new JLabel("");
@@ -61,7 +61,7 @@ public class UsuarioHome extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UsuarioHome usuarioHome = new UsuarioHome();
+					ClienteHome usuarioHome = new ClienteHome();
 					usuarioHome.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -73,8 +73,8 @@ public class UsuarioHome extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UsuarioHome() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(UsuarioHome.class.getResource("/img/favicon.png")));
+	public ClienteHome() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteHome.class.getResource("/img/favicon.png")));
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 752, 460);
@@ -92,7 +92,7 @@ public class UsuarioHome extends JFrame {
 		// FIM NICKNAME
 		
 		//CONTA 3
-		ImageIcon conta3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt3.png"));
+		ImageIcon conta3 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_bt3.png"));
 		JLabel lblConta3 = new JLabel("");
 		lblConta3.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -117,7 +117,7 @@ public class UsuarioHome extends JFrame {
 		//FIM CONTA 3
 		
 		//CONTA 2
-		ImageIcon conta2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt2.png"));
+		ImageIcon conta2 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_bt2.png"));
 		JLabel lblConta2 = new JLabel("");
 		lblConta2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -136,7 +136,7 @@ public class UsuarioHome extends JFrame {
 		//FIM CONTA 2
 		
 		//CONTA
-		ImageIcon conta = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_bt1.png"));
+		ImageIcon conta = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_bt1.png"));
 		JLabel lblConta = new JLabel("");
 		lblConta.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -163,7 +163,7 @@ public class UsuarioHome extends JFrame {
 		lblEditarPerfil.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				UsuarioConta frame3 = new UsuarioConta(); frame3.setVisible(true);
+				ClienteConta frame3 = new ClienteConta(); frame3.setVisible(true);
 				frame3.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
@@ -195,7 +195,7 @@ public class UsuarioHome extends JFrame {
 		//FIM SAIR
 		
 		//OPCAO 3
-		ImageIcon opcao3 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_sair.png"));
+		ImageIcon opcao3 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_sair.png"));
 		lblOpcao3.setBounds(591, 47, 147, 75);
 		Image imgOpcao3 = opcao3.getImage().getScaledInstance(lblOpcao3.getWidth(), lblOpcao3.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao3.setIcon(new ImageIcon(imgOpcao3));
@@ -204,7 +204,7 @@ public class UsuarioHome extends JFrame {
 		//FIM OPCAO 3
 		
 		//OPCAO 2
-		ImageIcon opcao2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_edit.png"));
+		ImageIcon opcao2 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_edit.png"));
 		lblOpcao2.setBounds(591, 47, 147, 75);
 		Image imgOpcao2 = opcao2.getImage().getScaledInstance(lblOpcao2.getWidth(), lblOpcao2.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao2.setIcon(new ImageIcon(imgOpcao2));
@@ -213,7 +213,7 @@ public class UsuarioHome extends JFrame {
 		//FIM OPCAO 2
 		
 		//OPCAO
-		ImageIcon opcao = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/conta_op.png"));
+		ImageIcon opcao = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/conta_op.png"));
 		lblOpcao.setBounds(591, 47, 147, 75);
 		Image imgOpcao = opcao.getImage().getScaledInstance(lblOpcao.getWidth(), lblOpcao.getHeight(), Image.SCALE_SMOOTH);
 		lblOpcao.setIcon(new ImageIcon(imgOpcao));
@@ -222,11 +222,11 @@ public class UsuarioHome extends JFrame {
 		//FIM OPCAO
 		
 		//PESQUISAR PRODUTOS 2
-		ImageIcon pesquisar2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt2.png"));
+		ImageIcon pesquisar2 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/pesquisar_bt2.png"));
 		lblPesquisarprodutos2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
+				ClienteCatalogo frame4 = new ClienteCatalogo(); frame4.setVisible(true);
 				frame4.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
@@ -239,7 +239,7 @@ public class UsuarioHome extends JFrame {
 		//FIM PESQUISAR PRODUTOS 2
 		
 		//PESQUISAR PRODUTOS
-		ImageIcon pesquisar = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesquisar_bt1.png"));
+		ImageIcon pesquisar = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/pesquisar_bt1.png"));
 		lblPesquisarprodutos.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -290,7 +290,7 @@ public class UsuarioHome extends JFrame {
 		// FIM CAMPO PESQUISA
 		
 		//PESQ 2
-		ImageIcon pesq2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesq_bt2.png"));
+		ImageIcon pesq2 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/pesq_bt2.png"));
 		lblPesq2.setBounds(683, 56, 35, 39);
 		Image imgPesq2 = pesq2.getImage().getScaledInstance(lblPesq2.getWidth(), lblPesq2.getHeight(), Image.SCALE_SMOOTH);
 		lblPesq2.setIcon(new ImageIcon(imgPesq2));
@@ -299,7 +299,7 @@ public class UsuarioHome extends JFrame {
 		//FIM PESQ 2
 		
 		//PESQ
-		ImageIcon pesq = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/pesq_bt1.png"));
+		ImageIcon pesq = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/pesq_bt1.png"));
 		JLabel lblPesq = new JLabel("");
 		lblPesq.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -315,11 +315,11 @@ public class UsuarioHome extends JFrame {
 		//FIM PESQ
 		
 		// MAIS 2
-		ImageIcon mais2 = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/mais_bt2.png"));
+		ImageIcon mais2 = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/mais_bt2.png"));
 		lblMais2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				UsuarioCatalogo frame4 = new UsuarioCatalogo(); frame4.setVisible(true);
+				ClienteCatalogo frame4 = new ClienteCatalogo(); frame4.setVisible(true);
 				frame4.receber(Fachada.getInstance().buscarUsuario(lblNickname.getText()));
 				dispose();
 			}
@@ -332,7 +332,7 @@ public class UsuarioHome extends JFrame {
 		// FIM MAIS 2
 		
 		// MAIS
-		ImageIcon mais = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/mais_bt1.png"));
+		ImageIcon mais = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/mais_bt1.png"));
 		lblMais.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
 			public void mouseMoved(MouseEvent e) {
@@ -401,7 +401,7 @@ public class UsuarioHome extends JFrame {
 		// FIM PROMO ATIVAS
 		
 		//BG
-		ImageIcon background = new ImageIcon(UsuarioHome.class.getResource("/img/usuarioHome/Usuario_Home.png"));
+		ImageIcon background = new ImageIcon(ClienteHome.class.getResource("/img/usuarioHome/Usuario_Home.png"));
 		JLabel lblBg = new JLabel("");
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -423,7 +423,7 @@ public class UsuarioHome extends JFrame {
 		
 	}
 	
-	public void receber (Usuario user){
+	public void receber (Cliente user){
 		table.setModel(Fachada.getInstance().listarReservasUser(user.getId()));
 		table2.setModel(Fachada.getInstance().listarPromocoesUser(user.getId()));
 		lblNickname.setText(user.getNome());

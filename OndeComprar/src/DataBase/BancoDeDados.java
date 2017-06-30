@@ -15,7 +15,6 @@ public abstract class BancoDeDados implements IBancoDeDados{ //não tenho certeza
 	protected Statement statement = null;
 	protected ResultSet resultset = null;
 	
-	
 	public void conectar(){
 		//String servidor = "jdbc:mysql://localhost:3306/ondecomprar";
 		String servidor = "jdbc:mysql://localhost:3306/ondecomp";
@@ -30,6 +29,7 @@ public abstract class BancoDeDados implements IBancoDeDados{ //não tenho certeza
 			System.out.println("Conectar Erro: " + e.getMessage());
 		}
 	}
+	
 	public boolean estaConectado(){ //acho isso redundância demais já que já se usa o try/catch no método conectar()
 		if(this.conection != null){
 			return true;

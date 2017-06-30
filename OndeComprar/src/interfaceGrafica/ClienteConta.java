@@ -13,17 +13,17 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import DataBase.RepositorioUsuario;
+import DataBase.RepositorioCliente;
 import programa.Endereco;
 import programa.Fachada;
-import programa.Usuario;
+import programa.Cliente;
 
 import java.awt.event.MouseAdapter;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
 
-public class UsuarioConta extends JFrame {
+public class ClienteConta extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
@@ -47,7 +47,7 @@ public class UsuarioConta extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UsuarioConta frame = new UsuarioConta();
+					ClienteConta frame = new ClienteConta();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,9 +59,9 @@ public class UsuarioConta extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UsuarioConta() {
+	public ClienteConta() {
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(UsuarioConta.class.getResource("/img/favicon.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteConta.class.getResource("/img/favicon.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 742, 453);
 		contentPane = new JPanel();
@@ -73,12 +73,12 @@ public class UsuarioConta extends JFrame {
 		this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		
 		//VOLTAR 2
-		ImageIcon voltar2 = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/voltar_bt2.png"));
+		ImageIcon voltar2 = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/voltar_bt2.png"));
 		JLabel lblVoltar2 = new JLabel("");
 		lblVoltar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				UsuarioHome frame4 = new UsuarioHome(); frame4.setVisible(true);
+				ClienteHome frame4 = new ClienteHome(); frame4.setVisible(true);
 				frame4.receber(Fachada.getInstance().buscarUsuario(txtNome.getText()));
 				dispose();
 			}
@@ -91,7 +91,7 @@ public class UsuarioConta extends JFrame {
 		//FIM VOLTAR 2
 		
 		//VOLTAR
-		ImageIcon voltar = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/voltar_bt1.png"));
+		ImageIcon voltar = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/voltar_bt1.png"));
 		JLabel lblVoltar = new JLabel("");
 		lblVoltar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -198,7 +198,7 @@ public class UsuarioConta extends JFrame {
 		// FIM NOME
 		
 		// APAGAR 2
-		ImageIcon apagar2 = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/apagar_bt2.png"));
+		ImageIcon apagar2 = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/apagar_bt2.png"));
 		lblApagar2 = new JLabel("");
 		lblApagar2.setBounds(379, 359, 158, 49);
 		Image imgApagar2 = apagar2.getImage().getScaledInstance(lblApagar2.getWidth(), lblApagar2.getHeight(), Image.SCALE_SMOOTH);
@@ -208,7 +208,7 @@ public class UsuarioConta extends JFrame {
 		// FIM APAGAR 2
 		
 		// APAGAR
-		ImageIcon apagar = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/apagar_bt1.png"));
+		ImageIcon apagar = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/apagar_bt1.png"));
 		lblApagar = new JLabel("");
 		lblApagar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -225,24 +225,24 @@ public class UsuarioConta extends JFrame {
 		// FIM APAGAR
 		
 		// ALTERAR 2
-		ImageIcon alterar2 = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/alterar_bt2.png"));
+		ImageIcon alterar2 = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/alterar_bt2.png"));
 		lblAlterar2 = new JLabel("");
 		lblAlterar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Usuario usuario = new Usuario();
+				Cliente cliente = new Cliente();
 			
-				usuario.setNome(txtNome.getText());
-				usuario.setId(Fachada.getInstance().buscarUsuario(usuario.getNome()).getId());
-				usuario.setEmail(txtEmail.getText());
-				usuario.setTelefone(txtTelefone.getText());
-				usuario.setCep(txtCep.getText());
-				usuario.setCidade(txtCidade.getText());
-				usuario.setEstado(txtEstado.getText());
-				usuario.setRua(txtEndereco.getText());
-				usuario.setEndereco_id(Fachada.getInstance().buscarUsuario(usuario.getNome()).getEndereco_id());
+				cliente.setNome(txtNome.getText());
+				cliente.setId(Fachada.getInstance().buscarUsuario(cliente.getNome()).getId());
+				cliente.setEmail(txtEmail.getText());
+				cliente.setTelefone(txtTelefone.getText());
+				cliente.getEndereco().setCep(txtCep.getText());
+				cliente.getEndereco().setCidade(txtCidade.getText());
+				cliente.getEndereco().setEstado(txtEstado.getText());
+				cliente.getEndereco().setRua(txtEndereco.getText());
+				cliente.getEndereco().setId(Fachada.getInstance().buscarUsuario(cliente.getNome()).getEndereco().getId());
 				
-				Fachada.getInstance().atualizarUsuario(usuario);
+				Fachada.getInstance().atualizarUsuario(cliente);
 				
 			}
 		});
@@ -254,7 +254,7 @@ public class UsuarioConta extends JFrame {
 		// FIM ALTERAR 2
 		
 		// ALTERAR
-		ImageIcon alterar = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/alterar_bt1.png"));
+		ImageIcon alterar = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/alterar_bt1.png"));
 		lblAlterar = new JLabel("");
 		lblAlterar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -271,7 +271,7 @@ public class UsuarioConta extends JFrame {
 		// FIM ALTERAR
 		
 		//BG
-		ImageIcon background = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/Usuario_Conta.png"));
+		ImageIcon background = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/Usuario_Conta.png"));
 		JLabel lblBg = new JLabel("");
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -289,7 +289,7 @@ public class UsuarioConta extends JFrame {
 		//FIM BG
 	}
 	
-	public void receber(Usuario user){
+	public void receber(Cliente user){
 		Endereco endereco = new Endereco();
 		
 		txtNome.setText(user.getNome());
@@ -297,7 +297,7 @@ public class UsuarioConta extends JFrame {
 		txtTelefone.setText(user.getTelefone());
 		txtSenhaAtual.setText(user.getSenha());
 		
-		endereco = Fachada.getInstance().buscarEndereco(user.getEndereco_id());
+		endereco = Fachada.getInstance().buscarEndereco(user.getEndereco().getId());
 		txtCep.setText(endereco.getCep());
 		txtCidade.setText(endereco.getCidade());
 		txtEstado.setText(endereco.getEstado());

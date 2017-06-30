@@ -7,7 +7,14 @@ public class Produto {
 	private String marca;
 	private String categoria;
 	private float preco;
+	Empresa empresa;
 	
+	public Empresa getEmpresa() {
+		return empresa;
+	}
+	public void setEmpresa(Empresa empresa) {
+		this.empresa = empresa;
+	}
 	public int getId() {
 		return id;
 	}

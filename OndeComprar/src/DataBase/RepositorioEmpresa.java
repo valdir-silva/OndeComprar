@@ -6,9 +6,10 @@ import javax.swing.table.TableModel;
 import interfaces.IRepositorioEmpresa;
 import net.proteanit.sql.DbUtils;
 import programa.Empresa;
+import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
-import programa.Usuario;
+import programa.Cliente;
 
 public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpresa{
 	
@@ -44,12 +45,12 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				empresa.setEmail(this.resultset.getString("email"));
 				empresa.setTelefone(this.resultset.getString("telefone"));
 				empresa.setSenha(this.resultset.getString("senha"));
-				empresa.setEndereco_id(Integer.parseInt(this.resultset.getString("endereco_id")));
+				empresa.setEndereco(Fachada.getInstance().buscarEndereco(Integer.parseInt(this.resultset.getString("endereco_id"))));
 			}
 			super.desconectar();
 			return empresa;
 		} catch(Exception e){
-			System.out.println("Buscar Erro: " + e.getMessage());
+			System.out.println("Buscar Erro 2: " + e.getMessage());
 		}
 		return empresa; 
 	}
@@ -150,14 +151,14 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				reserva.setId(Integer.parseInt(this.resultset.getString("id")));
 				reserva.setData(this.resultset.getString("data"));
 				reserva.setSolicitacao(this.resultset.getString("solicitacao"));
-				reserva.setProduto_id(Integer.parseInt(this.resultset.getString("produto_id")));
-				reserva.setCliente_id(Integer.parseInt(this.resultset.getString("cliente_id")));
-				reserva.setCliente_endereco_id(Integer.parseInt(this.resultset.getString("cliente_endereco_id")));
+				reserva.setProduto(Fachada.getInstance().buscarProduto(Integer.parseInt(this.resultset.getString("produto_id"))));
+				reserva.setCliente(Fachada.getInstance().buscarUsuario(Integer.parseInt(this.resultset.getString("cliente_id"))));
+				reserva.getCliente().setEndereco(Fachada.getInstance().buscarEndereco(Integer.parseInt(this.resultset.getString("cliente_endereco_id"))));
 			}
 			super.desconectar();
 			return reserva;
 		} catch(Exception e){
-			System.out.println("Buscar Erro: " + e.getMessage());
+			System.out.println("Buscar Erro 1: " + e.getMessage());
 		}
 		return reserva; 
 	}

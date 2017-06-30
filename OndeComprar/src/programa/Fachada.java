@@ -4,10 +4,10 @@ import javax.swing.table.TableModel;
 
 import DataBase.RepositorioEmpresa;
 import DataBase.RepositorioProduto;
-import DataBase.RepositorioUsuario;
+import DataBase.RepositorioCliente;
 import interfaces.IRepositorioEmpresa;
 import interfaces.IRepositorioProduto;
-import interfaces.IRepositorioUsuario;
+import interfaces.IRepositorioCliente;
 
 public class Fachada {
 		private static Fachada instance;
@@ -17,7 +17,7 @@ public class Fachada {
 		
 		public Fachada(){
 			IRepositorioProduto produto = new RepositorioProduto(); produtos = new ControleProdutos(produto);
-			IRepositorioUsuario usuario = new RepositorioUsuario(); usuarios = new ControleUsuarios(usuario);
+			IRepositorioCliente usuario = new RepositorioCliente(); usuarios = new ControleUsuarios(usuario);
 			IRepositorioEmpresa empresa = new RepositorioEmpresa(); empresas = new ControleEmpresas(empresa);
 		}
 		
@@ -54,38 +54,38 @@ public class Fachada {
 		}
 		
 		// MÉTODOS DE USUARIO
-		public boolean logarUsuario(String login, String senha){
-			return usuarios.logarUsuario(login, senha);
+		public boolean logarUsuario(String login, String senha){ // TO FAZENDO AGR NA CLASSE ABSTRATA USUARIO, TIRO DAQUI?
+			return usuarios.logarCliente(login, senha);
 		}
-		public Usuario buscarUsuario(String login){
-			return usuarios.buscarUsuario(login);
+		public Cliente buscarUsuario(String login){
+			return usuarios.buscarCliente(login);
 		}
-		public Usuario buscarUsuario(int id){
-			return usuarios.buscarUsuario(id);
+		public Cliente buscarUsuario(int id){
+			return usuarios.buscarCliente(id);
 		}
 		public Endereco buscarEndereco(int id){
 			return usuarios.buscarEndereco(id);
 		}
 		public int reservasPendentesUser(int id){
-			return usuarios.reservasPendentesUser(id);
+			return usuarios.reservasPendentesCliente(id);
 		}
 		public int reservasAceitasUser(int id){
-			return usuarios.reservasAceitasUser(id);
+			return usuarios.reservasAceitasCliente(id);
 		}
 		public int reservasRecusadasUser(int id){
-			return usuarios.reservasRecusadasUser(id);
+			return usuarios.reservasRecusadasCliente(id);
 		}
-		public void atualizarUsuario(Usuario usuario){
-			usuarios.atualizarUsuario(usuario);
+		public void atualizarUsuario(Cliente usuario){
+			usuarios.atualizarCliente(usuario);
 		}
 		public void solicitarReserva(Reserva reserva){
 			usuarios.solicitarReserva(reserva);
 		}
 		public TableModel listarReservasUser(int id){
-			return usuarios.listarReservasUser(id);
+			return usuarios.listarReservasCliente(id);
 		}
 		public TableModel listarPromocoesUser(int id) {
-			return usuarios.listarPromocoesUser(id);
+			return usuarios.listarPromocoesCliente(id);
 		}
 		public int promocoesAtivas(String data) {
 			return usuarios.promocoesAtivas(data);
@@ -95,7 +95,7 @@ public class Fachada {
 		}
 		
 		// MÉTODOS DE EMPRESA
-		public boolean logarEmpresa(String login, String senha){
+		public boolean logarEmpresa(String login, String senha){ // TO FAZENDO AGR NA CLASSE ABSTRATA USUARIO, TIRO DAQUI?
 			return empresas.logarEmpresa(login, senha);
 		}
 		public Empresa buscarEmpresa(String login){
@@ -119,7 +119,7 @@ public class Fachada {
 		public int reservasRecusadasEmpresa(int id){
 			return empresas.reservasRecusadasEmpresa(id);
 		}
-		public Reserva tabelaParaTelaEmpresa(int id){
+		public Reserva tabelaParaTelaEmpresa(int id){ // RETORNA UMA RESERVA, MAS VOU TROCAR O NOME DESSE METODO
 			return empresas.tabelaParaTelaEmpresa(id);
 		}
 		public void aceitarReserva(int id){

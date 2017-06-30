@@ -4,7 +4,7 @@ import javax.swing.table.TableModel;
 
 import programa.Empresa;
 import programa.Reserva;
-import programa.Usuario;
+import programa.Cliente;
 
 public interface IRepositorioEmpresa {
 	//NOVA EMPRESA

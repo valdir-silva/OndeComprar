@@ -1,19 +1,13 @@
 package programa;
 
-public class Usuario extends Endereco {
+public abstract class Usuario {
 	private int id;
 	private String nome;
 	private String email;
 	private String telefone;
 	private String senha;
-	private int endereco_id;
+	private Endereco endereco;
 	
-	public int getEndereco_id() {
-		return endereco_id;
-	}
-	public void setEndereco_id(int endereco_id) {
-		this.endereco_id = endereco_id;
-	}
 	public int getId() {
 		return id;
 	}
@@ -44,4 +38,11 @@ public class Usuario extends Endereco {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
 }

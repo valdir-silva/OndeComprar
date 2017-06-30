@@ -14,7 +14,7 @@ import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import programa.Fachada;
-import programa.Usuario;
+import programa.Cliente;
 
 import java.awt.Color;
 import java.awt.Cursor;
@@ -121,7 +121,7 @@ public class Login extends JDialog {
 			public void mouseClicked(MouseEvent arg0) {
 				
 				if(Fachada.getInstance().logarUsuario(txtLogin.getText(), txtSenha.getText())){
-					UsuarioHome usuarioHome = new UsuarioHome(); usuarioHome.setVisible(true);
+					ClienteHome usuarioHome = new ClienteHome(); usuarioHome.setVisible(true);
 					usuarioHome.receber(Fachada.getInstance().buscarUsuario(txtLogin.getText()));
 					dispose();
 				} else if (Fachada.getInstance().logarEmpresa(txtLogin.getText(), txtSenha.getText())){

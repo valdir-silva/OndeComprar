@@ -21,7 +21,7 @@ import javax.swing.border.EmptyBorder;
 import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
-import programa.Usuario;
+import programa.Cliente;
 
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -34,7 +34,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import java.awt.Toolkit;
 
-public class UsuarioCatalogo extends JFrame {
+public class ClienteCatalogo extends JFrame {
 	
 	JLabel lblProvisorio2 = new JLabel("");
 
@@ -45,7 +45,7 @@ public class UsuarioCatalogo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					UsuarioCatalogo frame = new UsuarioCatalogo();
+					ClienteCatalogo frame = new ClienteCatalogo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -59,8 +59,8 @@ public class UsuarioCatalogo extends JFrame {
 	 */
 	
 	
-	public UsuarioCatalogo() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage(UsuarioCatalogo.class.getResource("/img/favicon.png")));
+	public ClienteCatalogo() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteCatalogo.class.getResource("/img/favicon.png")));
 		
 		JPanel contentPane;
 		JTable table;
@@ -187,13 +187,13 @@ public class UsuarioCatalogo extends JFrame {
 				Reserva reserva = new Reserva();
 				Calendar date = Calendar.getInstance();;
 				reserva.setData(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));
-				reserva.setProduto_id(Integer.parseInt(txtId.getText()));
-				reserva.setCliente_id(Integer.parseInt(lblProvisorio2.getText()));
+				reserva.getProduto().setId(Integer.parseInt(txtId.getText()));
+				reserva.getCliente().setId(Integer.parseInt(lblProvisorio2.getText()));
 				Fachada.getInstance().solicitarReserva(reserva);
 				JOptionPane.showMessageDialog(null, "Solicitação enviada!");
 			}
 		});
-		ImageIcon solicitar2 = new ImageIcon(UsuarioCatalogo.class.getResource("/img/usuarioCatalogo/solicitar_bt2.png"));
+		ImageIcon solicitar2 = new ImageIcon(ClienteCatalogo.class.getResource("/img/usuarioCatalogo/solicitar_bt2.png"));
 		lblSolicitar2.setBounds(26, 338, 168, 38);
 		Image imgSolicitar2 = solicitar2.getImage().getScaledInstance(lblSolicitar2.getWidth(), lblSolicitar2.getHeight(), Image.SCALE_SMOOTH);
 		lblSolicitar2.setIcon(new ImageIcon(imgSolicitar2));
@@ -209,7 +209,7 @@ public class UsuarioCatalogo extends JFrame {
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			}
 		});
-		ImageIcon solicitar = new ImageIcon(UsuarioCatalogo.class.getResource("/img/usuarioCatalogo/solicitar_bt1.png"));
+		ImageIcon solicitar = new ImageIcon(ClienteCatalogo.class.getResource("/img/usuarioCatalogo/solicitar_bt1.png"));
 		lblSolicitar.setBounds(26, 338, 168, 38);
 		Image imgSolicitar = solicitar.getImage().getScaledInstance(lblSolicitar.getWidth(), lblSolicitar.getHeight(), Image.SCALE_SMOOTH);
 		lblSolicitar.setIcon(new ImageIcon(imgSolicitar));
@@ -224,7 +224,7 @@ public class UsuarioCatalogo extends JFrame {
 		contentPane.add(lblProvisorio2);
 		
 		//BG
-		ImageIcon background = new ImageIcon(UsuarioCatalogo.class.getResource("/img/usuarioCatalogo/Usuario_Catalogo.png"));
+		ImageIcon background = new ImageIcon(ClienteCatalogo.class.getResource("/img/usuarioCatalogo/Usuario_Catalogo.png"));
 		JLabel lblBg = new JLabel("");
 		lblBg.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -240,7 +240,7 @@ public class UsuarioCatalogo extends JFrame {
 		//FIM BG
 	}
 	
-	public void receber (Usuario user){
+	public void receber (Cliente user){
 		lblProvisorio2.setText(Integer.toString(user.getId()));
 	}
 }

@@ -21,7 +21,7 @@ import programa.Empresa;
 import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
-import programa.Usuario;
+import programa.Cliente;
 
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
@@ -525,11 +525,10 @@ public class EmpresaHome extends JFrame {
 				int id = (int) table.getModel().getValueAt(row, 0);
 				reserva = Fachada.getInstance().tabelaParaTelaEmpresa(id);
 				lblData.setText(reserva.getData());
-				lblNome.setText(Fachada.getInstance().buscarUsuario(reserva.getCliente_id()).getNome());
-				Produto produto = Fachada.getInstance().buscarProduto(reserva.getProduto_id());
-				lblProduto.setText(produto.getNome());
-				lblCategoria.setText(produto.getCategoria());
-				lblPreco.setText(String.valueOf(produto.getPreco()));
+				lblNome.setText(reserva.getCliente().getNome());
+				lblProduto.setText(reserva.getProduto().getNome());
+				lblCategoria.setText(reserva.getProduto().getCategoria());
+				lblPreco.setText(String.valueOf(reserva.getProduto().getPreco()));
 				lblDadosreserva.setVisible(true);
 				lblFechar.setVisible(true);
 				lblNome.setVisible(true);

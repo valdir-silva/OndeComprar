@@ -3,19 +3,20 @@ package DataBase;
 import javax.swing.JOptionPane;
 import javax.swing.table.TableModel;
 
-import interfaces.IRepositorioUsuario;
+import interfaces.IRepositorioCliente;
 import net.proteanit.sql.DbUtils;
 import programa.Endereco;
+import programa.Fachada;
 import programa.Produto;
 import programa.Reserva;
-import programa.Usuario;
+import programa.Cliente;
 
-public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsuario {
+public class RepositorioCliente extends BancoDeDados implements IRepositorioCliente {
 
 	public void solicitarReserva(Reserva reserva) {
 		try {
 			super.conectar();
-			String query = "INSERT INTO reserva (data, produto_id, cliente_id, cliente_endereco_id) VALUES('" + reserva.getData() + "', '" + reserva.getProduto_id() + "', '" + reserva.getCliente_id() + "', '" + reserva.getCliente_endereco_id() + "');";
+			String query = "INSERT INTO reserva (data, produto_id, cliente_id, cliente_endereco_id) VALUES('" + reserva.getData() + "', '" + reserva.getProduto().getId() + "', '" + reserva.getCliente().getId() + "', '" + reserva.getCliente().getEndereco().getId() + "');";
 			this.statement.executeUpdate(query);
 			super.desconectar();
 		} catch(Exception e) {
@@ -23,7 +24,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
 	}
 
-	public TableModel listarReservasUser(int id) {
+	public TableModel listarReservasCliente(int id) {
 		TableModel t = null;
     	try{
 			super.conectar();
@@ -40,7 +41,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return t;
 	}
-	public TableModel listarPromocoesUser(int id) {
+	public TableModel listarPromocoesCliente(int id) {
 		TableModel t = null;
     	try{
 			super.conectar();
@@ -57,7 +58,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return t;
 	}
-	public boolean logarUsuario(String login, String senha) {
+	public boolean logarCliente(String login, String senha) {
 		try{
 			super.conectar();
 			String query = "SELECT * from cliente WHERE nome = '" + login + "' and senha='" + senha + "';";
@@ -74,8 +75,8 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
 		return false;
 	}
-	public Usuario buscarUsuario(int id) {
-		Usuario usuario = new Usuario();
+	public Cliente buscarCliente(int id) {
+		Cliente usuario = new Cliente();
 		try{
 			super.conectar();
 			String query = "SELECT * from cliente WHERE id = '" + id + "';";
@@ -86,18 +87,18 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 				usuario.setEmail(this.resultset.getString("email"));
 				usuario.setTelefone(this.resultset.getString("telefone"));
 				usuario.setSenha(this.resultset.getString("senha"));
-				usuario.setEndereco_id(this.resultset.getInt("endereco_id"));
+				usuario.setEndereco(Fachada.getInstance().buscarEndereco(this.resultset.getInt("endereco_id")));
 			}
 			super.desconectar();
 			return usuario;
 		} catch(Exception e){
-			System.out.println("Buscar Erro: " + e.getMessage());
+			System.out.println("Buscar Erro 4: " + e.getMessage());
 		}
 		return usuario; 
 	}
 
-	public Usuario buscarUsuario(String login) {
-		Usuario usuario = new Usuario();
+	public Cliente buscarCliente(String login) {
+		Cliente usuario = new Cliente();
 		try{
 			super.conectar();
 			String query = "SELECT * from cliente WHERE nome = '" + login + "';";
@@ -108,18 +109,18 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 				usuario.setEmail(this.resultset.getString("email"));
 				usuario.setTelefone(this.resultset.getString("telefone"));
 				usuario.setSenha(this.resultset.getString("senha"));
-				usuario.setEndereco_id(this.resultset.getInt("endereco_id"));
+				usuario.setEndereco(Fachada.getInstance().buscarEndereco(this.resultset.getInt("endereco_id")));
 			}
 			super.desconectar();
 			return usuario;
 		} catch(Exception e){
-			System.out.println("Buscar Erro: " + e.getMessage());
+			System.out.println("Buscar Erro 3: " + e.getMessage());
 		}
 		return usuario; 
 	}
 
 	@Override
-	public int reservasPendentesUser(int id) {
+	public int reservasPendentesCliente(int id) {
 		int n = 0;
     	try{
 			super.conectar();
@@ -137,7 +138,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return n;
 	}
-	public int reservasAceitasUser(int id) {
+	public int reservasAceitasCliente(int id) {
 		int n = 0;
     	try{
 			super.conectar();
@@ -155,7 +156,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return n;
 	}
-	public int reservasRecusadasUser(int id) {
+	public int reservasRecusadasCliente(int id) {
 		int n = 0;
     	try{
 			super.conectar();
@@ -173,7 +174,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 		}
     	return n;
 	}
-	public void atualizarUsuario(Usuario usuario){
+	public void atualizarCliente(Cliente usuario){
 			try{
 				super.conectar();
 				String query = "UPDATE cliente SET nome = '" + usuario.getNome() + "', email = '" + usuario.getEmail() + "', telefone = '" + usuario.getTelefone() + "' WHERE id = '" + usuario.getId() + "';";
@@ -183,7 +184,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 			} catch (Exception e){
 				System.out.println("Editar Usuario ERRO: " + e.getMessage()); 
 			}
-			Endereco endereco = usuario;
+			Endereco endereco = usuario.getEndereco();
 			this.atualizarEndereco(endereco);
 	}
 	private void atualizarEndereco(Endereco endereco){
@@ -209,7 +210,7 @@ public class RepositorioUsuario extends BancoDeDados implements IRepositorioUsua
 				endereco.setRua(this.resultset.getString("rua"));
 				endereco.setCep(this.resultset.getString("cep"));
 			}
-			super.desconectar();
+			//super.desconectar(); COMO RESOLVER ISSO? QUANDO UM METODO INTERNO CHAMA, SE DEIXAR O DESCONECTAR DÁ ERRO NO RESULTSET
 			return endereco;
 		} catch(Exception e){
 			System.out.println("Buscar endereco Erro: " + e.getMessage());

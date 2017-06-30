@@ -12,6 +12,7 @@ import com.mysql.jdbc.Statement;
 
 import interfaces.IRepositorioProduto;
 import net.proteanit.sql.DbUtils;
+import programa.Fachada;
 import programa.Produto;
 
 public class RepositorioProduto extends BancoDeDados implements IRepositorioProduto{
@@ -148,6 +149,7 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				produto.setNome(this.resultset.getString("nome"));
 				produto.setCategoria(this.resultset.getString("categoria"));
 				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
+				produto.setEmpresa(Fachada.getInstance().buscarEmpresa(this.resultset.getString("empresa_id")));
 			}
 			super.desconectar();
 			return produto;

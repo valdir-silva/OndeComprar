@@ -15,7 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 import programa.Endereco;
 import programa.Fachada;
-import programa.Usuario;
+import programa.Cliente;
 
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
@@ -26,6 +26,7 @@ public class EmpresaConta extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtNome;
+	private JTextField txtCnpj;
 	private JTextField txtEmail;
 	private JTextField txtTelefone;
 	private JTextField txtSenhaAtual;
@@ -65,7 +66,6 @@ public class EmpresaConta extends JFrame {
 		setBounds(100, 100, 742, 453);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -84,6 +84,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		});
 		lblVoltar2.setBounds(23, 5, 93, 33);
 		Image imgVoltar2 = voltar2.getImage().getScaledInstance(lblVoltar2.getWidth(), lblVoltar2.getHeight(), Image.SCALE_SMOOTH);
+		contentPane.setLayout(null);
 		lblVoltar2.setIcon(new ImageIcon(imgVoltar2));
 		contentPane.add(lblVoltar2);
 		lblVoltar2.setVisible(false);
@@ -168,7 +169,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// TELEFONE
 		txtTelefone = new JTextField();
 		txtTelefone.setForeground(SystemColor.controlDkShadow);
-		txtTelefone.setBounds(46, 270, 280, 20);
+		txtTelefone.setBounds(46, 276, 280, 20);
 		contentPane.add(txtTelefone);
 		txtTelefone.setColumns(10);
 		txtTelefone.setOpaque(false);
@@ -178,18 +179,29 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// EMAIL
 		txtEmail = new JTextField();
 		txtEmail.setForeground(SystemColor.controlDkShadow);
-		txtEmail.setBounds(46, 223, 280, 20);
+		txtEmail.setBounds(46, 238, 280, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		txtEmail.setOpaque(false);
 		txtEmail.setBorder(null);
 		// FIM EMAIL
 		
+		// CNPJ
+		txtCnpj = new JTextField();
+		txtCnpj.setEditable(false);
+		txtCnpj.setForeground(SystemColor.controlDkShadow);
+		txtCnpj.setBounds(46, 201, 280, 20);
+		contentPane.add(txtCnpj);
+		txtCnpj.setColumns(10);
+		txtCnpj.setOpaque(false);
+		txtCnpj.setBorder(null);
+		// FIM CNPJ
+		
 		// NOME
 		txtNome = new JTextField();
 		txtNome.setEditable(false);
 		txtNome.setForeground(SystemColor.controlDkShadow);
-		txtNome.setBounds(46, 175, 280, 20);
+		txtNome.setBounds(46, 165, 280, 20);
 		contentPane.add(txtNome);
 		txtNome.setColumns(10);
 		txtNome.setOpaque(false);
@@ -197,7 +209,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// FIM NOME
 		
 		// APAGAR 2
-		ImageIcon apagar2 = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/apagar_bt2.png"));
+		ImageIcon apagar2 = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/apagar_bt2.png"));
 		lblApagar2 = new JLabel("");
 		lblApagar2.setBounds(379, 359, 158, 49);
 		Image imgApagar2 = apagar2.getImage().getScaledInstance(lblApagar2.getWidth(), lblApagar2.getHeight(), Image.SCALE_SMOOTH);
@@ -207,7 +219,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// FIM APAGAR 2
 		
 		// APAGAR
-		ImageIcon apagar = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/apagar_bt1.png"));
+		ImageIcon apagar = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/apagar_bt1.png"));
 		lblApagar = new JLabel("");
 		lblApagar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -224,22 +236,22 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// FIM APAGAR
 		
 		// ALTERAR 2
-		ImageIcon alterar2 = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/alterar_bt2.png"));
+		ImageIcon alterar2 = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/alterar_bt2.png"));
 		lblAlterar2 = new JLabel("");
 		lblAlterar2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				Usuario usuario = new Usuario();
+				Cliente usuario = new Cliente();
 			
 				usuario.setNome(txtNome.getText());
 				usuario.setId(Fachada.getInstance().buscarUsuario(usuario.getNome()).getId());
 				usuario.setEmail(txtEmail.getText());
 				usuario.setTelefone(txtTelefone.getText());
-				usuario.setCep(txtCep.getText());
-				usuario.setCidade(txtCidade.getText());
-				usuario.setEstado(txtEstado.getText());
-				usuario.setRua(txtEndereco.getText());
-				usuario.setEndereco_id(Fachada.getInstance().buscarUsuario(usuario.getNome()).getEndereco_id());
+				//usuario.setCep(txtCep.getText());
+				//usuario.setCidade(txtCidade.getText());
+				//usuario.setEstado(txtEstado.getText());
+				//usuario.setRua(txtEndereco.getText());
+				//usuario.setEndereco_id(Fachada.getInstance().buscarUsuario(usuario.getNome()).getEndereco_id());
 				
 				Fachada.getInstance().atualizarUsuario(usuario);
 				
@@ -253,7 +265,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		// FIM ALTERAR 2
 		
 		// ALTERAR
-		ImageIcon alterar = new ImageIcon(UsuarioConta.class.getResource("/img/usuarioConta/alterar_bt1.png"));
+		ImageIcon alterar = new ImageIcon(ClienteConta.class.getResource("/img/usuarioConta/alterar_bt1.png"));
 		lblAlterar = new JLabel("");
 		lblAlterar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -287,7 +299,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		contentPane.add(lblBg);
 		//FIM BG
 	}
-	public void receber(Usuario user){
+	public void receber(Cliente user){
 		Endereco endereco = new Endereco();
 		
 		txtNome.setText(user.getNome());
@@ -295,7 +307,7 @@ this.setLocationRelativeTo(null); // JANELA FICA NO CENTRO
 		txtTelefone.setText(user.getTelefone());
 		txtSenhaAtual.setText(user.getSenha());
 		
-		endereco = Fachada.getInstance().buscarEndereco(user.getEndereco_id());
+		//endereco = Fachada.getInstance().buscarEndereco(user.getEndereco_id());
 		txtCep.setText(endereco.getCep());
 		txtCidade.setText(endereco.getCidade());
 		txtEstado.setText(endereco.getEstado());
