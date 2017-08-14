@@ -21,7 +21,12 @@ public class ControleEmpresas implements IRepositorioEmpresa{
 	public Empresa buscarEmpresa(String login) {
 		return repositorioEmpresa.buscarEmpresa(login);
 	}
-
+	
+	@Override
+	public Empresa buscarEmpresa(int id) {
+		return repositorioEmpresa.buscarEmpresa(id);
+	}
+	
 	@Override
 	public int reservasPendentesEmpresa(int id) {
 		return repositorioEmpresa.reservasPendentesEmpresa(id);

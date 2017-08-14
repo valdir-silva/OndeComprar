@@ -2,6 +2,7 @@ package interfaces;
 
 import javax.swing.table.TableModel;
 
+import Exceptions.LoginInvalidoException;
 import programa.Endereco;
 import programa.Reserva;
 import programa.Cliente;

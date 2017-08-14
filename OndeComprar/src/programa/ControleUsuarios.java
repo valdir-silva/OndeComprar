@@ -2,6 +2,7 @@ package programa;
 
 import javax.swing.table.TableModel;
 
+import Exceptions.LoginInvalidoException;
 import interfaces.IRepositorioCliente;
 
 public class ControleUsuarios implements IRepositorioCliente{

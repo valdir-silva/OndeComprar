@@ -1,6 +1,6 @@
 package programa;
 
-public abstract class Usuario {
+public class Usuario {
 	private int id;
 	private String nome;
 	private String email;

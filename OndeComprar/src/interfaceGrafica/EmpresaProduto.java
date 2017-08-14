@@ -129,9 +129,8 @@ public class EmpresaProduto extends JFrame {
 		txtBuscar.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent arg0) {
-				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){  
-					RepositorioProduto repositorio = new RepositorioProduto();
-					table.setModel(repositorio.listarProdutosTabela(txtBuscar.getText(), order));
+				if(arg0.getKeyCode() == KeyEvent.VK_ENTER){ 
+					table.setModel(Fachada.getInstance().listarProdutosTabela(txtBuscar.getText(), order));
 					
 					table.getColumnModel().getColumn(0).setPreferredWidth(50);
 					table.getColumnModel().getColumn(1).setPreferredWidth(180); 
@@ -205,8 +204,10 @@ public class EmpresaProduto extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				//ADICIONAR OUTRA IMAGEM PARA GERAR SENSAÇÃO DE ANIMAÇÃO AO DELETAR
-				RepositorioProduto repositorio = new RepositorioProduto();
-				repositorio.apagarProduto(Integer.parseInt(txtId.getText()));
+//				RepositorioProduto repositorio = new RepositorioProduto();
+//				repositorio.apagarProduto(Integer.parseInt(txtId.getText()));
+				
+				Fachada.getInstance().apagarProduto(Integer.parseInt(txtId.getText()));
 				JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 			}
 		});
@@ -243,10 +244,11 @@ public class EmpresaProduto extends JFrame {
 				produto.setCategoria((String) comboBox.getSelectedItem());
 				produto.setPreco(Float.parseFloat(txtPreco.getText()));
 				//produto.setEmpresa(Fachada.getInstance().buscarEmpresa(login));
+				//A LINHA ACIMA ESTÁ COMENTADA PQ AINDA NÃO ESTÁ PEGANDO O LOGIN VINDO DA TELA ANTERIOR
 				
-				//Fachada.getInstance().inserirProduto(produto);
-				RepositorioProduto repositorio = new RepositorioProduto();
-				repositorio.inserirProduto(produto);
+				Fachada.getInstance().inserirProduto(produto);
+//				RepositorioProduto repositorio = new RepositorioProduto();
+//				repositorio.inserirProduto(produto);
 				JOptionPane.showMessageDialog(null, "Adicionado com sucesso!");
 				txtNome.setText(null);
 				txtMarca.setText(null);

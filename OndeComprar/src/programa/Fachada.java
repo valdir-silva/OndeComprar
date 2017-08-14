@@ -3,7 +3,9 @@ package programa;
 import javax.swing.table.TableModel;
 
 import DataBase.RepositorioEmpresa;
+import DataBase.RepositorioListaProduto;
 import DataBase.RepositorioProduto;
+import Exceptions.LoginInvalidoException;
 import DataBase.RepositorioCliente;
 import interfaces.IRepositorioEmpresa;
 import interfaces.IRepositorioProduto;
@@ -17,6 +19,7 @@ public class Fachada {
 		
 		public Fachada(){
 			IRepositorioProduto produto = new RepositorioProduto(); produtos = new ControleProdutos(produto);
+			//IRepositorioProduto produto = new RepositorioListaProduto(); produtos = new ControleProdutos(produto);
 			IRepositorioCliente usuario = new RepositorioCliente(); usuarios = new ControleUsuarios(usuario);
 			IRepositorioEmpresa empresa = new RepositorioEmpresa(); empresas = new ControleEmpresas(empresa);
 		}
@@ -54,7 +57,7 @@ public class Fachada {
 		}
 		
 		// MÉTODOS DE USUARIO
-		public boolean logarUsuario(String login, String senha){ // TO FAZENDO AGR NA CLASSE ABSTRATA USUARIO, TIRO DAQUI?
+		public boolean logarUsuario(String login, String senha){
 			return usuarios.logarCliente(login, senha);
 		}
 		public Cliente buscarUsuario(String login){
@@ -100,6 +103,9 @@ public class Fachada {
 		}
 		public Empresa buscarEmpresa(String login){
 			return empresas.buscarEmpresa(login);
+		}
+		public Empresa buscarEmpresa(int id){
+			return empresas.buscarEmpresa(id);
 		}
 		public int reservasPendentesEmpresa(int id){
 			return empresas.reservasPendentesEmpresa(id);

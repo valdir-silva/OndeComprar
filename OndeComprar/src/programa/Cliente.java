@@ -1,7 +1,7 @@
 package programa;
 
 public class Cliente extends Usuario{
-	private String cpf; // ADICIONAR AO BANCO 
+	private String cpf; 
 	
 	public String getCpf() {
 		return cpf;

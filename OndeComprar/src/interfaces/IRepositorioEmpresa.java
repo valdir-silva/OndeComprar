@@ -13,6 +13,7 @@ public interface IRepositorioEmpresa {
 	//ALTERAR SENHA
 	public boolean logarEmpresa(String login, String senha);
 	public Empresa buscarEmpresa(String login);
+	public Empresa buscarEmpresa(int id);
 	public int reservasPendentesEmpresa(int id); // RETORNA A QUANTIDADE DE RESERVAS PENDENTES DAQUELA EMPRESA 
 	public int reservasAceitasEmpresa(int id);
 	public int reservasRecusadasEmpresa(int id);

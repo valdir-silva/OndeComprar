@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
+import Exceptions.LoginInvalidoException;
 import programa.Fachada;
 import programa.Cliente;
 
@@ -106,9 +107,6 @@ public class Login extends JDialog {
 
 		btnEntrar.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
-			public void mouseDragged(MouseEvent arg0) {
-			}
-			@Override
 			public void mouseMoved(MouseEvent e) {
 				getContentPane().setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 				Image imagemBotao3 = myImage2.getImage().getScaledInstance(btnEntrar.getWidth(), btnEntrar.getHeight(), Image.SCALE_DEFAULT);
@@ -131,6 +129,14 @@ public class Login extends JDialog {
 				} else {
 					JOptionPane.showMessageDialog(null, "Login ou Senha inválidos");
 				}
+				
+//				try {
+//					Fachada.getInstance().logarUsuario(txtLogin.getText(), txtSenha.getText());
+//				} catch (LoginInvalidoException e) {
+//					System.out.println("mas karai");
+//					e.printStackTrace();
+//				}
+				
 			}
 		});
 		btnEntrar.setFont(new Font("SansSerif", Font.PLAIN, 15));

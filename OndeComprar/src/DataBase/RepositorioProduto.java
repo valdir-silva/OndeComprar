@@ -25,9 +25,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 			}
-			super.desconectar();
 		} catch(Exception e){
 			System.out.println("Listar Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 	}
 	public void listarProdutos(String order){ // overloading para ordenar por outros atributos
@@ -39,9 +40,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				while(this.resultset.next()){
 					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 				}
-				super.desconectar();
 			} catch(Exception e){
 				System.out.println("Listar Erro: " + e.getMessage());
+			} finally {
+				super.desconectar();
 			}
 		} else if (order.equals("marca")){
 			try{
@@ -51,9 +53,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				while(this.resultset.next()){
 					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 				}
-				super.desconectar();
 			} catch(Exception e){
 				System.out.println("Listar Erro: " + e.getMessage());
+			} finally {
+				super.desconectar();
 			}
 		} else if (order.equals("preco")){
 			try{
@@ -63,9 +66,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				while(this.resultset.next()){
 					System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 				}
-				super.desconectar();
 			} catch(Exception e){
 				System.out.println("Listar Erro: " + e.getMessage());
+			} finally {
+				super.desconectar();
 			}
 		}
 	}
@@ -82,10 +86,11 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				produto.setCategoria(this.resultset.getString("categoria"));
 				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
 			}
-			super.desconectar();
 			return produto;
 		} catch(Exception e){
 			System.out.println("Buscar Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 		return produto; //perguntar ao professor como fica quando dá erro e retorna este objeto vazio (nao perguntei mas deve usar uma exceção pra isso)
 	}
@@ -94,9 +99,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			super.conectar();
 			String query = "INSERT INTO produto (nome, marca, categoria, preco) VALUES('" + produto.getNome() + "', '" + produto.getMarca() +"', '" + produto.getCategoria() + "', '" + produto.getPreco() + "');";
 			this.statement.executeUpdate(query);
-			super.desconectar();
 		} catch (Exception e){
 			System.out.println("Inserir ERRO: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 	}
 	public void atualizarProduto(Produto produto){
@@ -104,9 +110,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			super.conectar();
 			String query = "UPDATE produto SET nome = '" + produto.getNome() + "', marca = '" + produto.getMarca() + "', preco = '" + produto.getPreco() + "' WHERE id = " + produto.getId() + ";";
 			this.statement.executeUpdate(query);
-			super.desconectar();
 		} catch (Exception e){
 			System.out.println("Editar ERRO: " + e.getMessage()); 
+		} finally {
+			super.desconectar();
 		}
 	}
 	public void apagarProduto(int id){
@@ -114,9 +121,10 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			super.conectar();
 			String query = "DELETE FROM produto WHERE id = " + id + ";";
 			this.statement.executeUpdate(query);
-			super.desconectar();
 		} catch (Exception e){
 			System.out.println("Apagar ERRO:" + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 	}
     
@@ -130,14 +138,15 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 			}
-			super.desconectar();
 			return table;
 		} catch(Exception e){
 			System.out.println("Listar Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return t;
     }
-	public Produto produtoParaTela(int id){
+	public Produto produtoParaTela(int id){ // QUAL A DIFERENÇA DISSO PARA O PROCURAR NORMAL?
 		Produto produto = new Produto();
 		try{
 			super.conectar();
@@ -151,10 +160,11 @@ public class RepositorioProduto extends BancoDeDados implements IRepositorioProd
 				produto.setPreco(Float.parseFloat(this.resultset.getString("preco")));
 				produto.setEmpresa(Fachada.getInstance().buscarEmpresa(this.resultset.getString("empresa_id")));
 			}
-			super.desconectar();
 			return produto;
 		} catch(Exception e){
 			System.out.println("Buscar Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 		return produto; 
 	}

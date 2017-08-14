@@ -185,10 +185,10 @@ public class ClienteCatalogo extends JFrame {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				Reserva reserva = new Reserva();
-				Calendar date = Calendar.getInstance();;
+				Calendar date = Calendar.getInstance();
 				reserva.setData(date.get(Calendar.DAY_OF_MONTH) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR));
-				reserva.getProduto().setId(Integer.parseInt(txtId.getText()));
-				reserva.getCliente().setId(Integer.parseInt(lblProvisorio2.getText()));
+				reserva.setProduto(Fachada.getInstance().buscarProduto(Integer.parseInt(txtId.getText())));
+				reserva.setCliente(Fachada.getInstance().buscarUsuario(Integer.parseInt(lblProvisorio2.getText())));
 				Fachada.getInstance().solicitarReserva(reserva);
 				JOptionPane.showMessageDialog(null, "Solicitação enviada!");
 			}

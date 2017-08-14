@@ -22,11 +22,12 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				super.desconectar();
 				return true;
 			} else {
-				super.desconectar();
 				return false;
 			}
 		} catch (Exception e) {
-			System.out.println("Logar Erro: " + e.getMessage());
+			System.out.println("Logar Empresa Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 		return false;
 	}
@@ -47,10 +48,36 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				empresa.setSenha(this.resultset.getString("senha"));
 				empresa.setEndereco(Fachada.getInstance().buscarEndereco(Integer.parseInt(this.resultset.getString("endereco_id"))));
 			}
-			super.desconectar();
 			return empresa;
 		} catch(Exception e){
 			System.out.println("Buscar Erro 2: " + e.getMessage());
+		} finally {
+			super.desconectar();
+		}
+		return empresa; 
+	}
+	
+	@Override
+	public Empresa buscarEmpresa(int id) {
+		Empresa empresa = new Empresa();
+		try{
+			super.conectar();
+			String query = "SELECT * from empresa WHERE id = '" + id + "';";
+			this.resultset = this.statement.executeQuery(query);
+			while(this.resultset.next()){
+				empresa.setId(Integer.parseInt(this.resultset.getString("id")));
+				empresa.setNome(this.resultset.getString("nome"));
+				empresa.setCnpj(this.resultset.getString("cnpj"));
+				empresa.setEmail(this.resultset.getString("email"));
+				empresa.setTelefone(this.resultset.getString("telefone"));
+				empresa.setSenha(this.resultset.getString("senha"));
+				empresa.setEndereco(Fachada.getInstance().buscarEndereco(Integer.parseInt(this.resultset.getString("endereco_id"))));
+			}
+			return empresa;
+		} catch(Exception e){
+			System.out.println("Buscar Erro 2.5: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 		return empresa; 
 	}
@@ -66,10 +93,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 			}
-			super.desconectar();
 			return table;
 		} catch(Exception e){
 			System.out.println("Listar Erro: " + e.getMessage());
+		} finally { 
+			super.desconectar();
 		}
     	return t;
 	}
@@ -85,10 +113,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			while(this.resultset.next()){
 				System.out.println("ID: " + this.resultset.getString("id") + " - Nome: " + this.resultset.getString("nome") + " - Marca: " + this.resultset.getString("marca") + " - Preço: " + this.resultset.getFloat("preco"));
 			}
-			super.desconectar();
 			return table;
 		} catch(Exception e){
 			System.out.println("Listar Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return t;
 	}
@@ -102,10 +131,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			super.desconectar();
 			return n;
 		} catch(Exception e){
 			System.out.println("Pendentes Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return n;
 	}
@@ -117,10 +147,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			super.desconectar();
 			return n;
 		} catch(Exception e){
 			System.out.println("Aceitas Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return n;
 	}
@@ -132,10 +163,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			super.desconectar();
 			return n;
 		} catch(Exception e){
 			System.out.println("Recusadas Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return n;
 	}
@@ -155,10 +187,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				reserva.setCliente(Fachada.getInstance().buscarUsuario(Integer.parseInt(this.resultset.getString("cliente_id"))));
 				reserva.getCliente().setEndereco(Fachada.getInstance().buscarEndereco(Integer.parseInt(this.resultset.getString("cliente_endereco_id"))));
 			}
-			super.desconectar();
 			return reserva;
 		} catch(Exception e){
 			System.out.println("Buscar Erro 1: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 		return reserva; 
 	}
@@ -169,9 +202,10 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 				super.conectar();
 				String query = "UPDATE reserva SET solicitacao = 'aceita' WHERE id = " + id + ";";
 				this.statement.executeUpdate(query);
-				super.desconectar();
 			} catch (Exception e){
 				System.out.println("Aceitar Reserva ERRO:" + e.getMessage());
+			} finally {
+				super.desconectar();
 			}
 	}
 
@@ -181,9 +215,10 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			super.conectar();
 			String query = "UPDATE reserva SET solicitacao = 'recusada' WHERE id = " + id + ";";
 			this.statement.executeUpdate(query);
-			super.desconectar();
 		} catch (Exception e){
 			System.out.println("Aceitar Reserva ERRO:" + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 	}
 
@@ -196,10 +231,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			super.desconectar();
 			return n;
 		} catch(Exception e){
 			System.out.println("Recusadas Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return n;
 	}
@@ -213,10 +249,11 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			this.resultset = this.statement.executeQuery(query);
 			this.resultset.next();
 			n = this.resultset.getInt("count(*)");
-			super.desconectar();
 			return n;
 		} catch(Exception e){
 			System.out.println("Recusadas Erro: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
     	return n;
 	}
@@ -227,9 +264,10 @@ public class RepositorioEmpresa extends BancoDeDados implements IRepositorioEmpr
 			super.conectar();
 			String query = "INSERT INTO promocao (preco_promo, valida_ate, produto_id) VALUES('" + preco + "', '" + validade +"', '" + produto_id + "');";
 			this.statement.executeUpdate(query);
-			super.desconectar();
 		} catch (Exception e){
 			System.out.println("Inserir Promocao ERRO: " + e.getMessage());
+		} finally {
+			super.desconectar();
 		}
 	}
 }
